@@ -17,9 +17,10 @@ class CreatePagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
-            $table->integer('created_by');
-            $table->integer('updated_by');
-            $table->integer('deleted_by');
+            $table->string('slug');
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
