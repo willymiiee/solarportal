@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\HomeController;
 
 use App\Models\Page;
 
-class PageController extends Controller
+class PageController extends HomeController
 {
     protected static function find($id)
     {
