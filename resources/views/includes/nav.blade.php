@@ -1,5 +1,5 @@
 <li class="{{ (Request::segment(2) == '' || Request::segment(2) == 'home') ? 'active' : '' }}">
-    <a href="#">
+    <a href="{{ url('admin/home') }}">
         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
     </a>
 </li>
