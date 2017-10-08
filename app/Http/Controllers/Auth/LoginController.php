@@ -58,6 +58,6 @@ class LoginController extends Controller
             $response = json_decode((string) $response->getBody(), true);
         }
 
-        return redirect(url('admin/home'))->cookie('auth_token', $response['access_token']);
+        return redirect('admin/home')->cookie('auth_token', $response['access_token']);
     }
 }
