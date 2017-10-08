@@ -24,4 +24,11 @@ class Page extends Model
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at'
     ];
+
+    public function images()
+    {
+        return $this->belongsToMany('App\Models\Image', 'image_items', 'item_id', 'image_id')
+            ->withPivot('item_type')
+            ->withTimestamps();;
+    }
 }
