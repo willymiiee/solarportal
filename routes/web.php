@@ -21,7 +21,5 @@ Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function (
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('/pages', 'PageController', [
-        'only' => ['index', 'create', 'edit']
-    ]);
+    Route::resource('/pages', 'PageController');
 });
