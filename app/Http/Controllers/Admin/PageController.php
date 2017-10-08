@@ -4,11 +4,32 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\HomeController;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 use App\Models\Page;
+use App\Models\Image;
 
 class PageController extends HomeController
 {
+    private $client;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->client = new Client([
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.\Cookie::get('auth_token'),
+            ]
+        ]);
+    }
+
     protected static function find($id)
     {
         return Page::where('id', $id)->first();
@@ -21,8 +42,13 @@ class PageController extends HomeController
      */
     public function index()
     {
-        $items = Page::whereNull('deleted_at')->get();
-        return response()->json($items);
+        try {
+            $response = $this->client->get(url('api/v1/pages'));
+            $items = json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+        }
+
+        return view('admin.pages.index', compact('items'));
     }
 
     /**
@@ -32,7 +58,7 @@ class PageController extends HomeController
      */
     public function create()
     {
-        //
+        return view('admin.pages.form');
     }
 
     /**
@@ -43,24 +69,32 @@ class PageController extends HomeController
      */
     public function store(Request $request)
     {
-        Page::create([
-            'title' => $request->get('title'),
-            'content' => $request->get('content'),
-            'slug' => $request->get('title')
+        $this->validate($request, [
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+            'title' => 'required',
+            'content' => 'required'
         ]);
 
-        return response()->json([]);
-    }
+        $page = Page::create([
+            'title' => $request->get('title'),
+            'content' => $request->get('content'),
+            'slug' => str_slug($request->get('title'), '-'),
+            'is_home' => $request->get('is_home') ? true : false,
+            'created_by' => \Auth::user()->id
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ($request->image) {
+            $photoName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('upload'), $photoName);
+
+            $image = Image::create([
+                'url' => 'upload/'.$photoName
+            ]);
+
+            $page->images()->attach($image->id, ['item_type' => 'page']);
+        }
+
+        return redirect('admin/pages')->with('status', 'Success add page!');
     }
 
     /**
@@ -71,7 +105,8 @@ class PageController extends HomeController
      */
     public function edit($id)
     {
-        //
+        $item = self::find($id);
+        return view('admin.pages.form', compact('item'));
     }
 
     /**
@@ -83,13 +118,30 @@ class PageController extends HomeController
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+        ]);
+
         $item = self::find($id);
         $item->title = $request->get('title') ? $request->get('title') : $item->title;
         $item->content = $request->get('content') ? $request->get('content') : $item->content;
-        $item->slug = $request->get('title') ? $request->get('title') : $item->slug;
+        $item->slug = $request->get('title') ? str_slug($request->get('title'), '-') : $item->slug;
+        $item->is_home = $request->get('is_home') ? ($request->get('is_home') == true ? 1 : 0) : $item->is_home;
+        $item->updated_by = \Auth::user()->id;
         $item->save();
 
-        return response()->json([]);
+        if ($request->image) {
+            $photoName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('upload'), $photoName);
+
+            $image = Image::create([
+                'url' => 'upload/'.$photoName
+            ]);
+
+            $item->images()->sync($image->id, ['item_type' => 'page']);
+        }
+
+        return redirect('admin/pages')->with('status', 'Success update page!');
     }
 
     /**
@@ -101,8 +153,10 @@ class PageController extends HomeController
     public function destroy($id)
     {
         $item = self::find($id);
+        $item->deleted_by = \Auth::user()->id;
+        $item->save();
         $item->delete();
 
-        return response()->json([]);
+        return redirect('admin/pages')->with('status', 'Success delete page!');
     }
 }
