@@ -68,7 +68,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-                    @include('includes.nav')
+                    @include('includes.admin.nav')
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
