@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-
 Auth::routes();
 
 Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function () {
@@ -22,3 +20,6 @@ Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function (
     Route::resource('pages', 'PageController');
     Route::resource('posts', 'PostController');
 });
+
+Route::get('/', 'HomeController@index');
+Route::get('{type}/{slug}', 'HomeController@getItem');
