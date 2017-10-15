@@ -8,6 +8,11 @@
         <i class="fa fa-files-o"></i> <span>Pages</span>
     </a>
 </li>
+<li class="{{ Request::segment(2) == 'posts' ? 'active' : '' }}">
+    <a href="{{ url('admin/posts') }}">
+        <i class="fa fa-book"></i> <span>Posts</span>
+    </a>
+</li>
 <li class="{{ Request::segment(2) == 'users' ? 'active' : '' }}">
     <a href="{{ url('admin/users') }}">
         <i class="fa fa-users"></i> <span>Users</span>
