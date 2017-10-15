@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\RequestException;
 use App\Models\Post;
 use App\Models\Image;
 
-class PostController extends Controller
+class PostController extends HomeController
 {
     private $client;
 
@@ -90,7 +90,7 @@ class PostController extends Controller
                 'url' => 'upload/'.$photoName
             ]);
 
-            $page->images()->attach($image->id, ['item_type' => 'post']);
+            $post->images()->attach($image->id, ['item_type' => 'post']);
         }
 
         return redirect('admin/posts')->with('status', 'Success add post!');
