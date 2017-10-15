@@ -23,12 +23,12 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $item = Page::where('id', $id)->first();
+        $item = Page::where('slug', $slug)->first();
         return response()->json($item);
     }
 }
