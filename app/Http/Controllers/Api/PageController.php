@@ -29,6 +29,7 @@ class PageController extends Controller
     public function show($slug)
     {
         $item = Page::where('slug', $slug)->first();
+        $item->image = $item->images()->first();
         return response()->json($item);
     }
 }
