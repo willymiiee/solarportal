@@ -38,6 +38,7 @@ class PostController extends Controller
     public function show($slug)
     {
         $item = Post::where('slug', $slug)->first();
+        $item->image = $item->images()->where('item_type', 'post')->first();
         return response()->json($item);
     }
 }

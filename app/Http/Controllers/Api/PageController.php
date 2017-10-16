@@ -29,7 +29,7 @@ class PageController extends Controller
     public function show($slug)
     {
         $item = Page::where('slug', $slug)->first();
-        $item->image = $item->images()->first();
+        $item->image = $item->images()->where('item_type', 'page')->first();
         return response()->json($item);
     }
 }
