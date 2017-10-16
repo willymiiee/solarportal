@@ -51,7 +51,7 @@
                                         <!-- Collect the nav links, forms, and other content for toggling -->
                                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                                            @include('includes.main.menu')
+                                            @yield('menu')
 
                                         </div>
                                         <!-- /.navbar-collapse -->
@@ -63,7 +63,7 @@
                 </div><!--Navigation Row End-->
             </header><!--Header Content End-->
 
-            @yield('search')
+            @yield('addon')
 
             <!--Main Content Start-->
             <div class="tl-main-content">
@@ -72,7 +72,7 @@
 
             </div><!--Main Content End-->
 
-            @include('includes.main.footer')
+            @include('includes.frontend.footer')
 
         </div>
         <!--Wrapper Content End-->
@@ -83,5 +83,7 @@
         <script src="{{ asset('js/migrate.js') }}"></script>
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
+
+        @yield('script')
    </body>
 </html>
