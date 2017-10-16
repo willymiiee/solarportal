@@ -1,6 +1,10 @@
 @extends('layouts.main')
 
-@section('search')
+@section('menu')
+@include('includes.frontend.menu', ['menus' => $data['menu']])
+@endsection
+
+@section('addon')
 <!--Search Content Start-->
 <section class="tl-search-section">
     <div class="container">
@@ -42,69 +46,23 @@
         <!--Heading Outer End-->
 
         <div class="row">
+            @foreach ($data['blog'] as $b)
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <!--Blog Box Start-->
                 <div class="tl-blog-box">
                     <figure class="tl-thumb">
-                        <a href="blog-detail.html"><img src="images/blog-sm-img-01.jpg" alt=""></a>
+                        <a href="{{ url('b/'.$b->slug) }}"><img src="{{ $b->image ? url($b->image->url) : '' }}"></a>
                     </figure>
                     <div class="tl-text-holder">
-                        <h3><a href="blog-detail.html">New loft apartments</a></h3>
+                        <h3><a href="{{ url('b/'.$b->slug) }}">{{ $b->title }}</a></h3>
                         <ul class="tl-meta-listed tl-meta-listed_v2">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>26 February, 2017</li>
+                            <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $b->created_at }}</li>
                         </ul>
                     </div>
                 </div>
-                <!--Blog Box Start-->
+                <!--Blog Box End-->
             </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <!--Blog Box Start-->
-                <div class="tl-blog-box">
-                    <figure class="tl-thumb">
-                        <a href="blog-detail.html"><img src="images/blog-sm-img-02.jpg" alt=""></a>
-                    </figure>
-                    <div class="tl-text-holder">
-                        <h3><a href="blog-detail.html">Exclusive listings</a></h3>
-                        <ul class="tl-meta-listed tl-meta-listed_v2">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>06 March, 2017</li>
-                        </ul>
-                    </div>
-                </div>
-                <!--Blog Box Start-->
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <!--Blog Box Start-->
-                <div class="tl-blog-box">
-                    <figure class="tl-thumb">
-                        <a href="blog-detail.html"><img src="images/blog-sm-img-03.jpg" alt=""></a>
-                    </figure>
-                    <div class="tl-text-holder">
-                        <h3><a href="blog-detail.html">How much it cost?</a></h3>
-                        <ul class="tl-meta-listed tl-meta-listed_v2">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>24 March, 2017</li>
-                        </ul>
-                    </div>
-                </div>
-                <!--Blog Box Start-->
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <!--Blog Box Start-->
-                <div class="tl-blog-box">
-                    <figure class="tl-thumb">
-                        <a href="blog-detail.html"><img src="images/blog-sm-img-04.jpg" alt=""></a>
-                    </figure>
-                    <div class="tl-text-holder">
-                        <h3><a href="blog-detail.html">Original mortgage rates</a></h3>
-                        <ul class="tl-meta-listed tl-meta-listed_v2">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>15 March, 2017</li>
-                        </ul>
-                    </div>
-                </div>
-                <!--Blog Box Start-->
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
