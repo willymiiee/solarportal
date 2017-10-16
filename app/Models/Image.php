@@ -30,4 +30,11 @@ class Image extends Model
             ->wherePivot('item_type', 'page')
             ->withTimestamps();
     }
+
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Post')
+            ->wherePivot('item_type', 'post')
+            ->withTimestamps();
+    }
 }
