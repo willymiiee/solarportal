@@ -78,7 +78,7 @@
         $('#title').html(response.title);
         $('#content').html(response.content);
         $('#date').html(moment(response.created_at).format('DD MMM YYYY'));
-        $('#headImg').attr('src', '{{ url('') }}/' + response.image.url);
+        $('#headImg').attr('src', '{{ url('') }}/' + (response.image ? response.image.url : ''));
     });
 </script>
 @endsection
