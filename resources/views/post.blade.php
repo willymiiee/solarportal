@@ -44,13 +44,13 @@
                                         <!--Social Links Start-->
                                         <ul class="top-social-links tl-social-links">
                                             <li class="tl-fb-icon">
-                                                <a href="https://demo-themelocation.co/mottestate/blog-detail.html"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                                <a id="fb-share" href="" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                             </li>
                                             <li class="tl-tw-icon">
-                                                <a href="https://demo-themelocation.co/mottestate/blog-detail.html"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                <a id="tw-share" href="" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                             </li>
                                             <li class="tl-gp-icon">
-                                                <a href="https://demo-themelocation.co/mottestate/blog-detail.html"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                                <a id="gp-share" href="" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                                             </li>
                                         </ul>
                                         <!--Social Links End-->
@@ -79,6 +79,9 @@
         $('#content').html(response.content);
         $('#date').html(moment(response.created_at).format('DD MMM YYYY'));
         $('#headImg').attr('src', '{{ url('') }}/' + (response.image ? response.image.url : ''));
+        $('#fb-share').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + '{{ url('') }}/' + response.slug);
+        $('#tw-share').attr('href', 'https://twitter.com/intent/tweet?text=' + response.title + '&url=' + '{{ url('') }}/' + response.slug);
+        $('#gp-share').attr('href', 'https://plus.google.com/share?url=' + '{{ url('') }}/' + response.slug);
     });
 </script>
 @endsection
