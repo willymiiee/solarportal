@@ -66,8 +66,9 @@ body{
 	overflow: hidden;
 }
 .tl-wrapper figure img{
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    /* hardcoded height */
+	height: 260px;
 }
 .tl-wrapper ul{
 	padding: 0;
@@ -180,7 +181,8 @@ body{
 .tl-thumb img{
   max-width: 100%;
   width: 100%;
-  height: auto;
+  /* hardcoded height */
+  height: 260px;
 }
 /*===============================================================*/
   /*Header Css Start*/
