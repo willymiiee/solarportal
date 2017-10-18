@@ -9,10 +9,12 @@ use GuzzleHttp\Exception\RequestException;
 
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\Label;
 
 class PostController extends HomeController
 {
     private $client;
+    private $label;
 
     /**
      * Create a new controller instance.
@@ -28,6 +30,8 @@ class PostController extends HomeController
                 'Authorization' => 'Bearer '.\Cookie::get('auth_token'),
             ]
         ]);
+
+        $this->label = Label::whereNull('deleted_at')->get();
     }
 
     protected static function find($id)
@@ -58,7 +62,8 @@ class PostController extends HomeController
      */
     public function create()
     {
-        return view('admin.posts.form');
+        $label = $this->label;
+        return view('admin.posts.form', compact('label'));
     }
 
     /**
@@ -72,15 +77,18 @@ class PostController extends HomeController
         $this->validate($request, [
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'label_id' => 'required'
         ]);
 
-        $post = Post::create([
-            'title' => $request->get('title'),
-            'content' => $request->get('content'),
-            'slug' => str_slug($request->get('title'), '-'),
-            'created_by' => \Auth::user()->id
-        ]);
+        $post = new Post();
+        $post->title = $request->get('title');
+        $post->content = $request->get('content');
+        $post->slug = str_slug($request->get('title'), '-');
+        $post->label_id = $request->get('label_id');
+        $post->published = $request->get('published') ? true : false;
+        $post->created_by = \Auth::user()->id;
+        $post->save();
 
         if ($request->image) {
             $photoName = time().'.'.$request->image->getClientOriginalExtension();
@@ -105,7 +113,8 @@ class PostController extends HomeController
     public function edit($id)
     {
         $item = self::find($id);
-        return view('admin.posts.form', compact('item'));
+        $label = $this->label;
+        return view('admin.posts.form', compact('item', 'label'));
     }
 
     /**
@@ -125,6 +134,8 @@ class PostController extends HomeController
         $item->title = $request->get('title') ? $request->get('title') : $item->title;
         $item->content = $request->get('content') ? $request->get('content') : $item->content;
         $item->slug = $request->get('title') ? str_slug($request->get('title'), '-') : $item->slug;
+        $item->label_id = $request->get('label_id');
+        $item->published = $request->get('published') ? true : false;
         $item->updated_by = \Auth::user()->id;
         $item->save();
 

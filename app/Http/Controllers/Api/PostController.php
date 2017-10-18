@@ -26,6 +26,10 @@ class PostController extends Controller
         $items = $items->orderBy('created_at', 'desc')
             ->get();
 
+        foreach ($items as $k => $item) {
+            $items[$k]->label_name = $item->label->name;
+        }
+
         return response()->json($items);
     }
 

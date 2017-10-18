@@ -40,6 +40,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="">Label</label>
+                        <select class="form-control" name="label_id">
+                            @foreach ($label as $l)
+                            <option value="{{ $l->id }}" {{ isset($item) ? ($item->label_id == $l->id ? 'selected' : '') : ''}}>{{ $l->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Content</label>
                         <textarea id="content" name="content" rows="10" cols="80">
                             {{ isset($item) ? $item->content : '' }}
@@ -52,6 +61,12 @@
 
                         @if (isset($item) && $item->images())
                         @endif
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="published" {{ isset($item) ? ($item->published == 1 ? 'checked' : '') : '' }}> <b>Publish</b>
+                        </label>
                     </div>
                 </div>
 
