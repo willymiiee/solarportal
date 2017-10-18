@@ -13,7 +13,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'content', 'slug', 'created_by', 'updated_by', 'deleted_by'
+        'title', 'content', 'slug', 'published', 'label', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -30,5 +30,10 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Image', 'image_items', 'item_id', 'image_id')
             ->withPivot('item_type')
             ->withTimestamps();;
+    }
+
+    public function label()
+    {
+        return $this->belongsTo('App\Models\Label');
     }
 }
