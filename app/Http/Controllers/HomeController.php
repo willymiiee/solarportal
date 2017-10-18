@@ -32,6 +32,7 @@ class HomeController extends Controller
     {
         $this->data['blog'] = Post::whereNull('deleted_at')
             ->take(4)
+            ->where('published', true)
             ->orderBy('id', 'desc')
             ->get();
 
