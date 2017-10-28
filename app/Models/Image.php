@@ -24,17 +24,8 @@ class Image extends Model
         'created_at', 'updated_at'
     ];
 
-    public function pages()
+    public function articles()
     {
-        return $this->belongsToMany('App\Models\Page')
-            ->wherePivot('item_type', 'page')
-            ->withTimestamps();
-    }
-
-    public function posts()
-    {
-        return $this->belongsToMany('App\Models\Post')
-            ->wherePivot('item_type', 'post')
-            ->withTimestamps();
+        return $this->belongsToMany('App\Models\Article');
     }
 }
