@@ -15,7 +15,21 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $items = Article::whereNull('deleted_at')->orderBy('created_at', 'desc')->get();
+        $items = Article::whereNull('deleted_at');
+
+        if ($request->has('skip') && $request->has('take')) {
+            $items = $items->skip($request->get('skip'))
+                ->take($request->get('take'));
+        }
+
+        $items = $items->orderBy('created_at', 'desc')
+            ->get();
+
+        foreach ($items as $k => $item) {
+            $items[$k]->images = $item->images;
+            $items[$k]->label = $item->label;
+        }
+
         return response()->json($items);
     }
 
