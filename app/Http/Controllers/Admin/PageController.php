@@ -4,16 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\HomeController;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-
-use App\Models\Page;
+use App\Models\Article;
 use App\Models\Image;
 
 class PageController extends HomeController
 {
-    private $client;
-
     /**
      * Create a new controller instance.
      *
@@ -21,18 +16,11 @@ class PageController extends HomeController
      */
     public function __construct()
     {
-        $this->client = new Client([
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.\Cookie::get('auth_token'),
-            ]
-        ]);
     }
 
     protected static function find($id)
     {
-        return Page::where('id', $id)->first();
+        return Article::where('id', $id)->first();
     }
 
     /**
@@ -42,13 +30,8 @@ class PageController extends HomeController
      */
     public function index()
     {
-        try {
-            $response = $this->client->get(url('api/v1/pages'));
-            $items = json_decode($response->getBody()->getContents());
-        } catch (RequestException $e) {
-        }
-
-        return view('admin.pages.index', compact('items'));
+        $items = Article::where('type', 'page')->get();
+        return view('admin.page.index', compact('items'));
     }
 
     /**
@@ -58,7 +41,7 @@ class PageController extends HomeController
      */
     public function create()
     {
-        return view('admin.pages.form');
+        return view('admin.page.form');
     }
 
     /**
@@ -75,10 +58,11 @@ class PageController extends HomeController
             'content' => 'required'
         ]);
 
-        $page = Page::create([
+        $page = Article::create([
             'title' => $request->get('title'),
             'content' => $request->get('content'),
             'slug' => str_slug($request->get('title'), '-'),
+            'type' => 'page',
             'is_home' => $request->get('is_home') ? true : false,
             'created_by' => \Auth::user()->id
         ]);
@@ -91,7 +75,7 @@ class PageController extends HomeController
                 'url' => 'upload/'.$photoName
             ]);
 
-            $page->images()->attach($image->id, ['item_type' => 'page']);
+            $page->images()->attach($image->id);
         }
 
         return redirect('admin/pages')->with('status', 'Success add page!');
@@ -106,7 +90,7 @@ class PageController extends HomeController
     public function edit($id)
     {
         $item = self::find($id);
-        return view('admin.pages.form', compact('item'));
+        return view('admin.page.form', compact('item'));
     }
 
     /**
@@ -138,7 +122,7 @@ class PageController extends HomeController
                 'url' => 'upload/'.$photoName
             ]);
 
-            $item->images()->sync($image->id, ['item_type' => 'page']);
+            $item->images()->sync($image->id);
         }
 
         return redirect('admin/pages')->with('status', 'Success update page!');
