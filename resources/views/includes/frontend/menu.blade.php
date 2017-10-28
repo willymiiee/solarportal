@@ -4,7 +4,7 @@
     </li>
     @foreach ($menus as $m)
     <li>
-        <a href="{{ url('p/'.$m->slug) }}">{{ $m->title }}</a>
+        <a href="{{ url($m->slug) }}">{{ $m->title }}</a>
     </li>
     @endforeach
 </ul>

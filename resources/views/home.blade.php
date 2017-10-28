@@ -51,10 +51,10 @@
                 <!--Blog Box Start-->
                 <div class="tl-blog-box">
                     <figure class="tl-thumb">
-                        <a href="{{ url('b/'.$b->slug) }}"><img src="{{ $b->image ? url($b->image->url) : '' }}"></a>
+                        <a href="{{ url($b->slug) }}"><img src="{{ $b->image ? url($b->image->url) : '' }}"></a>
                     </figure>
                     <div class="tl-text-holder">
-                        <h3><a href="{{ url('b/'.$b->slug) }}">{{ $b->title }}</a></h3>
+                        <h3><a href="{{ url($b->slug) }}">{{ $b->title }}</a></h3>
                         <ul class="tl-meta-listed tl-meta-listed_v2">
                             <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $b->created_at }}</li>
                         </ul>
