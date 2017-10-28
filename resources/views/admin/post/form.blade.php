@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('style')
+<link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
 @endsection
 
 @section('header')
@@ -41,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="">Label</label>
-                        <select class="form-control" name="label_id">
+                        <select class="form-control select2" name="label_id[]" multiple="multiple" data-placeholder="Select Label">
                             @foreach ($label as $l)
                             <option value="{{ $l->id }}" {{ isset($item) ? ($item->label_id == $l->id ? 'selected' : '') : ''}}>{{ $l->name }}</option>
                             @endforeach
@@ -82,11 +83,16 @@
 @endsection
 
 @section('script')
+<!-- Select2 -->
+<script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 <!-- CK Editor -->
 <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 <script>
     $(function () {
         CKEDITOR.replace('content')
+
+        //Initialize Select2 Elements
+        $('.select2').select2()
     })
 </script>
 @endsection

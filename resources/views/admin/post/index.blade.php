@@ -32,6 +32,7 @@
                         <tr>
                             <th>Title</th>
                             <th>Label</th>
+                            <th>Status</th>
                             <th>Created at</th>
                             <th>Action</th>
                         </tr>
@@ -41,7 +42,16 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>{{ $item->title }}</td>
-                            <td>{{ $item->label_name }}</td>
+                            <td>
+                                @foreach ($item->label as $l)
+                                <span class="label label-primary">{{ $l->name }}</span>&nbsp;
+                                @endforeach
+                            </td>
+                            <td>
+                                <span class="label {{ $item->published ? 'label-success' : 'label-danger' }}">
+                                    {{ $item->published ? 'Published' : 'Pending' }}
+                                </span>
+                            </td>
                             <td>{{ date('j M Y', strtotime($item->created_at)) }}</td>
                             <td>
                                 <a href="{{ url('admin/posts/'.$item->id.'/edit') }}" class="btn btn-sm btn-warning pull-left"><i class="fa fa-pencil"></i></a>
