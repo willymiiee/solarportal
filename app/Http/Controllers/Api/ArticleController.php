@@ -13,9 +13,13 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $items = Article::whereNull('deleted_at');
+
+        if ($request->has('type')) {
+            $items = $items->where('type', $request->get('type'));
+        }
 
         if ($request->has('skip') && $request->has('take')) {
             $items = $items->skip($request->get('skip'))
@@ -36,10 +40,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         $item = Article::where('slug', $slug)->first();
         $item->images = $item->images();
