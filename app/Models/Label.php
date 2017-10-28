@@ -25,8 +25,8 @@ class Label extends Model
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-    public function posts()
+    public function articles()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->belongsToMany('App\Models\Articles');
     }
 }
