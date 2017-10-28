@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Page;
-use App\Models\Post;
+use App\Models\Article;
 
 class HomeController extends Controller
 {
@@ -18,7 +17,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->data = [
-            'menu' => Page::whereNull('deleted_at')->where('is_home', 1)->get()
+            'menu' => Article::whereNull('deleted_at')
+                ->where('type', 'page')
+                ->where('is_home', 1)->get()
         ];
         // $this->middleware('auth');
     }
@@ -30,40 +31,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $this->data['blog'] = Post::whereNull('deleted_at')
+        $this->data['blog'] = Article::whereNull('deleted_at')
             ->take(4)
+            ->where('type', 'post')
             ->where('published', true)
             ->orderBy('id', 'desc')
             ->get();
 
         foreach ($this->data['blog'] as $k => $b) {
-            $this->data['blog'][$k]->image = $b->images()->where('item_type', 'post')->first();
+            $this->data['blog'][$k]->image = $b->images()->first();
         }
 
         return view('home')->with('data', $this->data);
     }
 
-    public function getItem($type = null, $slug = null)
+    public function getItem($slug = null)
     {
-        if ($type && $slug) {
-            switch ($type) {
-                case 'p':
-                    $view = 'page';
-                break;
-
-                case 'b':
-                    $view = 'post';
-                break;
-
-                default:
-                    return redirect('home');
-                break;
-            }
-
-            $this->data['type'] = $type;
+        if ($slug) {
             $this->data['slug'] = $slug;
 
-            return view($view)->with('data', $this->data);
+            return view('post')->with('data', $this->data);
         }
     }
 }
