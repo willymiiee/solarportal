@@ -44,7 +44,7 @@
                         <label for="">Label</label>
                         <select class="form-control select2" name="label_id[]" multiple="multiple" data-placeholder="Select Label">
                             @foreach ($label as $l)
-                            <option value="{{ $l->id }}" {{ isset($item) ? ($item->label_id == $l->id ? 'selected' : '') : ''}}>{{ $l->name }}</option>
+                            <option value="{{ $l->id }}" {{ in_array($l->id, $itemLabels) ? 'selected' : '' }}>{{ $l->name }}</option>
                             @endforeach
                         </select>
                     </div>
