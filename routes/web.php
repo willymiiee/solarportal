@@ -22,4 +22,4 @@ Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function (
 });
 
 Route::get('/', 'HomeController@index');
-Route::get('{type}/{slug}', 'HomeController@getItem');
+Route::get('{slug}', 'HomeController@getItem');
