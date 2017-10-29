@@ -46,8 +46,8 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $item = Article::where('slug', $slug)->first();
-        $item->images = $item->images();
-        $item->label = $item->label();
+        $item->head_image = $item->images()->first();
+        $item->labels = $item->label()->get();
         return response()->json($item);
     }
 }
