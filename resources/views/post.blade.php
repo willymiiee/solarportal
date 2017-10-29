@@ -78,10 +78,15 @@
         $('#title').html(response.title);
         $('#content').html(response.content);
         $('#date').html(moment(response.created_at).format('DD MMM YYYY'));
-        $('#headImg').attr('src', '{{ url('') }}/' + (response.head_image ? response.head_image.url : ''));
         $('#fb-share').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + '{{ url('') }}/' + response.slug);
         $('#tw-share').attr('href', 'https://twitter.com/intent/tweet?text=' + response.title + '&url=' + '{{ url('') }}/' + response.slug);
         $('#gp-share').attr('href', 'https://plus.google.com/share?url=' + '{{ url('') }}/' + response.slug);
+
+        if (response.head_image) {
+            $('#headImg').attr('src', '{{ url('') }}/' + (response.head_image ? response.head_image.url : ''));
+        } else {
+            $('#headImg').parent().remove();
+        }
     });
 </script>
 @endsection
