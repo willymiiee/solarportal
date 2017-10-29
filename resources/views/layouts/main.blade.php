@@ -14,7 +14,7 @@
         <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
 
         <!-- Fontawesome -->
-        <script src="https://use.fontawesome.com/6de5c4290d.js"></script>
+        <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
 
         <!-- Css Files End -->
         <!--[if lt IE 9]>
