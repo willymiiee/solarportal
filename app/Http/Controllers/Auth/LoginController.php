@@ -34,7 +34,11 @@ class LoginController extends Controller
     // Override login function
     public function login()
     {
-        if (\Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if (\Auth::attempt([
+            'email' => request('email'),
+            'password' => request('password'),
+            'confirmation_code' => null
+        ])) {
             $user = \Auth::user();
 
             if ($user->type == 'A') {
