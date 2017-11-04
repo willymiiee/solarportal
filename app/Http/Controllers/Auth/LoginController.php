@@ -22,13 +22,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin/home';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -43,6 +36,13 @@ class LoginController extends Controller
     {
         if (\Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = \Auth::user();
+
+            if ($user->type == 'A') {
+                $redirect = 'admin/home';
+            } else {
+                $redirect = '/';
+            }
+
             $http = new \GuzzleHttp\Client;
             $response = $http->post(url('oauth/token'), [
                 'form_params' => [
@@ -57,7 +57,7 @@ class LoginController extends Controller
 
             $response = json_decode((string) $response->getBody(), true);
 
-            return redirect('admin/home')->cookie('auth_token', $response['access_token']);
+            return redirect($redirect)->cookie('auth_token', $response['access_token']);
         }
 
         return redirect('login');
