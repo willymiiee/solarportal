@@ -22,4 +22,5 @@ Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function (
 });
 
 Route::get('/', 'HomeController@index');
+Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('{slug}', 'HomeController@getItem');
