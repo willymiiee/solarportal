@@ -9,6 +9,7 @@ function sendMail(
     $toEmail,
     $toName,
     $subject,
+    $content,
     $subs = [],
     $replyTo = null,
     $templateId = null,
@@ -17,13 +18,31 @@ function sendMail(
     $status = 1,
     $statusLog = null
 ) {
-    $from = new SendGrid\Email($fromName, $fromEmail);
-    $subject = $subject;
-    $to = new SendGrid\Email($toName, $toEmail);
-    $content = new SendGrid\Content("text/html", "Here is your code : ".$subs['code']);
-    $mail = new SendGrid\Mail($from, $subject, $to, $content);
-    if($templateId != null) $mail->setTemplateId($templateId);
-    if($replyTo != null) $mail->setReplyTo($replyTo);
+    $request_body = json_decode(
+        '{
+            "personalizations": [
+                {
+                    "to": [
+                        {
+                            "email": "'.$toEmail.'",
+                            "name": "'.$toName.'"
+                        }
+                    ],
+                    "subject": "'.$subject.'"
+                }
+            ],
+            "from": {
+                "email": "'.$fromEmail.'",
+                "name": "'.$fromName.'"
+            },
+            "content": [
+                {
+                    "type": "text/plain",
+                    "value": "'.$content.'"
+                }
+            ]
+        }'
+    );
 
     $apiKey = env('SENDGRID_API_KEY');
     $sg = new \SendGrid($apiKey);
@@ -32,7 +51,7 @@ function sendMail(
         $response = $sg->client->mail()->send()->post($mail);
 
         return true;
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         $log = ['Helpers' => 'helpers', 'function' => 'sendgridMail'];
         $dataError['email_recipient'] = $toEmail;
         $dataError['email_recipient_name'] = $toName;
