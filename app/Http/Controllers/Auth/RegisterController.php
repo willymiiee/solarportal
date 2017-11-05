@@ -72,6 +72,15 @@ class RegisterController extends Controller
             'confirmation_code' => bcrypt($data['name'].'-'.$data['email'])
         ]);
 
+        sendMail(
+            'noreply@sejutasuryaatap.com',
+            'noreply',
+            $user->email,
+            $user->name,
+            'Please activate your account',
+            "Please copy this url on your browser : ".url('user/verify/').$user->confirmation_code
+        );
+
         return $user;
     }
 
