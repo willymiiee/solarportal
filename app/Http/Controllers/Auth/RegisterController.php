@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'type' => array_key_exists('type', $data) ? $data['type'] : 'C',
             'password' => bcrypt($data['password']),
-            'confirmation_code' => bcrypt($data['name'].'-'.$data['email'])
+            'confirmation_code' => str_random(30)
         ]);
 
         sendMail(
