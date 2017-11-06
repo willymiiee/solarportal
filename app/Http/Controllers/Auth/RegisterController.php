@@ -72,13 +72,22 @@ class RegisterController extends Controller
             'confirmation_code' => str_random(30)
         ]);
 
+        $emailData = json_encode(
+            [
+                '-verifyUrl-' => url('user/verify').'/'.$user->confirmation_code
+            ]
+        );
+
         sendMail(
             'noreply@sejutasuryaatap.com',
             'noreply',
             $user->email,
             $user->name,
             'Please activate your account',
-            "Please copy this url on your browser : ".url('user/verify')."/".$user->confirmation_code
+            null,
+            $emailData,
+            null,
+            'cca4c8f6-f7dd-41f0-bc15-6feabfecc472'
         );
 
         return $user;
