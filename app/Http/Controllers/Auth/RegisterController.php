@@ -78,7 +78,7 @@ class RegisterController extends Controller
             $user->email,
             $user->name,
             'Please activate your account',
-            "Please copy this url on your browser : ".url('user/verify/').$user->confirmation_code
+            "Please copy this url on your browser : ".url('user/verify')."/".$user->confirmation_code
         );
 
         return $user;
