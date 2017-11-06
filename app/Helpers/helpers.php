@@ -28,19 +28,15 @@ function sendMail(
                             "name": "'.$toName.'"
                         }
                     ],
-                    "subject": "'.$subject.'"
+                    "subject": "'.$subject.'",
+                    "substitutions": '.$subs.'
                 }
             ],
             "from": {
                 "email": "'.$fromEmail.'",
                 "name": "'.$fromName.'"
             },
-            "content": [
-                {
-                    "type": "text/plain",
-                    "value": "'.$content.'"
-                }
-            ]
+            "template_id": "'.$templateId.'"
         }'
     );
 
