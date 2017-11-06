@@ -48,7 +48,7 @@ function sendMail(
     $sg = new \SendGrid($apiKey);
 
     try {
-        $response = $sg->client->mail()->send()->post($mail);
+        $response = $sg->client->mail()->send()->post($request_body);
 
         return true;
     } catch (\Exception $e) {
