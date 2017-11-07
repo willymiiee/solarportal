@@ -26,42 +26,8 @@
     <body>
         <!--Wrapper Content Start-->
         <div class="tl-wrapper">
-            <!--Header Content Start-->
-            <header class="tl-header" id="tl-header_v1">
-                <!--Navigation Row Start-->
-                <div class="tl-navigation-row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-2">
-                                <!--Logo Start-->
-                                <strong class="tl-logo">
-                                    <a href="{{ url('') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a>
-                                </strong><!--Logo End-->
-                            </div>
 
-                            <div class="col-md-10 col-sm-10">
-                                <!--Nav Holder Start-->
-                                <div class="tl-nav-holder">
-                                    <!--Menu Holder Start-->
-                                    <nav class="navbar navbar-default">
-                                        <div class="navbar-header">
-                                          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Menu</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                                        </div>
-
-                                        <!-- Collect the nav links, forms, and other content for toggling -->
-                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                                            @yield('menu')
-
-                                        </div>
-                                        <!-- /.navbar-collapse -->
-                                      </nav>
-                                </div><!--Nav Holder End-->
-                            </div>
-                        </div>
-                    </div>
-                </div><!--Navigation Row End-->
-            </header><!--Header Content End-->
+            @include('includes.frontend.header')
 
             @yield('addon')
 
