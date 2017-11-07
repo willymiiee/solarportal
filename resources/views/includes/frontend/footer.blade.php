@@ -48,8 +48,8 @@
                                 +1 212-431-2100</li>
                             <li>
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <a href="mailto:admin@test.com">
-                                admin@test.com</a>
+                                <a href="mailto:info@sejutasuryaatap.com">
+                                info@sejutasuryaatap.com</a>
                             </li>
 
                         </ul>
