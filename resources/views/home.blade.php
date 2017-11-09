@@ -68,3 +68,26 @@
 </section>
 <!--Blog Section End-->
 @endsection
+
+@section('script')
+@if (session()->has('error'))
+<script>
+    swal({
+        title: 'Auto close alert!',
+        text: 'I will close in 5 seconds.',
+        timer: 2500,
+        onOpen: function () {
+            swal.showLoading()
+        }
+    }).then(
+        function () {},
+        // handling the promise rejection
+        function (dismiss) {
+            if (dismiss === 'timer') {
+                console.log('I was closed by the timer')
+            }
+        }
+    )
+</script>
+@endif
+@endsection
