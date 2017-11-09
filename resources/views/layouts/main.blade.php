@@ -16,6 +16,12 @@
         <!-- Fontawesome -->
         <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
 
+        <!-- Sweetalert -->
+        <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
+
+        <!-- Custom -->
+        @yield('style')
+
         <!-- Css Files End -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -49,6 +55,9 @@
         <script src="{{ asset('js/migrate.js') }}"></script>
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
+
+        <!-- Sweetalert -->
+        <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
         @yield('script')
    </body>
