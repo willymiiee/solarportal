@@ -7,8 +7,6 @@ use App\Models\Article;
 
 class HomeController extends Controller
 {
-    protected $data;
-
     /**
      * Create a new controller instance.
      *
@@ -16,11 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->data = [
-            'menu' => Article::whereNull('deleted_at')
-                ->where('type', 'page')
-                ->where('is_home', 1)->get()
-        ];
+        parent::__construct();
         // $this->middleware('auth');
     }
 
