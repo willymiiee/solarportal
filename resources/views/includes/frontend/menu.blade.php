@@ -20,8 +20,15 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li><a href="">Profile</a></li>
-            <li><a href="">Change Password</a></li>
+
+            @if (Auth::user()->type == 'A')
+
+            <li><a href="{{ url('admin/home') }}">Admin Page</a></li>
+
+            @endif
+
+            <li><a href="{{ url('profile') }}">Profile</a></li>
+            <li><a href="{{ url('profile#reset-password') }}">Change Password</a></li>
             <li>
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
