@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function () {
     Route::get('/', 'HomeController@index');
     Route::get('home', 'HomeController@index');
 
@@ -23,4 +23,5 @@ Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function (
 
 Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
+Route::get('profile', 'UserController@getProfile');
 Route::get('{slug}', 'HomeController@getItem');
