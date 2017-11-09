@@ -44,7 +44,7 @@ class LoginController extends Controller
             if ($user->type == 'A') {
                 $redirect = 'admin/home';
             } else {
-                $redirect = '/';
+                $redirect = 'profile';
             }
 
             $http = new \GuzzleHttp\Client;
