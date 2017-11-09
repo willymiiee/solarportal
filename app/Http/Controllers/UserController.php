@@ -8,6 +8,16 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function getVerify($code)
     {
         $user = User::where('confirmation_code', $code)->first();
@@ -23,5 +33,21 @@ class UserController extends Controller
         }
 
         dd('Confirmation code doesn\'t match');
+    }
+
+    public function getProfile()
+    {
+        if (\Auth::check()) {
+            $user = \Auth::user();
+
+            return view('profile')->with(
+                [
+                    'data' => $this->data,
+                    'user' => $user
+                ]
+            );
+        }
+
+        return redirect('/')->with('error', 'Please login first!');
     }
 }
