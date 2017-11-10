@@ -47,4 +47,9 @@ class HomeController extends Controller
             return view('post')->with('data', $this->data);
         }
     }
+
+    public function getThankyouRegister()
+    {
+        return view('register-thankyou')->with('data', $this->data);
+    }
 }
