@@ -24,4 +24,7 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function 
 Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('profile', 'UserController@getProfile');
+Route::post('profile', 'UserController@postProfile');
+Route::get('change-password', 'UserController@getChangePassword');
+Route::post('change-password', 'UserController@postChangePassword');
 Route::get('{slug}', 'HomeController@getItem');

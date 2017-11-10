@@ -84,6 +84,16 @@
     <section class="tl-properties-section">
         <div class="container">
             <div class="row">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -93,11 +103,11 @@
                 <div class="col-xs-12 bhoechie-tab-container">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                         <div class="list-group">
-                            <a href="#" class="list-group-item active text-center">
+                            <a href="{{ url('profile') }}" class="list-group-item text-center">
                                 <h4 class="glyphicon glyphicon-plane"></h4><br/>Profile
                             </a>
 
-                            <a href="{{ url('change-password') }}" class="list-group-item text-center">
+                            <a href="#" class="list-group-item active text-center">
                                 <h4 class="glyphicon glyphicon-road"></h4><br/>Reset Password
                             </a>
                         </div>
@@ -106,61 +116,48 @@
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
                         <div class="bhoechie-tab-content active">
                             <center>
-                                <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
-                                <h2 style="margin-top: 0;color:#55518a">Profile</h2>
+                                <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+                                <h2 style="margin-top: 0;color:#55518a">Reset Password</h2>
 
-                                <form method="POST" action="{{ url('profile') }}" class="tl-contact-form" style="margin-top: 50px;">
+                                <form method="POST" action="{{ url('change-password') }}" class="tl-contact-form" style="margin-top: 50px;">
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Name</label>
+                                                <label for="">Old Password</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <input type="text" name="name" value="{{ $user->name }}">
+                                                <input type="password" name="old_password">
                                             </div><!--Inner Holder End-->
                                         </div>
 
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Email</label>
+                                                <label for="">New Password</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <input type="email" name="email" value="{{ $user->email }}">
+                                                <input type="password" name="password">
                                             </div><!--Inner Holder End-->
                                         </div>
 
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Phone</label>
+                                                <label for="">Confirm New Password</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <input type="text" name="phone" value="{{ $user->phone }}">
-                                            </div><!--Inner Holder End-->
-                                        </div>
-
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <!--Inner Holder Start-->
-                                            <div class="inner-holder">
-                                                <label for="">Address</label>
-                                            </div><!--Inner Holder End-->
-                                        </div>
-                                        <div class="col-md-8 col-sm-6 col-xs-12">
-                                            <!--Inner Holder Start-->
-                                            <div class="inner-holder">
-                                                <textarea name="address" placeholder="Your Address">{{ $user->address }}</textarea>
+                                                <input type="password" name="password_confirmation">
                                             </div><!--Inner Holder End-->
                                         </div>
 
@@ -182,8 +179,4 @@
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(function() {
-        });
-    </script>
 @endsection

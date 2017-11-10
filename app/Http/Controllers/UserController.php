@@ -50,4 +50,62 @@ class UserController extends Controller
 
         return redirect('/')->with('error', 'Please login first!');
     }
+
+    public function postProfile(Request $request)
+    {
+        User::where('id', \Auth::user()->id)
+            ->update(
+                [
+                    'name' => $request->has('name') ? $request->get('name') : \Auth::user()->name,
+                    'email' => $request->has('email') ? $request->get('email') : \Auth::user()->email,
+                    'phone' => $request->has('phone') ? $request->get('phone') : \Auth::user()->phone,
+                    'address' => $request->has('address') ? $request->get('address') : \Auth::user()->address
+                ]
+            );
+
+        return back()->with('success', 'Success update profile');
+    }
+
+    public function getChangePassword()
+    {
+        if (\Auth::check()) {
+            $user = \Auth::user();
+
+            return view('change-password')->with(
+                [
+                    'data' => $this->data,
+                    'user' => $user
+                ]
+            );
+        }
+
+        return redirect('/')->with('error', 'Please login first!');
+    }
+
+    public function postChangePassword(Request $request)
+    {
+        $request->validate(
+            [
+            'old_password' => 'required',
+            'password' => 'required|string|min:6|confirmed'
+            ]
+        );
+
+        if (bcrypt($request->get('old_password')) == \Auth::user()->password) {
+            User::where('id', \Auth::user()->id)
+                ->update(
+                    [
+                    'password' => bcrypt($request->get('password'))
+                    ]
+                );
+
+            return back()->with('success', 'Success update password');
+        } else {
+            return back()->withErrors(
+                [
+                    'password' => 'Wrong Old Password'
+                ]
+            );
+        }
+    }
 }

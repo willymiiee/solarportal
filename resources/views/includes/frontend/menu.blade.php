@@ -28,7 +28,7 @@
             @endif
 
             <li><a href="{{ url('profile') }}">Profile</a></li>
-            <li><a href="{{ url('profile#reset-password') }}">Change Password</a></li>
+            <li><a href="{{ url('change-password') }}">Change Password</a></li>
             <li>
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
