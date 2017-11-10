@@ -170,6 +170,7 @@
                                         <input id="name" type="text" name="name" required autofocus placeholder="Full name">
                                         <input id="email" type="email" name="email" required placeholder="Email">
                                         <input id="password" type="password" name="password" required placeholder="Password">
+                                        <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Confirm Password">
                                         <button type="submit" class="create-account">Create Account</button>
                                     </form>
                                 </div>

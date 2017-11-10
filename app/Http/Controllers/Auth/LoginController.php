@@ -64,6 +64,10 @@ class LoginController extends Controller
             return redirect($redirect)->cookie('auth_token', $response['access_token']);
         }
 
-        return redirect('login');
+        return redirect('/')->withErrors(
+            [
+                'login' => 'Wrong credentials!'
+            ]
+        );
     }
 }

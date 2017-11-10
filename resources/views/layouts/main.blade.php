@@ -32,7 +32,6 @@
     <body>
         <!--Wrapper Content Start-->
         <div class="tl-wrapper">
-
             @include('includes.frontend.header')
 
             @yield('addon')
@@ -58,6 +57,17 @@
 
         <!-- Sweetalert -->
         <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+
+        @if ($errors->any())
+            <script>
+                const html = "@foreach ($errors->all() as $error) {{ $error }}, @endforeach";
+                swal(
+                    'Oops...',
+                    html,
+                    'error'
+                );
+            </script>
+        @endif
 
         @yield('script')
    </body>
