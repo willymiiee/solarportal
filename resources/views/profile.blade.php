@@ -84,12 +84,6 @@
     <section class="tl-properties-section">
         <div class="container">
             <div class="row">
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
                 <div class="col-xs-12 bhoechie-tab-container">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                         <div class="list-group">
@@ -122,19 +116,6 @@
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
                                                 <input type="text" name="name" value="{{ $user->name }}">
-                                            </div><!--Inner Holder End-->
-                                        </div>
-
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <!--Inner Holder Start-->
-                                            <div class="inner-holder">
-                                                <label for="">Email</label>
-                                            </div><!--Inner Holder End-->
-                                        </div>
-                                        <div class="col-md-8 col-sm-6 col-xs-12">
-                                            <!--Inner Holder Start-->
-                                            <div class="inner-holder">
-                                                <input type="email" name="email" value="{{ $user->email }}">
                                             </div><!--Inner Holder End-->
                                         </div>
 
