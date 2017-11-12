@@ -53,15 +53,9 @@ class UserController extends Controller
 
     public function postProfile(Request $request)
     {
+        $data = $request->except('_token');
         User::where('id', \Auth::user()->id)
-            ->update(
-                [
-                    'name' => $request->has('name') ? $request->get('name') : \Auth::user()->name,
-                    'email' => $request->has('email') ? $request->get('email') : \Auth::user()->email,
-                    'phone' => $request->has('phone') ? $request->get('phone') : \Auth::user()->phone,
-                    'address' => $request->has('address') ? $request->get('address') : \Auth::user()->address
-                ]
-            );
+            ->update($data);
 
         return back()->with('success', 'Success update profile');
     }
@@ -91,7 +85,7 @@ class UserController extends Controller
             ]
         );
 
-        if (bcrypt($request->get('old_password')) == \Auth::user()->password) {
+        if (password_verify($request->get('old_password'), \Auth::user()->password)) {
             User::where('id', \Auth::user()->id)
                 ->update(
                     [
@@ -106,6 +100,77 @@ class UserController extends Controller
                     'password' => 'Wrong Old Password'
                 ]
             );
+        }
+    }
+
+    public function postLostPassword(Request $request)
+    {
+        $checkEmail = User::where('email', $request->get('email'))->first();
+
+        if ($checkEmail) {
+            $checkEmail->lost_password = str_random(30);
+            $checkEmail->save();
+
+            $emailData = json_encode(
+                [
+                    '-resetUrl-' => url('reset-password').'/'.$checkEmail->lost_password
+                ]
+            );
+
+            sendMail(
+                'noreply@sejutasuryaatap.com',
+                'noreply',
+                $checkEmail->email,
+                $checkEmail->name,
+                'Reset password',
+                null,
+                $emailData,
+                null,
+                '5408f8fd-e74a-4435-864f-a77bc3b2e8ff'
+            );
+
+            return response(['message' => "We've sent the link to your email"]);
+        }
+
+        return response(['error' => 'Email not found'], 500);
+    }
+
+    public function getResetPassword($code)
+    {
+        $user = User::where('lost_password', $code)->first();
+
+        if ($user) {
+            $user->lost_password = null;
+            $user->save();
+
+            return view('reset-password')->with(
+                [
+                    'data' => $this->data,
+                    'user' => $user
+                ]
+            );
+        }
+
+        return redirect('/');
+    }
+
+    public function postResetPassword(Request $request)
+    {
+        $request->validate(
+            [
+            'password' => 'required|string|min:6|confirmed'
+            ]
+        );
+
+        $user = User::find($request->get('user_id'));
+
+        if ($user) {
+            $user->password = bcrypt($request->get('password'));
+            $user->save();
+
+            \Auth::guard()->login($user);
+
+            return redirect('/')->with('success', 'Success update password');
         }
     }
 }
