@@ -27,5 +27,8 @@ Route::get('profile', 'UserController@getProfile');
 Route::post('profile', 'UserController@postProfile');
 Route::get('change-password', 'UserController@getChangePassword');
 Route::post('change-password', 'UserController@postChangePassword');
+Route::post('lost-password', 'UserController@postLostPassword');
+Route::get('reset-password/{code}', 'UserController@getResetPassword');
+Route::post('reset-password', 'UserController@postResetPassword');
 Route::get('register-thankyou', 'HomeController@getThankyouRegister');
 Route::get('{slug}', 'HomeController@getItem');
