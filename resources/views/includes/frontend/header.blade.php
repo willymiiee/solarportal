@@ -112,7 +112,7 @@
                                         <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
                                         <input id="password" type="password" name="password" placeholder="Password" required>
                                         <button type="submit">Sign In</button>
-                                        <a href="https://demo-themelocation.co/mottestate/#" class="password-lost">Lost your password?</a>
+                                        <a href="#" class="password-lost">Lost your password?</a>
                                     </form>
                                 </div>
                                 <div id="tab-register" class="tab-pane fade">
@@ -161,7 +161,7 @@
                                         <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
                                         <input id="password" type="password" name="password" placeholder="Password" required>
                                         <button type="submit">Sign In</button>
-                                        <a href="https://demo-themelocation.co/mottestate/#" class="password-lost">Lost your password?</a>
+                                        <a href="#" class="password-lost">Lost your password?</a>
                                     </form>
                                 </div>
                                 <div id="tab-register2" class="tab-pane fade in active">
