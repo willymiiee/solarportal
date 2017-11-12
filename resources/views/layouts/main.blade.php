@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Solar Directory</title>
 
         <!-- Css Files Start -->
@@ -58,16 +59,54 @@
         <!-- Sweetalert -->
         <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
-        @if ($errors->any())
-            <script>
+        <script>
+            @if ($errors->any())
                 const html = "@foreach ($errors->all() as $error) {{ $error }}, @endforeach";
                 swal(
                     'Oops...',
                     html,
                     'error'
                 );
-            </script>
-        @endif
+            @endif
+
+            @if (session('success'))
+                swal(
+                    'Success!',
+                    '{{ session('success') }}',
+                    'success'
+                );
+            @endif
+
+            $('.password-lost').click(function (e) {
+                swal({
+                    title: 'Reset your password',
+                    text: 'Please enter your email',
+                    type: 'input',
+                    input: 'email',
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: 'Submit',
+                    allowOutsideClick: false
+                },
+                function(inputValue) {
+                    if (inputValue === false) return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError("You need to write something!");
+                        return false
+                    }
+
+                    const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.post('lost-password', { email: inputValue, _token: CSRF_TOKEN }, function(data) {
+                        swal("Success!", data.message, "success");
+                    })
+                    .error(function(data) {
+                        swal("Error!", data.responseJSON.error, "error");
+                    });
+                });
+            });
+        </script>
 
         @yield('script')
    </body>
