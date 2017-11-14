@@ -88,11 +88,11 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                         <div class="list-group">
                             <a href="#" class="list-group-item active text-center">
-                                <h4 class="glyphicon glyphicon-plane"></h4><br/>Profile
+                                <h4 class="glyphicon glyphicon-plane"></h4><br/>Profil
                             </a>
 
                             <a href="{{ url('change-password') }}" class="list-group-item text-center">
-                                <h4 class="glyphicon glyphicon-road"></h4><br/>Reset Password
+                                <h4 class="glyphicon glyphicon-road"></h4><br/>Ubah Kata Sandi
                             </a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="bhoechie-tab-content active">
                             <center>
                                 <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
-                                <h2 style="margin-top: 0;color:#55518a">Profile</h2>
+                                <h2 style="margin-top: 0;color:#55518a">Profil</h2>
 
                                 <form method="POST" action="{{ url('profile') }}" class="tl-contact-form" style="margin-top: 50px;">
                                     {{ csrf_field() }}
@@ -109,7 +109,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Name</label>
+                                                <label for="">Nama</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
@@ -122,7 +122,20 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Phone</label>
+                                                <label for="">Email</label>
+                                            </div><!--Inner Holder End-->
+                                        </div>
+                                        <div class="col-md-8 col-sm-6 col-xs-12">
+                                            <!--Inner Holder Start-->
+                                            <div class="inner-holder">
+                                                <input type="text" value="{{ $user->email }}" readonly>
+                                            </div><!--Inner Holder End-->
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <!--Inner Holder Start-->
+                                            <div class="inner-holder">
+                                                <label for="">Nomor Telepon</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
@@ -135,13 +148,13 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Address</label>
+                                                <label for="">Alamat</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <textarea name="address" placeholder="Your Address">{{ $user->address }}</textarea>
+                                                <textarea name="address" placeholder="Alamat anda">{{ $user->address }}</textarea>
                                             </div><!--Inner Holder End-->
                                         </div>
 

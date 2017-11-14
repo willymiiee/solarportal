@@ -88,11 +88,11 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                         <div class="list-group">
                             <a href="{{ url('profile') }}" class="list-group-item text-center">
-                                <h4 class="glyphicon glyphicon-plane"></h4><br/>Profile
+                                <h4 class="glyphicon glyphicon-plane"></h4><br/>Profil
                             </a>
 
                             <a href="#" class="list-group-item active text-center">
-                                <h4 class="glyphicon glyphicon-road"></h4><br/>Reset Password
+                                <h4 class="glyphicon glyphicon-road"></h4><br/>Ubah Kata Sandi
                             </a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="bhoechie-tab-content active">
                             <center>
                                 <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
-                                <h2 style="margin-top: 0;color:#55518a">Reset Password</h2>
+                                <h2 style="margin-top: 0;color:#55518a">Ubah Kata Sandi</h2>
 
                                 <form method="POST" action="{{ url('change-password') }}" class="tl-contact-form" style="margin-top: 50px;">
                                     {{ csrf_field() }}
@@ -109,7 +109,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Old Password</label>
+                                                <label for="">Kata Sandi Lama</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
@@ -122,7 +122,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">New Password</label>
+                                                <label for="">Kata Sandi Baru</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
@@ -135,7 +135,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Confirm New Password</label>
+                                                <label for="">Konfirmasi Ulang Kata Sandi</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">

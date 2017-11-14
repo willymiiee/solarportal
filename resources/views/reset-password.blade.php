@@ -89,7 +89,7 @@
                         <div class="bhoechie-tab-content active">
                             <center>
                                 <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
-                                <h2 style="margin-top: 0;color:#55518a">Reset Password</h2>
+                                <h2 style="margin-top: 0;color:#55518a">Ubah Kata Sandi</h2>
 
                                 <form method="POST" action="{{ url('reset-password') }}" class="tl-contact-form" style="margin-top: 50px;">
                                     {{ csrf_field() }}
@@ -98,7 +98,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">New Password</label>
+                                                <label for="">Kata Sandi Baru</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
@@ -111,7 +111,7 @@
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <!--Inner Holder Start-->
                                             <div class="inner-holder">
-                                                <label for="">Confirm New Password</label>
+                                                <label for="">Konfirmasi Ulang Kata Sandi</label>
                                             </div><!--Inner Holder End-->
                                         </div>
                                         <div class="col-md-8 col-sm-6 col-xs-12">
