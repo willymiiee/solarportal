@@ -180,8 +180,16 @@
         $(document).ready(function() {
             $('#profile-form').on('submit', function(e) {
                 e.preventDefault();
-                $.post('{{ url('api/v1/profile') }}', $(this).serialize(), function(data) {
-                    console.log(data);
+                $.ajax({
+                    headers: {
+                        Authorization: "Bearer " + $.cookie('auth_token');
+                    },
+                    url: "{{ url('api/v1/profile') }}"
+                    type: 'POST',
+                    data: $(this).serialize,
+                    success: function (result) {
+                        console.log(result);
+                    }
                 });
             });
         });

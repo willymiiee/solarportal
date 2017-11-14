@@ -32,7 +32,6 @@ class UserController extends Controller
 
     public function postProfile(Request $request)
     {
-        dd(\Auth::check());
         if (\Auth::check()) {
             $data = $request->except('_token');
             User::where('id', \Auth::user()->id)
