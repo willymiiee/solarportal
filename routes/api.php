@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')->group(function() {
     Route::apiResource('articles', 'ArticleController');
+    Route::post('profile', 'UserController@postProfile');
+    Route::post('change-password', 'UserController@postChangePassword');
+    Route::post('lost-password', 'UserController@postLostPassword');
+    Route::post('reset-password', 'UserController@postResetPassword');
 });
