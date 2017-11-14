@@ -9,10 +9,11 @@
     <section class="tl-properties-section">
         <div class="container">
             <div class="row" style="padding: 50px 0">
-                <h2 style="margin-bottom: 30px">Registration Success</h2>
+                <h2 style="margin-bottom: 30px">Registrasi Sukses!</h2>
 
-                <p>Thank you for signing up.</p>
-                <p>Please check your email & activate your account.</p>
+                <p>Terima kasih sudah mendaftarkan di portal Gerakan Sejuta Surya Atap.</p>
+                <p>Kami sudah mengirimkan e-mail untuk aktivasi akun anda.</p>
+                <p>Mohon periksa e-mail anda dan mengklik tautan untuk aktivasi.</p>
             </div>
         </div>
     </section>
