@@ -103,7 +103,7 @@
                                 <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
                                 <h2 style="margin-top: 0;color:#55518a">Profil</h2>
 
-                                <form method="POST" action="{{ url('profile') }}" class="tl-contact-form" style="margin-top: 50px;">
+                                <form method="POST" action="{{ url('profile') }}" class="tl-contact-form" style="margin-top: 50px;" id="profile-form">
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -178,6 +178,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $('#profile-form').on('submit', function(e) {
+                e.preventDefault();
+                $.post('{{ url('api/v1/profile') }}', $(this).serialize(), function(data) {
+                    console.log(data);
+                });
+            });
         });
     </script>
 @endsection
