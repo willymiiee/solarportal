@@ -5,6 +5,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="id" />
+        <meta property="og:site_name" content="Sejuta Surya Atap" />
+        @yield('meta')
+
         <title>Solar Directory</title>
 
         <!-- Css Files Start -->

@@ -42,6 +42,7 @@ class HomeController extends Controller
     public function getItem($slug = null)
     {
         if ($slug) {
+            $this->data['item'] = Article::where('slug', $slug)->first();
             $this->data['slug'] = $slug;
 
             return view('post')->with('data', $this->data);
