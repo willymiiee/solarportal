@@ -9,7 +9,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="id" />
         <meta property="og:site_name" content="Sejuta Surya Atap" />
-        <meta property="og:url" content="{{ url()->current() }}"
+        <meta property="og:url" content="{{ url()->current() }}">
         @yield('meta')
 
         <title>Solar Directory</title>
