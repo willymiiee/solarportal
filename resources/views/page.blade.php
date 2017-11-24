@@ -1,8 +1,11 @@
 @extends('layouts.main')
 
 @section('meta')
+    <meta property="og:title" content="{{ $data['item']->title }}" />
     <meta property="og:description" content="{!! $data['item']->content !!}" />
-    <meta property="og:image" content="{{ asset($data['item']->images()->first()->url) }}" />
+    @if ($data['item']->images()->first())
+        <meta property="og:image" content="{{ asset($data['item']->images()->first()->url) }}" />
+    @endif
 @endsection
 
 @section('menu')
@@ -16,11 +19,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="tl-properties-info">
-                        <!--Properties Thumb Holder Start-->
-                        <figure class="tl-properties-thumb">
-                            <img src="" id="headImg">
-                        </figure>
-                        <!--Properties Thumb Holder End-->
+                        @if ($data['item']->images()->first())
+                            <!--Properties Thumb Holder Start-->
+                            <figure class="tl-properties-thumb">
+                                <img src="" id="headImg">
+                            </figure>
+                            <!--Properties Thumb Holder End-->
+                        @endif
 
                         <!--TOp HOlder Start-->
                         <div class="top-holder2">
@@ -50,7 +55,11 @@
             $('#title').html(response.title);
             $('#content').html(response.content);
             $('#date').html(moment(response.created_at).format('DD MMM YYYY'));
-            $('#headImg').attr('src', '{{ url('') }}/' + (response.image ? response.image.url : ''));
+            if (response.head_image) {
+                $('#headImg').attr('src', '{{ url('') }}/' + (response.head_image ? response.head_image.url : ''));
+            } else {
+                $('#headImg').parent().remove();
+            }
         });
     </script>
 @endsection

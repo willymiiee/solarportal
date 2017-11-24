@@ -1,8 +1,11 @@
 @extends('layouts.main')
 
 @section('meta')
+    <meta property="og:title" content="{{ $data['item']->title }}" />
     <meta property="og:description" content="{!! $data['item']->content !!}" />
-    <meta property="og:image" content="{{ asset($data['item']->images()->first()->url) }}" />
+    @if ($data['item']->images()->first())
+        <meta property="og:image" content="{{ asset($data['item']->images()->first()->url) }}" />
+    @endif
 @endsection
 
 @section('menu')
@@ -26,10 +29,12 @@
                         </div>
                         <!--Top Holder End-->
 
-                        <!--Thumb Holder start-->
-                        <figure class="tl-thumb">
-                            <img src="" id="headImg">
-                        </figure>
+                        @if ($data['item']->images()->first())
+                            <!--Thumb Holder start-->
+                            <figure class="tl-thumb">
+                                <img src="" id="headImg">
+                            </figure>
+                        @endif
 
                         <!--Text HOlder Start-->
                         <div class="tl-text-holder">
@@ -87,11 +92,8 @@
             $('#tw-share').attr('href', 'https://twitter.com/intent/tweet?text=' + response.title + '&url=' + '{{ url('') }}/' + response.slug);
             $('#gp-share').attr('href', 'https://plus.google.com/share?url=' + '{{ url('') }}/' + response.slug);
 
-            $('meta[property="og:description"]').attr('content', response.content);
-
             if (response.head_image) {
                 $('#headImg').attr('src', '{{ url('') }}/' + (response.head_image ? response.head_image.url : ''));
-                $('meta[property="og:image"]').attr('content', $('#headImg').attr('src'));
             } else {
                 $('#headImg').parent().remove();
             }
