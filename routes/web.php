@@ -19,6 +19,7 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function 
 
     Route::resource('pages', 'PageController');
     Route::resource('posts', 'PostController');
+    Route::resource('users', 'UserController');
 });
 
 Route::get('/', 'HomeController@index');
