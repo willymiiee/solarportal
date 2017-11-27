@@ -22,9 +22,9 @@
                     <div class="tl-blog-box tl-blog-detail-info">
                         <!--Top Holder Srart-->
                         <div class="tl-top-holder">
-                            <h3 id="title"></h3>
+                            <h3 id="title">{{ $data['item']->title }}</h3>
                             <ul class="tl-meta-listed tl-meta-listed_v2">
-                                <li><i class="fa fa-calendar"></i> <span id="date"></span></li>
+                                <li><i class="fa fa-calendar"></i> <span id="date">{{ \Carbon\Carbon::parse($data['item']->created_at)->format('d M Y') }}</span></li>
                             </ul>
                         </div>
                         <!--Top Holder End-->
@@ -32,13 +32,15 @@
                         @if ($data['item']->images()->first())
                             <!--Thumb Holder start-->
                             <figure class="tl-thumb">
-                                <img src="" id="headImg">
+                                <img src="{{ url($data['item']->images()->first()->url) }}" id="headImg">
                             </figure>
                         @endif
 
                         <!--Text HOlder Start-->
                         <div class="tl-text-holder">
-                            <div id="content"></div>
+                            <div id="content">
+                                {!! $data['item']->content !!}
+                            </div>
 
                             <!--Blog Bottom HOlder Start-->
                             <div class="tl-bottom-holder">
@@ -54,13 +56,13 @@
                                             <!--Social Links Start-->
                                             <ul class="top-social-links tl-social-links">
                                                 <li class="tl-fb-icon">
-                                                    <a id="fb-share" href="" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                                    <a id="fb-share" href="https://www.facebook.com/sharer/sharer.php?u='{{ $data['item']->slug }}'" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="tl-tw-icon">
-                                                    <a id="tw-share" href="" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                    <a id="tw-share" href="https://twitter.com/intent/tweet?text='{{ $data['item']->title }}'&url='{{ $data['item']->slug }}'" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="tl-gp-icon">
-                                                    <a id="gp-share" href="" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                                    <a id="gp-share" href="https://plus.google.com/share?url={{ url($data['item']->slug) }}" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                                                 </li>
                                             </ul>
                                             <!--Social Links End-->
@@ -82,21 +84,4 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/moment.min.js') }}"></script>
-    <script>
-        $.get('{{ url('api/v1/articles/'.$data['slug']) }}', function(response) {
-            $('#title').html(response.title);
-            $('#content').html(response.content);
-            $('#date').html(moment(response.created_at).format('DD MMM YYYY'));
-            $('#fb-share').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + '{{ url('') }}/' + response.slug);
-            $('#tw-share').attr('href', 'https://twitter.com/intent/tweet?text=' + response.title + '&url=' + '{{ url('') }}/' + response.slug);
-            $('#gp-share').attr('href', 'https://plus.google.com/share?url=' + '{{ url('') }}/' + response.slug);
-
-            if (response.head_image) {
-                $('#headImg').attr('src', '{{ url('') }}/' + (response.head_image ? response.head_image.url : ''));
-            } else {
-                $('#headImg').parent().remove();
-            }
-        });
-    </script>
 @endsection
