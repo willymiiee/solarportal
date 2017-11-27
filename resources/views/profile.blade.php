@@ -178,11 +178,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            console.log(Cookies.get('XSRF-TOKEN'));
             $('#profile-form').on('submit', function(e) {
                 e.preventDefault();
                 $.ajax({
                     headers: {
-                        Authorization: "Bearer " + Cookies.get('auth_token')
+                        Authorization: "Bearer " + Cookies.get('laravel_token')
                     },
                     url: "{{ url('api/v1/profile') }}",
                     type: 'POST',
