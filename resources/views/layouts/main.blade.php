@@ -66,6 +66,9 @@
         <!-- Sweetalert -->
         <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
+        <!-- JS Cookie -->
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
         <script>
             @if ($errors->any())
                 const html = "@foreach ($errors->all() as $error) {{ $error }}, @endforeach";
