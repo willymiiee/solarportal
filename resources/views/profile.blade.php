@@ -103,7 +103,7 @@
                                 <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
                                 <h2 style="margin-top: 0;color:#55518a">Profil</h2>
 
-                                <form method="POST" action="{{ url('profile') }}" class="tl-contact-form" style="margin-top: 50px;" id="profile-form">
+                                <form method="POST" class="tl-contact-form" style="margin-top: 50px;" id="profile-form">
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -182,9 +182,9 @@
                 e.preventDefault();
                 $.ajax({
                     headers: {
-                        Authorization: "Bearer " + $.cookie('auth_token');
+                        Authorization: "Bearer " + Cookies.get('auth_token')
                     },
-                    url: "{{ url('api/v1/profile') }}"
+                    url: "{{ url('api/v1/profile') }}",
                     type: 'POST',
                     data: $(this).serialize,
                     success: function (result) {
