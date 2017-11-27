@@ -56,10 +56,10 @@
                                             <!--Social Links Start-->
                                             <ul class="top-social-links tl-social-links">
                                                 <li class="tl-fb-icon">
-                                                    <a id="fb-share" href="https://www.facebook.com/sharer/sharer.php?u='{{ url($data['item']->slug) }}'" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                                    <a id="fb-share" href="https://www.facebook.com/sharer/sharer.php?u={{ url($data['item']->slug) }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="tl-tw-icon">
-                                                    <a id="tw-share" href="https://twitter.com/intent/tweet?text='{{ $data['item']->title }}'&url='{{ url($data['item']->slug) }}'" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                    <a id="tw-share" href="https://twitter.com/intent/tweet?text={{ $data['item']->title }}&url={{ url($data['item']->slug) }}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li class="tl-gp-icon">
                                                     <a id="gp-share" href="https://plus.google.com/share?url={{ url($data['item']->slug) }}" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
