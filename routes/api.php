@@ -13,14 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->group(function() {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
-Route::namespace('Api')->group(function() {
-    Route::apiResource('articles', 'ArticleController');
-    Route::post('profile', 'UserController@postProfile');
-    Route::post('change-password', 'UserController@postChangePassword');
-    Route::post('lost-password', 'UserController@postLostPassword');
-    Route::post('reset-password', 'UserController@postResetPassword');
+    Route::namespace('Api')->group(function() {
+        Route::apiResource('articles', 'ArticleController');
+        Route::post('profile', 'UserController@postProfile');
+        Route::post('change-password', 'UserController@postChangePassword');
+        Route::post('lost-password', 'UserController@postLostPassword');
+        Route::post('reset-password', 'UserController@postResetPassword');
+    });
 });
