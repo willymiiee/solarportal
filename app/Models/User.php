@@ -38,4 +38,8 @@ class User extends Authenticatable
         'created_at', 'updated_at', 'deleted_at', 'confirmed_at'
     ];
 
+    public function company()
+    {
+        return $this->belongsToMany('App\Models\Company');
+    }
 }
