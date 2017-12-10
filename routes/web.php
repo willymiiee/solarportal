@@ -22,7 +22,8 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function 
     Route::resource('users', 'UserController');
 });
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function() { return view('tes'); });
+// Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('profile', 'UserController@getProfile');
 Route::post('profile', 'UserController@postProfile');
