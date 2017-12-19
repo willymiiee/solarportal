@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class UpdateUsersTable extends Migration
 {
@@ -17,6 +17,8 @@ class UpdateUsersTable extends Migration
             $table->enum('type', ['C', 'V', 'A'])->default('C');
             $table->string('confirmation_code')->nullable();
             $table->dateTime('confirmed_at')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
         });
     }
 
