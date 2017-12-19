@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * A list of main domicile used for dropdown
+ *
+ * Data below referenced on: https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia/blob/master/csv/provinces.csv
+ */
 return [
 	'SUMATERA UTARA' => 'SUMATERA UTARA',
 	'SUMATERA BARAT' => 'SUMATERA BARAT',
