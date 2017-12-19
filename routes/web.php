@@ -11,6 +11,7 @@
 |
 */
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function () {

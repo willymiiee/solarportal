@@ -36,17 +36,28 @@
         <div class="register-box-body">
             <p class="login-box-msg">Register a new membership</p>
 
+            @include('includes.admin.alert')
+
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback">
-                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="Full name">
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Full Name', 'required']) !!}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
 
                 <div class="form-group has-feedback">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Email">
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'required']) !!}
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => 'Mobile Phone']) !!}
+                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                </div>
+
+                <div class="form-group">
+                    {!! Form::select('main_domicile', $list_main_domicile, null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group has-feedback">
