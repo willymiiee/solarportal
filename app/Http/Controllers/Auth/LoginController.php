@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -17,7 +16,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -37,36 +36,40 @@ class LoginController extends Controller
         if (\Auth::attempt([
             'email' => request('email'),
             'password' => request('password'),
-            'confirmation_code' => null
+            'confirmation_code' => null,
         ])) {
             $user = \Auth::user();
 
             if ($user->type == 'A') {
                 $redirect = 'admin/home';
+            } elseif ($user->type == 'V') {
+                $redirect = route('participant.dashboard');
             } else {
                 $redirect = 'profile';
             }
 
-            $http = new \GuzzleHttp\Client;
-            $response = $http->post(url('oauth/token'), [
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'client_id' => 2,
-                    'client_secret' => env('SECRET_KEY', ''),
-                    'username' => request('email'),
-                    'password' => request('password'),
-                    'scope' => '*',
-                ],
-            ]);
+            return redirect($redirect);
 
-            $response = json_decode((string) $response->getBody(), true);
+            // $http = new \GuzzleHttp\Client;
+            // $response = $http->post(url('oauth/token'), [
+            //     'form_params' => [
+            //         'grant_type' => 'password',
+            //         'client_id' => 2,
+            //         'client_secret' => env('SECRET_KEY', ''),
+            //         'username' => request('email'),
+            //         'password' => request('password'),
+            //         'scope' => '*',
+            //     ],
+            // ]);
 
-            return redirect($redirect)->cookie('auth_token', $response['access_token']);
+            // $response = json_decode((string) $response->getBody(), true);
+
+            // return redirect($redirect)->cookie('auth_token', $response['access_token']);
         }
 
-        return redirect('/')->withErrors(
+        return back()->withErrors(
             [
-                'login' => 'Wrong credentials!'
+                'login' => 'Wrong credentials!',
             ]
         );
     }
