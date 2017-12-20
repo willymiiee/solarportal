@@ -34,8 +34,7 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
     Route::resource('companies', 'CompanyController');
 });
 
-Route::get('/', function () {return view('tes');});
-// Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('profile', 'UserController@getProfile');
 Route::post('profile', 'UserController@postProfile');

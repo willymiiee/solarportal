@@ -22,6 +22,7 @@ class AdminMiddleware
             }
         } else {
             return abort(403, 'You dont have access to this page');
+            // return redirect('/login');
         }
 
         return $next($request);

@@ -25,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->data['about'] = Article::where('slug', 'tentang-kami')->first();
         $this->data['blog'] = Article::whereNull('deleted_at')
-            ->take(4)
+            ->take(3)
             ->where('type', 'post')
             ->where('published', true)
             ->orderBy('id', 'desc')

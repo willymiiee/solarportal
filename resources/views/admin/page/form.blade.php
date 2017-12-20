@@ -50,7 +50,10 @@
                         <label for="">Header Image</label>
                         <input type="file" id="image" name="image">
 
-                        @if (isset($item) && $item->images())
+                        @if (isset($item) && $item->images()->get())
+                            @foreach ($item->images()->get() as $i)
+                            <img src="{{ url($i->url) }}" width=300 alt="">
+                            @endforeach
                         @endif
                     </div>
 

@@ -1,93 +1,134 @@
-@extends('layouts.main')
+@extends('layouts.new')
 
 @section('menu')
-@include('includes.frontend.menu', ['menus' => $data['menu']])
+    @include('includes.frontend.menu', ['menus' => $data['menu']])
 @endsection
 
 @section('addon')
-<!--Search Content Start-->
-<section class="tl-search-section">
-    <div class="container">
-        <!--Search Bar Content Start-->
-        <div class="tl-search-bar-holder">
-            <h2>Find the right product for you</h2>
+    <div class="container-fluid homepage-search">
+        <div class="row text-center">
+            <div class="col">
+                <div class="homepage-search-title noselect my-auto">
+                    One Million Solar Rooftop Movement
+                </div>
+            </div>
+        </div>
 
-            <!--Search Bar Inner Start-->
-            <div class="tl-search-inner-row">
-                <!--Search Form Start-->
-                <form method="get" class="tl-search-form">
-
-                    <!--Drop Down Start-->
-                    <select class='tl-dropdown-outer tl-select-box'>
-                        <option value='installer'>Installers</option>
-                        <option value='product'>Products</option>
-                        </select><!--Drop Down End-->
-
-                    <input class="tl-search-address" type="text" placeholder="Search by name">
-
-                    <button class="btn-search-submit" type="submit">Search</button>
-
-                </form><!--Search Form End-->
-            </div><!--Search Bar Inner End-->
-        </div><!--Search Bar Content End-->
+        {{--  <div class="row text-center mt-4" id="search-form">
+            <div class="col">
+                <div class="input-group">
+                    <select class="selectpicker form-control" name="" id="searchSelect">
+                        <option value="installer">Installers</option>
+                        <option value="product">Products</option>
+                    </select>
+                    <input class="form-control" type="text" placeholder="Search by name" id="searchInput">
+                    <span class="input-group-btn">
+                        <button class="btn btn-submit" type="submit" id="searchBtn">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>  --}}
     </div>
-</section>
-<!--Search Content End-->
 @endsection
 
 @section('content')
-<!--Blog Section Start-->
-<section class="tl-blog-section pd-t-80">
-    <div class="container">
-        <!--Heading Outer Start-->
-        <div class="tl-heading-outer">
-            <h2>Blog</h2>
+    <div class="container" id="coordinator">
+        <div class="section-title" id="coordinator-title">Co-Coordinator</div>
+        <hr class="section-line">
+
+        <div class="row">
+            <div class="coordinator-item"></div>
+            <div class="coordinator-item"></div>
         </div>
-        <!--Heading Outer End-->
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 no-gutters" id="about-img">
+                <div class="about-img"></div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 no-gutters" id="about-content">
+                <div id="about-title">{{ $data['about']->title }}</div>
+
+                <div id="about-description">
+                    {!! $data['about']->content !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="blog">
+        <div class="section-title" id="blog-title">Informasi Terkini</div>
+        <hr class="section-line">
 
         <div class="row">
             @foreach ($data['blog'] as $b)
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <!--Blog Box Start-->
-                <div class="tl-blog-box">
-                    <figure class="tl-thumb">
-                        <a href="{{ url($b->slug) }}"><img src="{{ $b->image ? url($b->image->url) : '' }}"></a>
-                    </figure>
-                    <div class="tl-text-holder">
-                        <h3><a href="{{ url($b->slug) }}">{{ $b->title }}</a></h3>
-                        <ul class="tl-meta-listed tl-meta-listed_v2">
-                            <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $b->created_at }}</li>
-                        </ul>
-                    </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 blog-item">
+                <img src="{{ $b->image ? url($b->image->url) : '' }}" alt="" class="blog-cover">
+                <div class="blog-item-title">{{ $b->title }}</div>
+                <div class="blog-item-content">
+                    {!! substr($b->content, 0, 120).'...' !!}
                 </div>
-                <!--Blog Box End-->
+                <a href="{{ url($b->slug) }}" class="blog-item-readmore">Read more</a>
             </div>
             @endforeach
         </div>
+
+        <div class="row align-items-center justify-content-center" id="blog-readmore">
+            <a href="#" id="blog-btn-readmore">Find out more</a>
+        </div>
     </div>
-</section>
-<!--Blog Section End-->
+
+    <div class="container-fluid" id="benefit">
+        <div id="benefit-title">Mengapa Listrik Surya Atap</div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+                <i class="icon icon-chart"></i>
+                <span>Hemat</span>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+                <i class="icon icon-energy"></i>
+                <span>Mandiri</span>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+                <i class="icon icon-bulb"></i>
+                <span>Hijau</span>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+                <i class="icon icon-diamond"></i>
+                <span>Investasi</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="participant">
+        <div class="section-title" id="participant-title">Participants</div>
+        <hr class="section-line">
+
+        <div class="row" id="participant-items">
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
+                Company A
+            </div>
+
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
+                Company B
+            </div>
+
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
+                Company C
+            </div>
+
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
+                Company D
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
-@if (session()->has('error'))
-<script>
-    swal({
-        title: 'Auto close alert!',
-        text: 'I will close in 5 seconds.',
-        timer: 2500,
-        onOpen: function () {
-            swal.showLoading()
-        }
-    }).then(
-        function () {},
-        // handling the promise rejection
-        function (dismiss) {
-            if (dismiss === 'timer') {
-                console.log('I was closed by the timer')
-            }
-        }
-    )
-</script>
-@endif
 @endsection
