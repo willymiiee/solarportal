@@ -41,6 +41,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $data = [
+            'list_main_domicile' => require_once(app_path('Helpers/list_main_domicile.php')),
+        ];
+
+        return view('auth.register', $data);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -69,7 +78,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'type' => array_key_exists('type', $data) ? $data['type'] : 'C',
             'password' => bcrypt($data['password']),
-            'confirmation_code' => str_random(30)
+            'confirmation_code' => str_random(30),
+            'phone' => $data['phone'],
+            'main_domicile' => $data['main_domicile'],
         ]);
 
         $emailData = json_encode(
