@@ -44,7 +44,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $data = [
-            'list_main_domicile' => require_once(app_path('Helpers/list_main_domicile.php')),
+            'list_main_domicile' => getMainDomicileDropdown(),
         ];
 
         return view('auth.register', $data);

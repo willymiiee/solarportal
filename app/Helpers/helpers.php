@@ -55,3 +55,20 @@ function sendMail(
         return false;
     }
 }
+
+
+if (! function_exists('getMainDomicileDropdown')) {
+    /**
+     * Get list of main domicile for dropdown data
+     *
+     * @param  string $placeholder
+     * @return array
+     */
+    function getMainDomicileDropdown($placeholder = null)
+    {
+        $result = require_once(app_path('Helpers/list_main_domicile.php'));
+        $result[''] = $placeholder ?: '< Select Main Domicile >';
+        asort($result);
+        return $result;
+    }
+}
