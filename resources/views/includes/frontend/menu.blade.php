@@ -27,7 +27,7 @@
             </li>
             @else
             <li class="nav-item">
-                <a class="nav-link" href="#">Sign up / Login</a>
+                <a class="nav-link" href="{{ url('login') }}">Sign up / Login</a>
             </li>
             @endif
         </ul>
