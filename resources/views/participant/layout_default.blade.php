@@ -29,6 +29,8 @@
         @include('participant::partials.sidebar')
 
         <div class="content-wrapper">
+            @include('participant::partials.alert')
+
             <section class="content-header">
                 @if(!empty($content_title))
                     <h1>

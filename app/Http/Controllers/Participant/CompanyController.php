@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Participant;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ParticipantController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,14 +14,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        $title = 'Participant Dashboard';
-        $data = [
-            'title' => $title,
-            'content_title' => $title,
-            'content_description' => 'Here is your overview data',
-        ];
-
-        return view('participant::home', $data);
+        //
     }
 
     /**
