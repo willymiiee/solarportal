@@ -18,11 +18,6 @@ class PageController extends HomeController
     {
     }
 
-    protected static function find($id)
-    {
-        return Article::where('id', $id)->first();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -89,7 +84,7 @@ class PageController extends HomeController
      */
     public function edit($id)
     {
-        $item = self::find($id);
+        $item = Article::find($id);
         return view('admin.page.form', compact('item'));
     }
 
@@ -106,7 +101,7 @@ class PageController extends HomeController
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);
 
-        $item = self::find($id);
+        $item = Article::find($id);
         $item->title = $request->get('title') ? $request->get('title') : $item->title;
         $item->content = $request->get('content') ? $request->get('content') : $item->content;
         $item->slug = $request->get('title') ? str_slug($request->get('title'), '-') : $item->slug;
@@ -136,7 +131,7 @@ class PageController extends HomeController
      */
     public function destroy($id)
     {
-        $item = self::find($id);
+        $item = Article::find($id);
         $item->deleted_by = \Auth::user()->id;
         $item->save();
         $item->delete();
