@@ -1,47 +1,35 @@
-<ul class="nav navbar-nav">
-    <li>
-        <a href="{{ url('') }}">Home</a>
-    </li>
+<nav class="navbar navbar-expand-lg menu-container">
+    <a href="{{ url('') }}" class="navbar-brand"><img src="{{ asset('img/logo.png') }}" alt=""></a>
 
-    @foreach ($menus as $m)
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars fa-2x light-orange"></i>
+    </button>
 
-    <li>
-        <a href="{{ url($m->slug) }}">{{ $m->title }}</a>
-    </li>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto"></ul>
 
-    @endforeach
-
-    @if (Auth::check())
-
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <b>Hi, {{ Auth::user()->name }}</b>
-            <span class="caret"></span>
-        </a>
-
-        <ul class="dropdown-menu">
-
-            @if (Auth::user()->type == 'A')
-
-            <li><a href="{{ url('admin/home') }}">Admin Page</a></li>
-
-            @endif
-
-            <li><a href="{{ url('profile') }}">Profile</a></li>
-            <li><a href="{{ url('change-password') }}">Change Password</a></li>
-            <li>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+        <ul class="navbar-nav nav-menu">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('') }}">Home</a>
             </li>
-        </ul>
-    </li>
 
-    @endif
-</ul>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Info</a>
+            </li>
+
+            @if (Auth::check())
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hi, {{ Auth::user()->name }}</a>
+            </li>
+            @else
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sign up / Login</a>
+            </li>
+            @endif
+        </ul>
+    </div>
+</nav>
