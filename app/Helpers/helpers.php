@@ -24,19 +24,19 @@ function sendMail(
                 {
                     "to": [
                         {
-                            "email": "'.$toEmail.'",
-                            "name": "'.$toName.'"
+                            "email": "' . $toEmail . '",
+                            "name": "' . $toName . '"
                         }
                     ],
-                    "subject": "'.$subject.'",
-                    "substitutions": '.$subs.'
+                    "subject": "' . $subject . '",
+                    "substitutions": ' . $subs . '
                 }
             ],
             "from": {
-                "email": "'.$fromEmail.'",
-                "name": "'.$fromName.'"
+                "email": "' . $fromEmail . '",
+                "name": "' . $fromName . '"
             },
-            "template_id": "'.$templateId.'"
+            "template_id": "' . $templateId . '"
         }'
     );
 
@@ -56,8 +56,7 @@ function sendMail(
     }
 }
 
-
-if (! function_exists('getMainDomicileDropdown')) {
+if (!function_exists('getMainDomicileDropdown')) {
     /**
      * Get list of main domicile for dropdown data
      *
@@ -66,9 +65,23 @@ if (! function_exists('getMainDomicileDropdown')) {
      */
     function getMainDomicileDropdown($placeholder = null)
     {
-        $result = require_once(app_path('Helpers/list_main_domicile.php'));
+        $result = require_once app_path('Helpers/list_main_domicile.php');
         $result[''] = $placeholder ?: '< Select Main Domicile >';
         asort($result);
         return $result;
+    }
+}
+
+if (!function_exists('getImgAvatar')) {
+    /**
+     * Get image avatar from given email
+     *
+     * @param  string $email
+     * @return string
+     */
+    function getImgAvatar($email, $size = 150)
+    {
+        $grav_url = "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
+        return $grav_url;
     }
 }

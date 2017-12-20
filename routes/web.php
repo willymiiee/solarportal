@@ -23,6 +23,10 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function 
     Route::resource('users', 'UserController');
 });
 
+Route::middleware('participant')->group(function () {
+	Route::resource('participant', 'ParticipantController');
+});
+
 Route::get('/', function() { return view('tes'); });
 // Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');

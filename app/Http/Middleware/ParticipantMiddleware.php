@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
+use App\Models\User;
 
-class AdminMiddleware
+class ParticipantMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,11 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         if ($user = $request->user()) {
-            if ($user->type != 'A') {
-                return abort(403, 'You dont have access to this page');
+            if ($user->type != 'V') {
+                return redirect()->route('login');
             }
         } else {
-            return abort(403, 'You dont have access to this page');
+            return redirect()->route('login');
         }
 
         return $next($request);

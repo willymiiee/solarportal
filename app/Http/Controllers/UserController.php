@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,10 +29,21 @@ class UserController extends Controller
 
             \Auth::guard()->login($user);
 
+            // redirect for admin
+            if ($user->type == 'A') {
+                return redirect('/admin');
+            }
+
+            // redirect for vendor/participant
+            elseif ($user->type == 'V') {
+                return redirect()->route('participant.index');
+            }
+
+            // redirect for customer
             return redirect('/');
         }
 
-        dd('Confirmation code doesn\'t match');
+        abort(403, 'Confirmation code doesn\'t match');
     }
 
     public function getProfile()
@@ -43,7 +54,7 @@ class UserController extends Controller
             return view('profile')->with(
                 [
                     'data' => $this->data,
-                    'user' => $user
+                    'user' => $user,
                 ]
             );
         }
@@ -68,7 +79,7 @@ class UserController extends Controller
             return view('change-password')->with(
                 [
                     'data' => $this->data,
-                    'user' => $user
+                    'user' => $user,
                 ]
             );
         }
@@ -80,8 +91,8 @@ class UserController extends Controller
     {
         $request->validate(
             [
-            'old_password' => 'required',
-            'password' => 'required|string|min:6|confirmed'
+                'old_password' => 'required',
+                'password' => 'required|string|min:6|confirmed',
             ]
         );
 
@@ -89,7 +100,7 @@ class UserController extends Controller
             User::where('id', \Auth::user()->id)
                 ->update(
                     [
-                    'password' => bcrypt($request->get('password'))
+                        'password' => bcrypt($request->get('password')),
                     ]
                 );
 
@@ -97,7 +108,7 @@ class UserController extends Controller
         } else {
             return back()->withErrors(
                 [
-                    'password' => 'Wrong Old Password'
+                    'password' => 'Wrong Old Password',
                 ]
             );
         }
@@ -113,7 +124,7 @@ class UserController extends Controller
 
             $emailData = json_encode(
                 [
-                    '-resetUrl-' => url('reset-password').'/'.$checkEmail->lost_password
+                    '-resetUrl-' => url('reset-password') . '/' . $checkEmail->lost_password,
                 ]
             );
 
@@ -146,7 +157,7 @@ class UserController extends Controller
             return view('reset-password')->with(
                 [
                     'data' => $this->data,
-                    'user' => $user
+                    'user' => $user,
                 ]
             );
         }
@@ -158,7 +169,7 @@ class UserController extends Controller
     {
         $request->validate(
             [
-            'password' => 'required|string|min:6|confirmed'
+                'password' => 'required|string|min:6|confirmed',
             ]
         );
 
