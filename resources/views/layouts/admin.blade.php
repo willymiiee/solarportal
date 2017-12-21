@@ -102,8 +102,7 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <strong>Copyright &copy; {{ date('Y') }} Australia Indonesia Quality Solar
-Collaboration
+            <strong>Copyright &copy; {{ date('Y') }} Australia Indonesia Quality Solar Collaboration
         </footer>
     </div>
 

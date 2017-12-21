@@ -41,6 +41,8 @@
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
 
+                {!! Form::hidden('type', 'V') !!}
+
                 <div class="form-group has-feedback">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Full Name', 'required']) !!}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

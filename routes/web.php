@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
@@ -21,6 +21,17 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function 
     Route::resource('pages', 'PageController');
     Route::resource('posts', 'PostController');
     Route::resource('users', 'UserController');
+});
+
+Route::prefix('participant')->namespace('Participant')->middleware('participant')->group(function () {
+    Route::get('/', 'HomeController@index')->name('participant.dashboard');
+
+    Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
+    Route::put('/profile', 'ProfileController@update')->name('profile.update');
+    Route::get('/profile-password', 'ProfileController@password')->name('profile.password');
+    Route::put('/profile-password', 'ProfileController@updatePassword')->name('profile.updatePassword');
+
+    Route::resource('companies', 'CompanyController');
 });
 
 Route::get('/', 'HomeController@index');

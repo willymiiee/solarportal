@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \View::addNamespace('participant', resource_path('views/participant'));
     }
 
     /**

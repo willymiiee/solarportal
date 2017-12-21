@@ -36,6 +36,8 @@
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
+            @include('includes.admin.alert')
+
             <form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
