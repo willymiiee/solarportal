@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') Gerakan Nasional Sejuta Surya Atap</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
 
     {{--  Bootstrap 4  --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap4.min.css') }}">
