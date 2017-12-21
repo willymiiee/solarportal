@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg menu-container">
-    <a href="{{ url('') }}" class="navbar-brand"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+    <a href="{{ url('') }}" class="navbar-brand">
+        <img src="{{ asset('img/logo.svg') }}" srcset="{{ asset('img/logo.svg') }}" alt="" height=60 width=135>
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-bars fa-2x light-orange"></i>
