@@ -181,7 +181,7 @@ body { margin: 0 !important; }
 }
 .blog-cover {
     width: 87%;
-    height: 41.3%;
+    height: 200px;
     margin: 24px 24px 32px 24px;
 }
 .blog-item-title {
