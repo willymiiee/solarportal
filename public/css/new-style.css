@@ -42,6 +42,10 @@ body { margin: 0 !important; }
     margin: 16px auto 30px;
     background-color: #f7b72d;
 }
+a, a:hover { text-decoration: none; color: #000; }
+#share-fb, #share-fb:hover { color: #3B5998; }
+#share-tw, #share-tw:hover { color: #0084b4; }
+#share-gp, #share-gp:hover { color: #d34836; }
 
 /*============================================*/
 /*                  Nav Bar                   */

@@ -15,6 +15,9 @@
 
     {{--  Simple Line Icons  --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+
+    {{--  Font Awesome 5  --}}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 </head>
 <body>
     @include('includes.frontend.menu')
@@ -31,8 +34,5 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="{{ asset('js/bootstrap4.min.js') }}"></script>
-
-    {{--  Font Awesome  --}}
-    <script src="https://use.fontawesome.com/6de5c4290d.js"></script>
 </body>
 </html>
