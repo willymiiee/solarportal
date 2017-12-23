@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -17,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'confirmation_code', 'phone', 'main_domicile', 'address', 'lost_password'
+        'name', 'email', 'password', 'type', 'confirmation_code', 'phone', 'main_domicile', 'address', 'lost_password',
     ];
 
     /**
@@ -35,10 +34,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at', 'confirmed_at'
+        'created_at', 'updated_at', 'deleted_at', 'confirmed_at',
     ];
 
-    public function company()
+    public function companies()
     {
         return $this->belongsToMany('App\Models\Company');
     }
