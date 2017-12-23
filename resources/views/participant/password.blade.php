@@ -8,7 +8,7 @@
 				<!-- Hutang Pembelian -->
 				<div class="box box-default box-solid">
 					<div class="box-header with-border">
-						<h3 class="box-title">Edit Profile</h3>
+						<h3 class="box-title">Change Password</h3>
 					</div>
 					{!! Form::open(['method' => 'PUT', 'url' => route('profile.updatePassword'), 'class' => 'form-horizontal']) !!}
 						<div class="box-body">
