@@ -31,8 +31,19 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
     Route::get('/profile-password', 'ProfileController@password')->name('profile.password');
     Route::put('/profile-password', 'ProfileController@updatePassword')->name('profile.updatePassword');
 
-    Route::resource('companies', 'CompanyController');
+    Route::resource('companies', 'CompanyController', ['names' => [
+        'index' => 'participant.company.index',
+        'create' => 'participant.company.create',
+        'store' => 'participant.company.store',
+        'edit' => 'participant.company.edit',
+        'update' => 'participant.company.update',
+        'destroy' => 'participant.company.destroy',
+    ]]);
 });
+
+Route::get('company/{slug}', function () {
+    return 'public company page';
+})->name('company.show');
 
 Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');

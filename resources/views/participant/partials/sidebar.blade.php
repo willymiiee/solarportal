@@ -15,13 +15,13 @@
       <li class="header">Main Menu</li>
 
       <li>
-        <a href="">
+        <a href="{{ route('participant.dashboard') }}">
           <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
         </a>
       </li>
       <li>
-        <a href="">
-          <i class="fa fa-briefcase"></i> <span>Companies</span>
+        <a href="{{ route('participant.company.index') }}">
+          <i class="fa fa-briefcase"></i> <span>Company</span>
         </a>
       </li>
     </ul>

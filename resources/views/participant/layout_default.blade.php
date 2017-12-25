@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AIQSC | Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>AIQSC {{ !empty($title) ? ' | '. $title : '' }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="fixed skin-yellow sidebar-mini">
-    <div class="wrapper">
+    <div id="app-participant" class="wrapper">
         @include('participant::partials.header')
         @include('participant::partials.sidebar')
 
@@ -69,10 +70,10 @@
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Slimscroll -->
     <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}"></script>
+
+    <script src="{{ mix('js/participant.js') }}"></script>
 
     @yield('script')
 </body>
