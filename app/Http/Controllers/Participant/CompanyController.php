@@ -105,7 +105,6 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ids = collect($request->get('services'));
         $this->_runValidate($request, $id);
 
         $this->repo->baseUpdate($id, $request->all());
@@ -124,7 +123,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $this->repo->baseDelete($id);
+        $this->repo->delete($id);
 
         return redirect()->route('participant.company.index')->withMessage([
             'type' => 'success',
@@ -140,6 +139,7 @@ class CompanyController extends Controller
             'email' => 'required|email',
             'slug' => 'required|alpha_dash|unique:companies,slug,' . $forgetId,
             'services.*.name' => 'required',
+            'services.*.image' => 'image',
         ];
 
         $this->validate($request, $rules, [], [

@@ -5,6 +5,10 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
+				<a href="{{ route('participant.company.create') }}" class="btn btn-warning">
+					<i class="fa fa-plus"></i>
+					Create
+				</a>
 				<div class="box box-default">
 					<div class="box-header with-border">
 
@@ -49,7 +53,7 @@
 											<a href="{{ route('participant.company.destroy', $com['id']) }}"
 											class="btn btn-danger btn-sm"
 											data-method="delete"
-											data-confirm="Are you sure prend?">
+											data-confirm="Are you sure?">
 												<i class="fa fa-trash"></i>
 												Delete
 											</a>

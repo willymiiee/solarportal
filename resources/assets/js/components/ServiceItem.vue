@@ -23,8 +23,9 @@
           <label class="col-sm-3 control-label">Image</label>
           <div class="col-sm-9">
             <div v-if="item.image">
+              <input type="hidden" :name="inputName('current_image')" :value="item.image">
               <a href="#" class="thumbnail">
-                <img :src="item.image">
+                <img :src="item.image_url || item.image">
               </a>
               <button type="button" @click="removeImage" class="btn btn-default">Remove image</button>
             </div>

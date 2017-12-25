@@ -72,7 +72,7 @@
           // ...
         }
         catch(err) {
-          console.log(err)
+          // console.log('here is error from json parse above', err)
           this.items = []
         }
       },
