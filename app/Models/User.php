@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Company;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -39,6 +40,6 @@ class User extends Authenticatable
 
     public function companies()
     {
-        return $this->belongsToMany('App\Models\Company');
+        return $this->belongsToMany(Company::class);
     }
 }

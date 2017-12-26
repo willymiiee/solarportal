@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository
 {
+    /**
+     * Model that should be implemented in Repository
+     *
+     * @var \Illuminate\Database\Eloquent\Model
+     */
     protected $model;
 
     public function __construct(Model $model)

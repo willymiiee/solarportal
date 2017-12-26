@@ -21,7 +21,7 @@ class CompanyController extends Controller
     public function index()
     {
         $title = 'Company';
-        $companies = $this->repo->basePaginate();
+        $companies = $this->repo->getPaginateByUser(auth()->user()['id']);
         $data = [
             'title' => $title,
             'content_title' => $title,
