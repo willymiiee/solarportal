@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,7 +11,20 @@ class CompanyRepository extends BaseRepository
 {
     public function __construct(Company $model)
     {
-        $this->model = $model;
+        parent::__construct($model);
+    }
+
+    /**
+     * Get companies by given user_id
+     *
+     * @param  integer  $user_id
+     * @param  integer $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getPaginateByUser($user_id, $limit = 10)
+    {
+        $user = User::find($user_id);
+        return $user->companies()->paginate($limit);
     }
 
     /**
@@ -39,19 +53,26 @@ class CompanyRepository extends BaseRepository
      */
     public function delete($id)
     {
-        $model = $this->model->find($id);
+        return \DB::transaction(function () use ($id) {
+            $model = $this->model->find($id);
 
-        // delete any services image
-        if (count($model->services) > 0) {
-            foreach ($model->services as $key => $serv) {
-                Storage::delete('public/' . $serv['image']);
+            // delete any services image
+            // we not delete services here, because it will
+            // automatically deleted by mysql foreign cascade
+            if (count($model->services) > 0) {
+                foreach ($model->services as $key => $serv) {
+                    Storage::delete('public/' . $serv['image']);
 
-                // delete on s3 driver
-                // Storage::disk('s3')->delete('folder_path/file_name.jpg');
+                    // delete on s3 driver
+                    // Storage::disk('s3')->delete('folder_path/file_name.jpg');
+                }
             }
-        }
 
-        return $model->delete();
+            // delete relation from user
+            auth()->user()->companies()->detach($model->id);
+
+            return $model->delete();
+        });
     }
 
     protected function _baseProcess($model, array $data, $isEdit = false)
@@ -87,6 +108,11 @@ class CompanyRepository extends BaseRepository
                         'id' => array_get($serv, 'id', 0),
                     ], $service_attr);
                 }
+            }
+
+            // Insert related user
+            if (!$isEdit) {
+                auth()->user()->companies()->attach($model->id);
             }
 
             return $model;

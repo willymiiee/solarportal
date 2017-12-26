@@ -63,7 +63,10 @@
 								</tbody>
 							</table>
 						</div>
-						{!! $companies->links() !!}
+
+						<div class="text-center">
+							{!! $companies->links() !!}
+						</div>
 						@endif
 					</div>
 				</div>

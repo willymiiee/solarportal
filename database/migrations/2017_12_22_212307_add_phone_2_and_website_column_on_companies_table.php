@@ -16,7 +16,7 @@ class AddPhone2AndWebsiteColumnOnCompaniesTable extends Migration
         Schema::table('companies', function (Blueprint $table) {
             $table->string('type')->nullable()->change();
             $table->string('domicile')->nullable()->after('email');
-            $table->string('phone_2')->nullable()->after('description');
+            $table->string('phone_2')->nullable()->after('phone');
             $table->string('website')->nullable()->after('phone_2');
         });
     }

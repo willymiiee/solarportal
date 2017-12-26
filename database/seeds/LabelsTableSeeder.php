@@ -11,7 +11,7 @@ class LabelsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('labels')->delete();
+        DB::table('labels')->truncate();
 
         $labels = [
             ['name' => 'Media'],
