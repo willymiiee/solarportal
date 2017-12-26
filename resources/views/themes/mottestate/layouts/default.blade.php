@@ -30,6 +30,24 @@
         <!--Main Content Start-->
         <div class="tl-main-content">
             @yield('content')
+
+            {{-- call to action for unauthenticated visitor --}}
+            @if (!auth()->check())
+                <section class="tl-call-to-action-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <h3><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b>So did you feel excited too?</b> Let collaboration with us.</h3>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <a href="{{ route('register') }}" class="tl-btn-style1">Join as Participant</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            @endif
+            {{-- end call to action --}}
+
         </div><!--Main Content End-->
 
         @include('themes::mottestate.partials.footer')
