@@ -13,7 +13,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /**
+         * Participant area theme path
+         */
         \View::addNamespace('participant', resource_path('views/participant'));
+
+        /**
+         * Theme path
+         */
+        \View::addNamespace('themes', resource_path('views/themes'));
+
+        /**
+         * Public Entity active theme
+         */
+        \View::addNamespace('public_entity', resource_path('views/themes/mottestate'));
     }
 
     /**

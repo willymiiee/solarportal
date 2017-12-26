@@ -41,6 +41,12 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
     ]]);
 });
 
+Route::prefix('companies')->group(function () {
+    Route::get('/', function () {
+        return view('public_entity::contents.company.index');
+    });
+});
+
 Route::get('company/{slug}', function () {
     return 'public company page';
 })->name('company.show');
