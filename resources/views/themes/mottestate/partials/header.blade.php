@@ -56,7 +56,7 @@
                 <div class="col-md-2 col-sm-2">
                     <!--Logo Start-->
                     <strong class="tl-logo">
-                        <a href="index.html"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a>
                     </strong><!--Logo End-->
                 </div>
                 <div class="col-md-10 col-sm-10">
@@ -84,10 +84,10 @@
                                     <li>
                                         <a href="about-us.html">About Us</a>
                                     </li>
-                                    <li class="dropdown"> <a href="team.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agents <span class="caret"></span></a>
+                                    <li class="dropdown"> <a href="team.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Companies <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="team.html">Agent</a></li>
-                                            <li><a href="team-detail.html">Agent Profile</a></li>
+                                            <li><a href="team.html">Company</a></li>
+                                            <li><a href="team-detail.html">Company Profile</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -206,11 +206,11 @@
 
 <section class="tl-inner-banner">
     <div class="container">
-        <h3>Agents</h3>
+        <h3>Companies</h3>
         <!--Breadcrum Start-->
         <ul class="tl-breadcrumb-listed">
             <li><a href="index.html">Home</a></li>
-            <li class="active">Agents</li>
+            <li class="active">Companies</li>
         </ul>
     </div>
 </section>

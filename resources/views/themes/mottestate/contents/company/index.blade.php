@@ -1,4 +1,4 @@
-@extends('public_entity::layouts.default')
+@extends('themes::mottestate.layouts.default')
 
 @section('content')
 
