@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -11,12 +12,34 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@test.com',
-            'type' => 'A',
-            'password' => app('hash')->make('12345678')
-        ]);
+        DB::table('users')->truncate();
+
+        $this->_specialUser();
+        factory(User::class, 5)->create();
+    }
+
+    protected function _specialUser()
+    {
+        $userData = [
+            //  An admin user
+            [
+                'name' => 'Admin',
+                'email' => 'admin@test.com',
+                'type' => 'A',
+                'password' => app('hash')->make('12345678'),
+            ],
+
+            // A participant user
+            [
+                'name' => 'Antoni Putra',
+                'email' => 'akiddcode@gmail.com',
+                'type' => 'V',
+                'password' => app('hash')->make('secret'),
+            ],
+        ];
+
+        foreach ($userData as $key => $ud) {
+            User::create($ud);
+        }
     }
 }
