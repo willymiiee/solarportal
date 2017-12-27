@@ -30,17 +30,16 @@ class UserController extends Controller
             \Auth::guard()->login($user);
 
             // redirect for admin
-            if ($user->type == 'A') {
-                return redirect('/admin');
-            }
+            switch ($user->type) {
+            case 'A':
+                return redirect('/admin'); // redirect for admin
 
-            // redirect for vendor/participant
-            elseif ($user->type == 'V') {
-                return redirect()->route('participant.index');
-            }
+            case 'V':
+                return redirect()->route('participant.index'); // redirect for vendor/participant
 
-            // redirect for customer
-            return redirect('/');
+            default:
+                return redirect('/'); // redirect for customer
+            }
         }
 
         abort(403, 'Confirmation code doesn\'t match');
