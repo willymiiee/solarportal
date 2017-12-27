@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AIQSC | Log in</title>
+    <title>GNSSA | Log in</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -27,10 +28,10 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: #51504e">
     <div class="login-box">
         <div class="login-logo">
-            <b>AIQSC</b>
+            <img src="{{ asset('img/logo.svg') }}" srcset="{{ asset('img/logo.svg') }}" alt="" height=80 width=155>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
