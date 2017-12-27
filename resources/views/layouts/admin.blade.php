@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AIQSC | Dashboard</title>
+    <title>GNSSA | Dashboard</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -37,9 +38,13 @@
             <!-- Logo -->
             <a href="{{ url('admin') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>AIA</b></span>
+                <span class="logo-mini">
+                    <img src="{{ asset('img/favicon.ico') }}" height=40/>
+                </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>AIQSC</b></span>
+                <span class="logo-lg">
+                    <img src="{{ asset('img/logo.svg') }}" srcset="{{ asset('img/logo.svg') }}" alt="" height=45 width=85>
+                </span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
