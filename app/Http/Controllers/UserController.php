@@ -42,7 +42,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect('/')->with('error', 'Confirmation code doesn\'t match!');
+        return redirect('/')->with('errors', 'Confirmation code doesn\'t match!');
     }
 
     public function getProfile()
@@ -58,7 +58,7 @@ class UserController extends Controller
             );
         }
 
-        return redirect('/')->with('error', 'Please login first!');
+        return redirect('/')->with('errors', 'Please login first!');
     }
 
     public function postProfile(Request $request)
@@ -83,7 +83,7 @@ class UserController extends Controller
             );
         }
 
-        return redirect('/')->with('error', 'Please login first!');
+        return redirect('/')->with('errors', 'Please login first!');
     }
 
     public function postChangePassword(Request $request)
@@ -142,7 +142,7 @@ class UserController extends Controller
             return response(['message' => "We've sent the link to your email"]);
         }
 
-        return response(['error' => 'Email not found'], 500);
+        return response(['errors' => 'Email not found'], 500);
     }
 
     public function getResetPassword($code)
