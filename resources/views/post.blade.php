@@ -2,7 +2,7 @@
 
 @section('meta')
     <meta property="og:title" content="{{ $data['item']->title }}" />
-    <meta property="og:description" content="{!! substr($data['item']->content, 0, 100) !!}" />
+    <meta property="og:description" content="{!! substr(strip_tags($data['item']->content), 0, 100) !!}" />
     @if ($data['item']->images()->first())
         <meta property="og:image" content="{{ asset($data['item']->images()->first()->url) }}" />
     @endif
