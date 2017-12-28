@@ -42,7 +42,7 @@ class UserController extends Controller
             }
         }
 
-        abort(403, 'Confirmation code doesn\'t match');
+        return redirect('/')->with('error', 'Confirmation code doesn\'t match!');
     }
 
     public function getProfile()
