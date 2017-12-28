@@ -35,7 +35,7 @@ class UserController extends Controller
                 return redirect('/admin'); // redirect for admin
 
             case 'V':
-                return redirect()->route('participant.company.index'); // redirect for vendor/participant
+                return redirect()->route('participant.dashboard'); // redirect for vendor/participant
 
             default:
                 return redirect('/'); // redirect for customer
