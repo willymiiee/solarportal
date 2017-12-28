@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id" />
+    <meta property="og:site_name" content="Gerakan Nasional Sejuta Surya Atap" />
+    <meta property="og:url" content="{{ url()->current() }}">
+    @yield('meta')
+
     <title>@yield('title') Gerakan Nasional Sejuta Surya Atap</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
 
