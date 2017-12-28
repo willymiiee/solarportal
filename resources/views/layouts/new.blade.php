@@ -25,6 +25,9 @@
 
     {{--  Font Awesome 5  --}}
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+    {{-- Sweetalert --}}
+    <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
 </head>
 <body>
     @include('includes.frontend.menu')
@@ -41,5 +44,27 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="{{ asset('js/bootstrap4.min.js') }}"></script>
+
+    {{-- Sweetalert --}}
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+
+    <script>
+        @if ($errors->any())
+            const html = "@foreach ($errors->all() as $error) {{ $error }}, @endforeach";
+            swal(
+                'Oops...',
+                html,
+                'error'
+            );
+        @endif
+
+        @if (session('success'))
+            swal(
+                'Success!',
+                '{{ session('success') }}',
+                'success'
+            );
+        @endif
+    </script>
 </body>
 </html>
