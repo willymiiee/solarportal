@@ -26,9 +26,9 @@ class Company extends Model
         'phone_2',
         'website',
         'description',
-        'created_by',
-        'updated_by',
-        'deleted_by',
+        // 'created_by',
+        // 'updated_by',
+        // 'deleted_by',
     ];
 
     /**

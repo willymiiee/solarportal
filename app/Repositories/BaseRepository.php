@@ -92,6 +92,14 @@ abstract class BaseRepository
         return $model->delete();
     }
 
+    /**
+     * This method used in both of create and edit
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  array   $data
+     * @param  boolean $isEdit
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     protected function _baseProcess($model, array $data, $isEdit = false)
     {
         $model->fill($data);

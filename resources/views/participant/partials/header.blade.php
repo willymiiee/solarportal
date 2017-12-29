@@ -21,12 +21,12 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ getImgAvatar(auth()->user()['email']) }}" class="user-image">
+                        <img src="{{ auth()->user()->avatar_url }}" class="user-image">
                         <span class="hidden-xs">{{ auth()->user()['name'] }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="{{ getImgAvatar(auth()->user()['email']) }}" class="img-circle">
+                            <img src="{{ auth()->user()->avatar_url }}" class="img-circle">
                             <p>
                                 {{ auth()->user()['name'] }}
                                 <small>Joined at {{ auth()->user()['created_at']->format('F, Y') }}</small>
