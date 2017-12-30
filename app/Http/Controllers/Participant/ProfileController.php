@@ -103,7 +103,7 @@ class ProfileController extends Controller
         Storage::put($path, (string) $image->encode($ext, 30));
 
         // if new file uploaded successfully, delete previous file
-        if (Storage::exists($path)) {
+        if (Storage::exists($path) && $previousFile) {
             Storage::delete('public/avatars/' . $previousFile);
         }
 

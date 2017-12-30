@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CompanyRepository extends BaseRepository
 {
@@ -24,7 +25,7 @@ class CompanyRepository extends BaseRepository
     public function getPaginateByUser($user_id, $limit = 10)
     {
         $user = User::find($user_id);
-        return $user->companies()->paginate($limit);
+        return $user->companies()->orderBy('created_at', 'desc')->paginate($limit);
     }
 
     /**
@@ -79,6 +80,12 @@ class CompanyRepository extends BaseRepository
     {
         return \DB::transaction(function () use ($model, $data, $isEdit) {
             $model->fill($data);
+
+            if ($data['avatar']) {
+                $avatar = $this->_uploadAvatar($data['avatar'], array_get($data, 'previous_avatar'));
+                $model->avatar = $avatar;
+            }
+
             $model->save();
 
             // when is Edit, we can delete any deleted services
@@ -97,7 +104,7 @@ class CompanyRepository extends BaseRepository
 
                     // handle image
                     if (!empty($serv['image'])) {
-                        $service_attr['image'] = $this->_uploadServiceImage($serv['image']);
+                        $service_attr['image'] = $this->_uploadServiceImage($serv['image'], $serv['previous_image']);
                     } else {
                         $service_attr['image'] = array_get($serv, 'current_image') ?: null;
                         // do we need delete removed image in our storage?
@@ -119,13 +126,50 @@ class CompanyRepository extends BaseRepository
         });
     }
 
-    protected function _uploadServiceImage(UploadedFile $file)
+    protected function _uploadServiceImage(UploadedFile $file, $previousFile)
     {
         if (!$file->isValid()) {
             return false;
         }
 
-        $file->store('public');
-        return $file->hashName();
+        $ext = $file->getClientOriginalExtension();
+        $image = Image::make($file);
+        $path = $file->hashName('public');
+
+        Storage::put($path, (string) $image->encode($ext, 30));
+
+        // if new file uploaded successfully, delete previous file
+        if (Storage::exists($path) && $previousFile) {
+            Storage::delete('public/' . $previousFile);
+        }
+
+        return basename($path);
+    }
+
+    /**
+     * Handle upload image for Avatar
+     *
+     * @param  \Illuminate\Http\UploadedFile $file
+     * @param  string       $previousFile
+     * @return string       [filename]
+     */
+    protected function _uploadAvatar($file, $previousFile)
+    {
+        if (!$file->isValid()) {
+            return false;
+        }
+
+        $ext = $file->getClientOriginalExtension();
+        $image = Image::make($file);
+        $path = $file->hashName('public/avatars');
+
+        Storage::put($path, (string) $image->encode($ext, 30));
+
+        // if new file uploaded successfully, delete previous file
+        if (Storage::exists($path) && $previousFile) {
+            Storage::delete('public/avatars/' . $previousFile);
+        }
+
+        return basename($path);
     }
 }

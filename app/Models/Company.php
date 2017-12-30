@@ -40,6 +40,13 @@ class Company extends Model
         'created_at', 'updated_at', 'deleted_at',
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['avatar_url'];
+
     public function users()
     {
         return $this->belongsToMany('App\Models\User');
@@ -48,5 +55,15 @@ class Company extends Model
     public function services()
     {
         return $this->hasMany(CompanyService::class);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/avatars/' . $this->avatar);
+        }
+
+        // // fallback default image for company
+        // return ...;
     }
 }
