@@ -22,8 +22,8 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">Image</label>
           <div class="col-sm-9">
+            <input type="hidden" :name="inputName('previous_image')" :value="previous_image">
             <div v-if="item.image">
-              <input type="hidden" :name="inputName('current_image')" :value="item.image">
               <a href="#" class="thumbnail">
                 <img :src="item.image_url || item.image">
               </a>
@@ -31,6 +31,7 @@
             </div>
             <div v-show="!item.image">
               <input type="file" :name="inputName('image')" @change="onFileChange" class="form-control">
+              <span class="help-block">Max File: 2 MB</span>
             </div>
           </div>
         </div>
@@ -49,7 +50,9 @@
   export default {
     props: ['item', 'index'],
     data () {
-      return {}
+      return {
+        previous_image: null
+      }
     },
     methods: {
       inputName (name) {
@@ -77,6 +80,7 @@
           return
         }
         this.item.image = null
+        this.item.image_url = null
       }
     },
     created () {
@@ -87,6 +91,8 @@
       if (!_.has(this.item, 'image')) {
         this.item['image'] = null
       }
+
+      this.previous_image = this.item['image']
     },
     mounted () {
       // console.log('hello world')

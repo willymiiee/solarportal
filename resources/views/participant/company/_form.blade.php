@@ -3,7 +3,7 @@
 	<div class="form-group">
 		{!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			{!! Form::text('name', null, ['class' => 'form-control', 'autofocus' => true]) !!}
+			{!! Form::text('name', null, ['class' => 'form-control', 'data-slug-target' => '#slug', 'autofocus' => true]) !!}
 		</div>
 	</div>
 	<div class="form-group">
@@ -11,7 +11,7 @@
 		<div class="col-sm-9">
 			<div class="input-group">
 				<span class="input-group-addon">{{ str_finish(route('company.show', ''), '/') }}</span>
-				{!! Form::text('slug', null, ['class' => 'form-control']) !!}
+				{!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control']) !!}
 			</div>
 		</div>
 	</div>
@@ -19,6 +19,19 @@
 		{!! Form::label('email', 'Email', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
 			{!! Form::email('email', null, ['class' => 'form-control']) !!}
+		</div>
+	</div>
+	<div class="form-group">
+		{!! Form::label('avatar', 'Profile Picture', ['class' => 'col-sm-3 control-label']) !!}
+		<div class="col-sm-9">
+			@if (@$company['avatar_url'])
+				<p>
+					<img src="{{ $company['avatar_url'] }}" style="width: 150px;">
+				</p>
+			@endif
+			{!! Form::hidden('previous_avatar', @$company['avatar']) !!}
+			{!! Form::file('avatar', ['class' => 'form-control']) !!}
+			<span class="help-block">Max File: 2 MB</span>
 		</div>
 	</div>
 	<div class="form-group">

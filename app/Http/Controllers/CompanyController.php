@@ -17,6 +17,7 @@ class CompanyController extends Controller
     public function index()
     {
         $data = [
+            'title' => 'Companies',
             'companies' => $this->repo->basePaginate(5),
         ];
 

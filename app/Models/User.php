@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'confirmation_code', 'phone', 'main_domicile', 'address', 'lost_password',
+        'name', 'email', 'password', 'type', 'confirmation_code', 'gender', 'phone', 'main_domicile', 'address', 'lost_password',
     ];
 
     /**
@@ -38,8 +38,25 @@ class User extends Authenticatable
         'created_at', 'updated_at', 'deleted_at', 'confirmed_at',
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['avatar_url'];
+
     public function companies()
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/avatars/' . $this->avatar);
+        }
+
+        // fallback default image based on it gender
+        return $this->gender == 'm' ? asset('img/male.png') : asset('img/female.png');
     }
 }

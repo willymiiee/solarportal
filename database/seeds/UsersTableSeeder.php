@@ -31,6 +31,12 @@ class UsersTableSeeder extends Seeder
 
             // A participant user
             [
+                'name' => 'John The Participant',
+                'email' => 'johndoe@gmail.com',
+                'type' => 'V',
+                'password' => app('hash')->make('secret'),
+            ],
+            [
                 'name' => 'Antoni Putra',
                 'email' => 'akiddcode@gmail.com',
                 'type' => 'V',

@@ -3,38 +3,14 @@
     <section class="tl-footer-middle-section pd-t-80">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-8 col-sm-6 col-xs-12">
                     <!--Widget Start-->
                     <div class="widget widget-about">
                         <h3>About</h3>
-                        <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit conequat ipsum, nec sagitti sem nibh id elit. Duised odio sit amet nibh vulputate cursus a sit amet mauris.</p>
+                        <p>Gerakan Nasional Sejuta Surya atap mendorong dan mempercepat pembangunan pembangkit listrik surya atap di perumahan, fasilitas umum, gedung perkantoran dan pemerintahan, bangunan komersial, dan kompleks industri hingga orde gigawat sebelum tahun 2020.</p>
                     </div><!--Widget End-->
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <!--Widget Start-->
-                    <div class="widget widget-location">
-                        <h3>Blogs</h3>
-                        <ul class="ft-listed">
-                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                        </ul>
-                    </div><!--Widget End-->
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <!--Widget Start-->
-                    <div class="widget widget-realstate">
-                        <h3>Partners</h3>
-                        <ul class="ft-listed">
-                            <li>Mortgage Rates</li>
-                            <li>Apartments For Sale</li>
-                            <li>Home Design Ideas</li>
-                            <li>Find Agent</li>
-                        </ul>
-                    </div><!--Widget End-->
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <!--Widget Start-->
                     <div class="widget widget-about">
                         <h3>Contact</h3>
@@ -43,10 +19,10 @@
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 Gedung BPPT. Jl. M.H. Thamrin No.8, RT.2/RW.1, Menteng, Kota Jakarta Pusat
                             </li>
-                            <li>
+                            {{-- <li>
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 +1 212-431-2100
-                            </li>
+                            </li> --}}
                             <li>
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                 <a href="mailto:info@sejutasuryaatap.com">

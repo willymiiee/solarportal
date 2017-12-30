@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Participant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -13,6 +15,7 @@ class ProfileController extends Controller
     {
         $data = [
             'title' => 'Edit Profile',
+            'user' => auth()->user(),
         ];
 
         return view('participant::profile', $data);
@@ -23,12 +26,24 @@ class ProfileController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
+            'avatar' => 'image',
             'phone' => 'required',
             'main_domicile' => 'required',
         ]);
 
         $user = auth()->user();
         $user->fill($request->all());
+
+        if ($file = $request->file('avatar')) {
+            $avatar = $this->_uploadAvatar($file, $user['avatar']);
+            if (!$avatar) {
+                $msg = (new MessageBag)->add('avatar', 'Your profile picture photo are invalid, try again');
+                return back()->withInput()->withErrors($msg);
+            }
+
+            $user->avatar = $avatar;
+        }
+
         $user->save();
 
         return redirect()->route('profile.edit')->withMessage([
@@ -66,5 +81,32 @@ class ProfileController extends Controller
             'type' => 'success',
             'message' => 'Password updated successfully!',
         ]);
+    }
+
+    /**
+     * Handle upload image for Avatar
+     *
+     * @param  \Illuminate\Http\UploadedFile $file
+     * @param  string       $previousFile
+     * @return string       [filename]
+     */
+    protected function _uploadAvatar($file, $previousFile)
+    {
+        if (!$file->isValid()) {
+            return false;
+        }
+
+        $ext = $file->getClientOriginalExtension();
+        $image = Image::make($file);
+        $path = $file->hashName('public/avatars');
+
+        Storage::put($path, (string) $image->encode($ext, 30));
+
+        // if new file uploaded successfully, delete previous file
+        if (Storage::exists($path) && $previousFile) {
+            Storage::delete('public/avatars/' . $previousFile);
+        }
+
+        return basename($path);
     }
 }

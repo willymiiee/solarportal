@@ -33,3 +33,4 @@ const app = new Vue({
 });
 
 require("./utilities/link-method");
+// require("./utilities/input-slug");
