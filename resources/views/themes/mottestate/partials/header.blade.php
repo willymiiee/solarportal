@@ -7,14 +7,15 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <!--Top Listed Start-->
                     <ul class="tl-top-listed">
-                        <li>
+                        <li> &nbsp; </li>
+                        {{-- <li>
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             (212) 505 - 1015
                         </li>
                         <li>
                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
                             <a href="mailto:info@sejutasuryaatap.com">info@sejutasuryaatap.com</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -56,12 +57,12 @@
                 <div class="col-md-2 col-sm-2">
                     <!--Logo Start-->
                     <strong class="tl-logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
                     </strong><!--Logo End-->
                 </div>
                 <div class="col-md-10 col-sm-10">
                     <!--Nav Holder Start-->
-                    <div class="tl-nav-holder">
+                    <div class="tl-nav-holder" style="margin-top: 25px;">
                         <!--Menu Holder Start-->
                         <nav class="navbar navbar-default">
                             <div class="navbar-header">

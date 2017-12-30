@@ -2,9 +2,12 @@
     <!-- Logo -->
     <a href="{{ route('participant.dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>SPV</b></span>
+        <span class="logo-mini"><img src="{{ asset('img/logo.svg') }}" style="height: 35px;"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SOLAR PV</b></span>
+        {{-- <span class="logo-lg"><b>GNSSA</b></span> --}}
+        <span class="logo-lg">
+            <img src="{{ asset('img/logo.svg') }}" style="height: 35px;">
+        </span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

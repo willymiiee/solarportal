@@ -10,7 +10,7 @@
 						<div class="row">
 							<div class="col-md-2 col-sm-6 col-xs-12">
 								<figure class="tl-thumb">
-									<img src="{{ asset('img/male.png') }}" alt="">
+									<img src="{{ $comp['avatar_url'] ?: getImgAvatar($comp['email']) }}" alt="{{ $comp['name'] }}" {{-- style="max-width: none; width: auto;" --}}>
 								</figure>
 							</div>
 							<div class="col-md-4 col-sm-6 col-xs-12">
