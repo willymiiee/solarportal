@@ -20,32 +20,25 @@ class UsersTableSeeder extends Seeder
 
     protected function _specialUser()
     {
-        $userData = [
-            //  An admin user
-            [
-                'name' => 'Admin',
-                'email' => 'admin@test.com',
-                'type' => 'A',
-                'password' => app('hash')->make('12345678'),
-            ],
+        factory(User::class)->create([
+            'name' => 'Admin',
+            'email' => 'admin@test.com',
+            'type' => 'A',
+            'password' => app('hash')->make('12345678'),
+        ]);
 
-            // A participant user
-            [
-                'name' => 'John The Participant',
-                'email' => 'johndoe@gmail.com',
-                'type' => 'V',
-                'password' => app('hash')->make('secret'),
-            ],
-            [
-                'name' => 'Antoni Putra',
-                'email' => 'akiddcode@gmail.com',
-                'type' => 'V',
-                'password' => app('hash')->make('secret'),
-            ],
-        ];
+        factory(User::class)->create([
+            'name' => 'John The Participant',
+            'email' => 'johndoe@gmail.com',
+            'type' => 'V',
+            'password' => app('hash')->make('secret'),
+        ]);
 
-        foreach ($userData as $key => $ud) {
-            User::create($ud);
-        }
+        factory(User::class)->create([
+            'name' => 'Antoni Putra',
+            'email' => 'akiddcode@gmail.com',
+            'type' => 'V',
+            'password' => app('hash')->make('secret'),
+        ]);
     }
 }

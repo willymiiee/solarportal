@@ -24,5 +24,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'phone' => $faker->phoneNumber,
         'main_domicile' => $faker->randomElement(['JAWA TIMUR', 'KALIMANTAN BARAT', 'LAMPUNG']),
+        'address' => $faker->address,
     ];
 });
