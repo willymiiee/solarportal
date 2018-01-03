@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $this->data['about'] = Article::where('slug', 'tentang-gnssa')->first();
-        $this->data['about']->content = explode("\r\n", $this->data['about']->content);
+        $this->data['about']->content = explode("\n", $this->data['about']->content);
         $this->data['blog'] = Article::whereNull('deleted_at')
             ->take(3)
             ->where('type', 'post')
