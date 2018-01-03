@@ -25,7 +25,7 @@
 
             @if (Auth::check())
             <li class="nav-item">
-                <a class="nav-link" href="#">Hi, {{ Auth::user()->name }}</a>
+                <a class="nav-link" href="{{ url('participant') }}">Hi, {{ Auth::user()->name }}</a>
             </li>
             @else
             <li class="nav-item">
