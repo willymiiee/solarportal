@@ -84,24 +84,19 @@
         <div id="benefit-title">Mengapa Listrik Surya Atap</div>
 
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
                 <i class="icon icon-chart"></i>
                 <span>Hemat</span>
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
                 <i class="icon icon-energy"></i>
                 <span>Mandiri</span>
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
-                <i class="icon icon-bulb"></i>
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
+                <i class="icon icon-globe"></i>
                 <span>Hijau</span>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 benefit-item">
-                <i class="icon icon-diamond"></i>
-                <span>Investasi</span>
             </div>
         </div>
     </div>
