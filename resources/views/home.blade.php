@@ -102,7 +102,7 @@
     </div>
 
     <div class="container" id="participant">
-        <div class="section-title" id="participant-title">Participants</div>
+        <div class="section-title" id="participant-title">Partisipan</div>
         <hr class="section-line">
 
         <div class="row" id="participant-items">
