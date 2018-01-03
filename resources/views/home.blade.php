@@ -52,7 +52,8 @@
                 <div id="about-title">{{ $data['about']->title }}</div>
 
                 <div id="about-description">
-                    {!! $data['about']->content !!}
+                    {!! $data['about']->content[0] !!}
+                    <a href="{{ url($data['about']->slug) }}" class="readmore">Lihat</a>
                 </div>
             </div>
         </div>
