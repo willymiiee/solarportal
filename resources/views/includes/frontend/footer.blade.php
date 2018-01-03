@@ -1,6 +1,6 @@
 <footer class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 footer-col">
+        <div class="offset-md-1 col-sm-12 col-md-4 col-lg-4 col-xl-4 footer-col">
             <div class="footer-col-title">Contact</div>
 
             <div class="footer-col-content">
