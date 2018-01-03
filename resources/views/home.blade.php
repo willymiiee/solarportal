@@ -36,9 +36,13 @@
         <div class="section-title" id="coordinator-title">Co-Coordinator</div>
         <hr class="section-line">
 
-        <div class="row">
-            <div class="coordinator-item"></div>
-            <div class="coordinator-item"></div>
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
+                <img src="{{ asset('img/logo-aesi.gif') }}" alt="">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
+                <img src="{{ asset('img/logo-esdm.png') }}" alt="">
+            </div>
         </div>
     </div>
 
