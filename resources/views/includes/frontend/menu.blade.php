@@ -20,7 +20,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Info</a>
+                <a class="nav-link" href="{{ url('info-listrik-surya') }}">Info Listrik Surya</a>
             </li>
 
             @if (Auth::check())
