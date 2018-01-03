@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{{ request()->is('/') ? '#about' : url('/#about') }}">About</a>
             </li>
 
             <li class="nav-item">
