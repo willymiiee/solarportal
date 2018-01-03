@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 footer-col">
+        {{--  <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 footer-col">
             <div class="footer-col-title">Recent posts</div>
 
             <div class="footer-col-content">
@@ -47,7 +47,7 @@
             <div class="footer-col-content">
                 <a href="#">Co-coordinator</a>
                 <a href="#">Participants</a>
-                {{--  <a href="#">Solar roof benefits</a>  --}}
+                <a href="#">Solar roof benefits</a>
             </div>
         </div>
 
@@ -58,6 +58,6 @@
                 <input type="text" id="footerSearch" placeholder="Search...">
                 <a href="#" id="footerSearchBtn"><i class="icon icon-magnifier"></i></a>
             </div>
-        </div>
+        </div>  --}}
     </div>
 </footer>
