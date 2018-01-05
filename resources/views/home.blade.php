@@ -80,8 +80,8 @@
             @endforeach
         </div>
 
-        <div class="row align-items-center justify-content-center" id="blog-readmore">
-            <a href="#" id="blog-btn-readmore">Find out more</a>
+        <div class="row align-items-center justify-content-center more-btn-container">
+            <a href="#" class="btn-more">Find out more</a>
         </div>
     </div>
 
@@ -125,6 +125,16 @@
 
             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
                 Company D
+            </div>
+        </div>
+
+        <div class="row more-btn-container">
+            <div class="col-6 text-center">
+                <a href="{{ url('companies') }}" class="btn-more">Daftar Lengkap Partisipan</a>
+            </div>
+
+            <div class="col-6 text-center">
+                <a href="{{ url('register') }}" class="btn-more">Mendaftar menjadi Partisipan</a>
             </div>
         </div>
     </div>
