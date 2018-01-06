@@ -8,15 +8,10 @@ image: php:7.1.1
 pipelines:
   default:
     - step:
-        caches:
-          - composer
         script:
-          - ssh root@45.76.146.223
-          - cd /var/www/html
           - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev mysql-client
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
-          - git pull
           - export DB_CONNECTION=mysql
           - php artisan migrate
         services:
@@ -27,7 +22,7 @@ definitions:
     mysql:
       image: mysql
       environment:
-        MYSQL_DATABASE: 'improvied'
+        MYSQL_DATABASE: 'improvid'
         MYSQL_RANDOM_ROOT_PASSWORD: 'no'
         MYSQL_USER: 'root'
         MYSQL_PASSWORD: '12345678'
