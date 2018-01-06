@@ -11,7 +11,20 @@ pipelines:
         caches:
           - composer
         script:
-          - apt-get update && apt-get install -y unzip
+          - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev mysql-client
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
-          - vendor/bin/phpunit
+          - export DB_CONNECTION=mysql
+          - php artisan migrate
+        services:
+          - mysql
+
+definitions:
+  services:
+    mysql:
+      image: mysql
+      environment:
+        MYSQL_DATABASE: 'improvied'
+        MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: '12345678'
