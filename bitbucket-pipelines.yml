@@ -9,7 +9,4 @@ pipelines:
   default:
     - step:
         script:
-          - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev mysql-client
-          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          - composer install
-          - php artisan migrate
+          - ssh root@45.76.146.223 "cd /var/www/html && git pull && composer update && php artisan migrate"
