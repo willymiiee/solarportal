@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: php:7.1.1
+image: php:7.0.22
 
 pipelines:
   default:
@@ -12,17 +12,4 @@ pipelines:
           - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev mysql-client
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
-          - export DB_CONNECTION=mysql
           - php artisan migrate
-        services:
-          - mysql
-
-definitions:
-  services:
-    mysql:
-      image: mysql
-      environment:
-        MYSQL_DATABASE: 'improvid'
-        MYSQL_RANDOM_ROOT_PASSWORD: 'no'
-        MYSQL_USER: 'root'
-        MYSQL_PASSWORD: '12345678'
