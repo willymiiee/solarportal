@@ -11,9 +11,12 @@ pipelines:
         caches:
           - composer
         script:
+          - ssh root@45.76.146.223
+          - cd /var/www/html
           - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev mysql-client
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
+          - git pull
           - export DB_CONNECTION=mysql
           - php artisan migrate
         services:
