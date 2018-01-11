@@ -13,6 +13,7 @@ class HomeController extends Controller
             'title' => $title,
             'content_title' => $title,
             'content_description' => 'Here is your overview data',
+            'active_page' => 'dashboard',
         ];
 
         return view('participant::home', $data);

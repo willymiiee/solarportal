@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -20,7 +20,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         $emailData = json_encode(
             [
-                '-verifyUrl-' => url('user/verify').'/'.$user->confirmation_code
+                '-verifyUrl-' => url('user/verify') . '/' . $user->confirmation_code,
             ]
         );
 
@@ -113,7 +113,16 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        // in case if user join via invitation link
+        if ($company_id = request('ref_company')) {
+            $user->addCompany($company_id);
+
+            return redirect($this->redirectPath())->withMessage([
+                'type' => 'success',
+                'message' => 'Invitation successfully!',
+            ]);
+        }
+
+        return redirect($this->redirectPath());
     }
 }

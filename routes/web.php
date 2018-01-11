@@ -31,6 +31,8 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
     Route::get('/profile-password', 'ProfileController@password')->name('profile.password');
     Route::put('/profile-password', 'ProfileController@updatePassword')->name('profile.updatePassword');
 
+    Route::get('/companies/invite', 'CompanyController@invite')->name('participant.company.invite');
+    Route::put('/companies/invite-process', 'CompanyController@inviteProcess')->name('participant.company.inviteProcess');
     Route::resource('companies', 'CompanyController', ['names' => [
         'index' => 'participant.company.index',
         'create' => 'participant.company.create',

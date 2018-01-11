@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Participant;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ParticipantInvitation;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
@@ -25,6 +27,7 @@ class CompanyController extends Controller
         $data = [
             'title' => $title,
             'content_title' => $title,
+            'active_page' => 'company',
             'companies' => $companies,
         ];
         return view('participant::company.index', $data);
@@ -147,5 +150,50 @@ class CompanyController extends Controller
             'description' => 'Deskripsi',
             'services.*.name' => 'Service Name',
         ]);
+    }
+
+    public function invite()
+    {
+        $title = 'Invite a Participant';
+        $data = [
+            'title' => $title,
+            'active_page' => 'participant_invite',
+            'company_dropdown' => $this->repo->getDropdownByUser(auth()->user()['id']),
+            'subject_placeholder' => 'Invitation from __company__',
+            'message_placeholder' => $this->_messagePlaceholder(),
+        ];
+        return view('participant::company.invite', $data);
+    }
+
+    public function inviteProcess(Request $request)
+    {
+        $mail_content = new ParticipantInvitation($request->all());
+        if ($request->get('preview')) {
+            return $mail_content;
+        }
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'company_id' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        Mail::to($request->get('email'))->send($mail_content);
+
+        return redirect()->route('participant.company.invite')->withMessage([
+            'type' => 'success',
+            'message' => 'Invitation has been sent to "' . $request->get('email') . '" successfully!',
+        ]);
+    }
+
+    protected function _messagePlaceholder()
+    {
+        return 'Hello __name__,
+
+I would like to invite you to join my company: __company__.
+
+Click a link below:';
     }
 }

@@ -59,4 +59,21 @@ class User extends Authenticatable
         // fallback default image based on it gender
         return $this->gender == 'm' ? asset('img/male.png') : asset('img/female.png');
     }
+
+    public function addCompany($company_id)
+    {
+        // check for existance of company
+        $company = Company::find($company_id);
+        if (!$company) {
+            return false;
+        }
+
+        // if user already joined that company, we do nothing
+        if ($this->companies->find($company_id)) {
+            return true;
+        }
+
+        $this->companies()->attach($company->id);
+        return true;
+    }
 }
