@@ -39,7 +39,7 @@
 
             @include('includes.admin.alert')
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register', request()->query()) }}">
                 {{ csrf_field() }}
 
                 {!! Form::hidden('type', 'V') !!}
@@ -81,7 +81,7 @@
                 </div>
             </form>
 
-            <a href="{{ url('login') }}" class="text-center">I already have a membership</a>
+            <a href="{{ route('login', request()->query()) }}" class="text-center">I already have a membership</a>
         </div>
         <!-- /.login-box-body -->
     </div>

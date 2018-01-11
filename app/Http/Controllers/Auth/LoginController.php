@@ -48,6 +48,15 @@ class LoginController extends Controller
                 $redirect = 'profile';
             }
 
+            if ($company_id = request('ref_company')) {
+                $user->addCompany($company_id);
+
+                return redirect($redirect)->withMessage([
+                    'type' => 'success',
+                    'message' => 'Invitation successfully!',
+                ]);
+            }
+
             return redirect($redirect);
 
             // $http = new \GuzzleHttp\Client;

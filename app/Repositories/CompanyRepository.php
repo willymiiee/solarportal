@@ -29,6 +29,26 @@ class CompanyRepository extends BaseRepository
     }
 
     /**
+     * Get companies as dropdown by given user_id
+     *
+     * @param  integer $user_id
+     * @param  string $display_field
+     * @return array
+     */
+    public function getDropdownByUser($user_id, $display_field = 'name')
+    {
+        $user = User::find($user_id);
+
+        if (empty($user->companies)) {
+            return [];
+        }
+
+        return $user->companies()
+            ->orderBy($display_field, 'asc')
+            ->pluck($display_field, 'companies.id');
+    }
+
+    /**
      * Get single company by ID or Slug
      *
      * @param  integer|string $identifier

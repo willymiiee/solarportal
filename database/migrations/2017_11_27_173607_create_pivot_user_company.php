@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePivotUserCompany extends Migration
 {
@@ -15,9 +15,11 @@ class CreatePivotUserCompany extends Migration
     {
         Schema::create('company_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id');
-            $table->integer('user_id');
+            $table->integer('company_id')->index();
+            $table->integer('user_id')->index();
             $table->timestamps();
+
+            $table->unique(['company_id', 'user_id']);
         });
     }
 

@@ -39,11 +39,11 @@
 
             @include('includes.admin.alert')
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login', request()->query()) }}">
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'required']) !!}
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
 
@@ -68,7 +68,7 @@
                 </div>
             </form>
 
-            <a href="{{ url('register') }}" class="text-center">Register a new membership</a>
+            <a href="{{ route('register', request()->query()) }}" class="text-center">Register a new membership</a>
         </div>
         <!-- /.login-box-body -->
     </div>

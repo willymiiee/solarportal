@@ -18,6 +18,23 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            $user = auth()->user();
+
+            if ($user->type == 'V') {
+
+                // check if there are invitation link
+                if ($company_id = request('ref_company')) {
+                    $user->addCompany($company_id);
+
+                    return redirect()->route('participant.company.index')->withMessage([
+                        'type' => 'success',
+                        'message' => 'Invitation successfully!',
+                    ]);
+                }
+
+                return redirect()->route('participant.dashboard');
+            }
+
             return redirect('/');
         }
 
