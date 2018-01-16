@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Participant;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ParticipantInvitation;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
@@ -167,25 +165,55 @@ class CompanyController extends Controller
 
     public function inviteProcess(Request $request)
     {
-        $mail_content = new ParticipantInvitation($request->all());
-        if ($request->get('preview')) {
-            return $mail_content;
-        }
+        // $mail_content = new ParticipantInvitation($request->all());
+        // if ($request->get('preview')) {
+        //     return $mail_content;
+        // }
 
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
             'company_id' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
+            // 'subject' => 'required',
+            // 'message' => 'required',
         ]);
 
-        Mail::to($request->get('email'))->send($mail_content);
+        // Mail::to($request->get('email'))->send($mail_content);
+
+        $this->_sendInvitationViaSendgrid($request);
 
         return redirect()->route('participant.company.invite')->withMessage([
             'type' => 'success',
             'message' => 'Invitation has been sent to "' . $request->get('email') . '" successfully!',
         ]);
+    }
+
+    public function _sendInvitationViaSendgrid($request)
+    {
+        $invitation_url = route('register', [
+            'ref_company' => $request->get('company_id'),
+            'email' => $request->get('email'),
+            'name' => $request->get('name'),
+        ]);
+        $emailData = json_encode(
+            [
+                '-senderName-' => 'me senderName',
+                '-companyName-' => 'me companyName',
+                '-recipentName-' => 'me recipentName',
+            ]
+        );
+
+        sendMail(
+            'noreply@sejutasuryaatap.com',
+            'noreply',
+            $request->get('email'),
+            $request->get('name'),
+            'Invitation',
+            null,
+            $emailData,
+            null,
+            '8a59a904-78c1-4019-bc1e-69fd6e2efb07'
+        );
     }
 
     protected function _messagePlaceholder()

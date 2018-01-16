@@ -31,7 +31,7 @@
 								{!! Form::select('company_id', $company_dropdown, null, ['class' => 'form-control']) !!}
 							</div>
 
-							<hr/>
+							{{-- <hr/>
 							<div class="alert alert-default" style="font-style: italic;">
 								You can use:
 								<label class="label label-default">__name__</label>
@@ -48,14 +48,14 @@
 								{!! Form::label('message', 'Message', []) !!}
 								{!! Form::textarea('message', old('message', $message_placeholder), ['class' => 'form-control', 'rows' => 15, 'required' => true]) !!}
 								<span class="help-block">Link invitation will automatically generated after this message</span>
-							</div>
+							</div> --}}
 						</div>
 						<div class="box-footer clearfix">
-							<button type="submit" name="preview" value="1" class="btn btn-default pull-left" onclick="$('.form-invite').attr('target', '_blank');">
+							{{-- <button type="submit" name="preview" value="1" class="btn btn-default pull-left" onclick="$('.form-invite').attr('target', '_blank');">
 								<i class="fa fa-eye"></i> Preview
-							</button>
+							</button> --}}
 							<button type="submit" class="btn btn-warning btn-lg pull-right" onclick="$('.form-invite').removeAttr('target');">
-								<i class="fa fa-envelope-o"></i> Send Invitation
+								<i class="fa fa-send"></i> Send Invitation
 							</button>
 						</div> <!-- /.box-footer -->
 						{!! Form::close() !!}
