@@ -41,6 +41,18 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
         'update' => 'participant.company.update',
         'destroy' => 'participant.company.destroy',
     ]]);
+
+    /* Coming Soon */
+    Route::get('products', function () {
+        return view('participant::coming_soon');
+    });
+    Route::get('customers', function () {
+        return view('participant::coming_soon');
+    });
+    Route::get('others', function () {
+        return view('participant::coming_soon');
+    });
+    /* End Coming Soon */
 });
 
 Route::prefix('companies')->group(function () {
