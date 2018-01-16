@@ -50,12 +50,12 @@
 					<div class="small-box bg-aqua">
 						<div class="inner">
 							<h3>0</h3>
-							<p>Others</p>
+							<p>Hours</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-navicon-round"></i>
 						</div>
-						<a href="{{ url('participant/others') }}" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="{{ url('participant/hours') }}" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div> <!-- Product ./col -->
 			</div>

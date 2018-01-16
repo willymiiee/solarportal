@@ -49,7 +49,7 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
     Route::get('customers', function () {
         return view('participant::coming_soon');
     });
-    Route::get('others', function () {
+    Route::get('hours', function () {
         return view('participant::coming_soon');
     });
     /* End Coming Soon */
