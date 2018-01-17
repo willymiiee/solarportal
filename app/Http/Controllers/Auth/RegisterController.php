@@ -89,17 +89,20 @@ class RegisterController extends Controller
             ]
         );
 
-        sendMail(
-            'noreply@sejutasuryaatap.com',
-            'noreply',
-            $user->email,
-            $user->name,
-            'Please activate your account',
-            null,
-            $emailData,
-            null,
-            'cca4c8f6-f7dd-41f0-bc15-6feabfecc472'
-        );
+        // in case if user join via invitation link
+        if (!request('ref_company')) {
+            sendMail(
+                'noreply@sejutasuryaatap.com',
+                'noreply',
+                $user->email,
+                $user->name,
+                'Please activate your account',
+                null,
+                $emailData,
+                null,
+                'cca4c8f6-f7dd-41f0-bc15-6feabfecc472'
+            );
+        }
 
         return $user;
     }
@@ -115,9 +118,15 @@ class RegisterController extends Controller
 
         // in case if user join via invitation link
         if ($company_id = request('ref_company')) {
+            $user->confirmation_code = null;
+            $user->confirmed_at = now();
+            $user->save();
+
             $user->addCompany($company_id);
 
-            return redirect($this->redirectPath())->withMessage([
+            auth()->loginUsingId($user->id, true);
+
+            return redirect()->route('participant.dashboard')->withMessage([
                 'type' => 'success',
                 'message' => 'Invitation successfully!',
             ]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Participant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 
@@ -195,11 +196,13 @@ class CompanyController extends Controller
             'email' => $request->get('email'),
             'name' => $request->get('name'),
         ]);
+        $company = Company::find($request->get('company_id'));
         $emailData = json_encode(
             [
-                '-senderName-' => 'me senderName',
-                '-companyName-' => 'me companyName',
-                '-recipentName-' => 'me recipentName',
+                '-senderName-' => auth()->user()->name,
+                '-companyName-' => $company->name,
+                '-invitationLink-' => $invitation_url,
+                '-targetName-' => $request->get('name'),
             ]
         );
 
