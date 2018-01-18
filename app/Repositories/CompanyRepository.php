@@ -101,7 +101,7 @@ class CompanyRepository extends BaseRepository
         return \DB::transaction(function () use ($model, $data, $isEdit) {
             $model->fill($data);
 
-            if ($data['avatar']) {
+            if (!empty($data['avatar'])) {
                 $avatar = $this->_uploadAvatar($data['avatar'], array_get($data, 'previous_avatar'));
                 $model->avatar = $avatar;
             }
