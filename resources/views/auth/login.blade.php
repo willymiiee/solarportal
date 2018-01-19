@@ -67,8 +67,11 @@
                     <!-- /.col -->
                 </div>
             </form>
+            <hr/>
 
             <a href="{{ route('register', request()->query()) }}" class="text-center">Register a new membership</a>
+            <br/>
+            <a href="{{ route('password.request', request()->query()) }}" class="text-center">I forgot my password</a>
         </div>
         <!-- /.login-box-body -->
     </div>
