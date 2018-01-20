@@ -151,6 +151,18 @@ a, a:hover { text-decoration: none; color: #000; }
 .coordinator-item > img { height: 190px; }
 
 /*============================================*/
+/*              Signing Section               */
+/*============================================*/
+#signed {
+    height: 100%;
+    background: #fff;
+    padding-bottom: 40px;
+}
+#signed-title { margin-top: 80px; }
+.signed-item { margin: 20px 0; text-align: center; }
+.signed-item > img { width: 170px; }
+
+/*============================================*/
 /*               About Section                */
 /*============================================*/
 #about-img {

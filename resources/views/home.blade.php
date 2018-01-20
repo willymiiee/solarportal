@@ -38,10 +38,54 @@
 
         <div class="row align-items-center">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
-                <img src="{{ asset('img/logo-aesi.png') }}" alt="">
+                <img src="{{ asset('img/logo/aesi.png') }}" alt="">
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
-                <img src="{{ asset('img/logo-esdm.png') }}" alt="">
+                <img src="{{ asset('img/logo/esdm.png') }}" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="signed">
+        <div class="section-title" id="signed-title">Penandatangan</div>
+        <hr class="section-line">
+
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/akjeti.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/apamsi.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/darmapersada.jpg') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/kkifn.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/b2tke.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/iesr.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/kemenperin.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/maskeei.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/meti.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/pjci.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/pplsa.png') }}" alt="">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 signed-item">
+                <img src="{{ asset('img/logo/kadin.jpeg') }}" alt="">
             </div>
         </div>
     </div>
