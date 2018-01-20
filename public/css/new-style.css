@@ -161,12 +161,12 @@ a, a:hover { text-decoration: none; color: #000; }
     background-size: cover;
 }
 #about-content {
-    max-height: 658px;
+    min-height: 658px;
     background-color: #f7b72d;
     padding: 80px 40px 80px 40px;
 }
 #about-title {
-    width: 468px;
+    /* width: 468px; */
     /* height: 114px; */
     font-family: 'Montserrat-Bold';
     font-size: 48px;
@@ -358,4 +358,15 @@ footer {
     text-align: center;
     color: #ffffff;
     padding-top: 11px;
+}
+
+@media(max-width: 415px){
+    .homepage-search {
+        padding: 20px 0;
+    }
+}
+@media(max-width: 600px){
+    .homepage-search {
+        padding: 90px 0;
+    }
 }

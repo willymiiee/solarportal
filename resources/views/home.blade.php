@@ -38,7 +38,7 @@
 
         <div class="row align-items-center">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
-                <img src="{{ asset('img/logo-aesi.gif') }}" alt="">
+                <img src="{{ asset('img/logo-aesi.png') }}" alt="">
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 coordinator-item">
                 <img src="{{ asset('img/logo-esdm.png') }}" alt="">
