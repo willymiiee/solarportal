@@ -129,12 +129,12 @@
         </div>
 
         <div class="row more-btn-container">
-            <div class="col-6 text-center">
-                <a href="{{ url('companies') }}" class="btn-more">Daftar Lengkap Partisipan</a>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center mt-2">
+                <a href="{{ url('companies') }}" class="btn btn-more">Daftar Lengkap Partisipan</a>
             </div>
 
-            <div class="col-6 text-center">
-                <a href="{{ url('register') }}" class="btn-more">Mendaftar menjadi Partisipan</a>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center mt-2">
+                <a href="{{ url('register') }}" class="btn btn-more">Mendaftar menjadi Partisipan</a>
             </div>
         </div>
     </div>
