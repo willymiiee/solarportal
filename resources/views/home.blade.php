@@ -119,13 +119,13 @@
                 <div class="blog-item-content">
                     {!! substr($b->content, 0, 120).'...' !!}
                 </div>
-                <a href="{{ url($b->slug) }}" class="blog-item-readmore">Read more</a>
+                <a href="{{ url($b->slug) }}" class="blog-item-readmore">Lihat</a>
             </div>
             @endforeach
         </div>
 
         <div class="row align-items-center justify-content-center more-btn-container">
-            <a href="#" class="btn-more">Find out more</a>
+            <a href="#" class="btn-more">Daftar Artikel</a>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 <footer class="container-fluid">
     <div class="row">
         <div class="offset-md-1 col-sm-12 col-md-4 col-lg-4 col-xl-4 footer-col">
-            <div class="footer-col-title">Contact</div>
+            <div class="footer-col-title">Hubungi GNSSA</div>
 
             <div class="footer-col-content">
                 <i class="icon icon-location-pin"></i>
@@ -59,5 +59,9 @@
                 <a href="#" id="footerSearchBtn"><i class="icon icon-magnifier"></i></a>
             </div>
         </div>  --}}
+    </div>
+
+    <div class="text-center mt-2 copyright">
+        Copyright &copy; {{date('Y')}} Gerakan Nasional Sejuta Surya Atap
     </div>
 </footer>

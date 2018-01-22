@@ -61,6 +61,7 @@ a, a:hover { text-decoration: none; color: #000; }
     text-decoration: none;
     padding: 15px 34.5px 16px 35.5px;
 }
+.copyright { font-family: 'OpenSans-Bold'; font-size: 14px; }
 
 /*============================================*/
 /*                  Nav Bar                   */
