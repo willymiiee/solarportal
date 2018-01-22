@@ -9,7 +9,7 @@
                 {{--  <i class="icon icon-phone"></i>
                 <span>+1 212-431-2100</span><br>  --}}
                 <i class="icon icon-envelope"></i>
-                <span>info@gerakannasionalsejutasuryaatap.org</span>
+                <span>info@sejutasuryaatap.com</span>
             </div>
         </div>
 
