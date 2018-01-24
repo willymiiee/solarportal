@@ -78,7 +78,7 @@
 										<img src="{{ asset('img/boxed-bg.jpg') }}">
 									</div>
 									<div class="product-info">
-										<a href="javascript:void(0)" class="product-title">
+										<a href="{{ url('/'. $al['slug']) }}" class="product-title" target="_blank">
 											{{ $al['title'] }}
 											{{-- <span class="label label-warning pull-right">$1800</span> --}}
 										</a>
