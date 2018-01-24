@@ -82,7 +82,9 @@ class CompanyRepository extends BaseRepository
             // automatically deleted by mysql foreign cascade
             if (count($model->services) > 0) {
                 foreach ($model->services as $key => $serv) {
-                    Storage::delete('public/' . $serv['image']);
+                    if (!empty($serv['image'])) {
+                        Storage::delete('public/' . $serv['image']);
+                    }
 
                     // delete on s3 driver
                     // Storage::disk('s3')->delete('folder_path/file_name.jpg');
