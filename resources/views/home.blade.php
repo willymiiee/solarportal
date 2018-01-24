@@ -123,7 +123,7 @@
                 <img src="{{ $b->image ? url($b->image->url) : '' }}" alt="" class="blog-cover">
                 <div class="blog-item-title">{{ $b->title }}</div>
                 <div class="blog-item-content">
-                    {!! str_limit($b->content, 300) !!}
+                    {!! str_limit($b->content, 150) !!}
                 </div>
                 <a href="{{ url($b->slug) }}" class="blog-item-readmore">Lihat</a>
             </div>
