@@ -37,10 +37,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <h3><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b>So did you feel excited too?</b> Let collaboration with us.</h3>
+                                <h3><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Ingin perusahaan atau institusi anda berpartisipasi di GNSSA?</h3>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <a href="{{ route('register') }}" class="tl-btn-style1">Join as Participant</a>
+                                <a href="{{ route('register') }}" class="tl-btn-style1">Klik untuk Mendaftar</a>
                             </div>
                         </div>
                     </div>

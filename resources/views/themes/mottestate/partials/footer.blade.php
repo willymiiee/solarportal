@@ -41,10 +41,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <p>Copyright &copy; 2017 Sejuta Surya Atap. All rights reserved.</p>
+                    <p>Copyright &copy; 2018 Gerakan Nasional Sejuta Surya Atap</p>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <!--Social Links Start-->
+                    {{-- <!--Social Links Start-->
                     <ul class="top-social-links">
                         <li>
                             <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -58,7 +58,7 @@
                         <li>
                             <a href=""><i class="fa fa-skype" aria-hidden="true"></i></a>
                         </li>
-                    </ul><!--Social Links End-->
+                    </ul><!--Social Links End--> --}}
                 </div>
             </div>
         </div>
