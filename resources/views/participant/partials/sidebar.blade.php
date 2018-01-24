@@ -21,7 +21,7 @@
       </li>
       <li class="@if(@$active_page == 'company') active @endif">
         <a href="{{ route('participant.company.index') }}">
-          <i class="fa fa-briefcase"></i> <span>Company</span>
+          <i class="fa fa-briefcase"></i> <span>Perusahaan/Institusi</span>
         </a>
       </li>
     </ul>

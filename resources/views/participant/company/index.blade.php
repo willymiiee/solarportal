@@ -15,7 +15,7 @@
 					</div>
 					<div class="box-body">
 						@if ($companies->isEmpty())
-							<p class="text-center text-muted lead">There is no company at this time. <a href="{{ route('participant.company.create') }}">Add New</a></p>
+							<p class="text-center text-muted lead">Saat ini tidak ada Perusahaan/Institusi. <a href="{{ route('participant.company.create') }}">Tambahkan di sini</a></p>
 						@else
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover">

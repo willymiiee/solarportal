@@ -2,7 +2,7 @@
   <div>
     <legend class="clearfix">
       <span class="pull-left">
-        2. Services
+        2. Layanan
       </span>
       <a @click.prevent="addItem" href="#" class="btn btn-sm btn-default pull-right">
         <i class="fa fa-plus"></i>
@@ -20,7 +20,7 @@
       </template>
       
       <p v-else class="lead">
-        There is no services. <a href="#" @click.prevent="addItem">Add Service</a>
+        Belum ada layanan, <a href="#" @click.prevent="addItem">Tambahkan di sini</a>
       </p>
     </div>
   </div>
@@ -49,7 +49,7 @@
           'id': 0,
           'name': 'Service #'+ (this.items.length + 1),
           'image': null,
-          'content': 'Lorem ipsum'
+          'content': 'Penjelasan Singkat'
         })
       },
       deleteItem (item) {

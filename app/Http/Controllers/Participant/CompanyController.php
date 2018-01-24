@@ -21,7 +21,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $title = 'Company';
+        $title = 'Perusahaan/Institusi';
         $companies = $this->repo->getPaginateByUser(auth()->user()['id']);
         $data = [
             'title' => $title,
@@ -39,7 +39,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $title = 'Create a company';
+        $title = 'Daftarkan Perusahaan/Institusi';
         $data = [
             'title' => $title,
             'content_title' => $title,
@@ -61,7 +61,7 @@ class CompanyController extends Controller
 
         return redirect()->route('participant.company.index')->withMessage([
             'type' => 'success',
-            'message' => 'Company created successfully!',
+            'message' => 'Perusahaan/Institusi berhasil terdaftar!',
         ]);
     }
 
@@ -89,7 +89,7 @@ class CompanyController extends Controller
             abort(404, 'Company not found');
         }
 
-        $title = 'Edit a company: ' . $company['name'];
+        $title = 'Edit Perusahaan/Institusi: ' . $company['name'];
         $data = [
             'title' => $title,
             'content_title' => $title,
@@ -113,7 +113,7 @@ class CompanyController extends Controller
 
         return redirect()->route('participant.company.index')->withMessage([
             'type' => 'success',
-            'message' => 'Company updated successfully!',
+            'message' => 'Perusahaan/Institusi berhasil diperbarui!',
         ]);
     }
 
@@ -129,25 +129,32 @@ class CompanyController extends Controller
 
         return redirect()->route('participant.company.index')->withMessage([
             'type' => 'success',
-            'message' => 'Company deleted successfully!',
+            'message' => 'Perusahaan/Institusi berhasil dihapus!',
         ]);
     }
 
     protected function _runValidate(Request $request, $forgetId = null)
     {
+        app()->setLocale('id');
+
         $forgetId = $forgetId ?: 'NULL';
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
+            'avatar' => 'image',
+            'domicile' => 'required',
             'slug' => 'required|alpha_dash|unique:companies,slug,' . $forgetId,
             'services.*.name' => 'required',
             'services.*.image' => 'image',
         ];
 
         $this->validate($request, $rules, [], [
-            'name' => 'Name',
-            'description' => 'Deskripsi',
-            'services.*.name' => 'Service Name',
+            'name' => 'Nama Perusahaan/Institusi',
+            'slug' => 'Nama Singkat',
+            'avatar' => 'Logo',
+            'domicile' => 'Domisili Utama',
+            'description' => 'Penjelasan Singkat',
+            'services.*.name' => 'Nama Layanan',
         ]);
     }
 

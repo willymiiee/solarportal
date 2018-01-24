@@ -12,7 +12,7 @@
 
 					@if (!$company_dropdown)
 						<div class="box-body">
-							<p class="text-center">You don't have any company at this moment. <br/> <a href="{{ route('participant.company.create') }}">Click here</a> to create your first company</p>
+							<p class="text-center">Saat ini anda tidak memiliki Perusahaan/Institusi. <br/> <a href="{{ route('participant.company.create') }}">Daftarkan Perusahaan/Institusi</a></p>
 						</div>
 					@else
 

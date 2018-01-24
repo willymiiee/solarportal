@@ -4,7 +4,7 @@
 			<span aria-hidden="true">&times;</span>
 		</button>
 
-		<h4><strong>Whops!</strong> something went wrong!</h4>
+		<h4><strong>Whops!</strong> Ada yang salah!</h4>
 		@foreach ($errors->all() as $error)
 			<li>{{ $error }}</li>
 		@endforeach

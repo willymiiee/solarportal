@@ -16,7 +16,7 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">Name</label>
           <div class="col-sm-9">
-            <input type="text" :name="inputName('name')" v-model="item.name" class="form-control">
+            <input type="text" :name="inputName('name')" v-model="item.name" class="form-control" required>
           </div>
         </div>
         <div class="form-group">
