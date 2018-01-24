@@ -75,6 +75,9 @@
                                     <li>
                                         <a href="{{ url('/') }}">Home</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('company.index') }}">Perusahaan/Institusi</a>
+                                    </li>
                                     {{-- <li>
                                         <a href="about-us.html">About Us</a>
                                     </li>
@@ -202,9 +205,9 @@
     <div class="container">
         <h3>Companies</h3>
         <!--Breadcrum Start-->
-        <ul class="tl-breadcrumb-listed">
+        {{-- <ul class="tl-breadcrumb-listed">
             <li><a href="{{ url('/') }}">Home</a></li>
             <li class="active">Companies</li>
-        </ul>
+        </ul> --}}
     </div>
 </section>

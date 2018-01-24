@@ -31,7 +31,7 @@
 				</p>
 			@endif
 			{!! Form::hidden('previous_avatar', @$company['avatar']) !!}
-			{!! Form::file('avatar', ['class' => 'form-control']) !!}
+			{!! Form::file('avatar', ['class' => 'form-control', 'accept' => 'image/*']) !!}
 			<span class="help-block">Max File: 2 MB</span>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 	<div class="form-group">
 		{!! Form::label('description', 'Penjelasan Singkat', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			{!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 5]) !!}
+			{!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 7]) !!}
 		</div>
 	</div>
 	<div class="form-group">

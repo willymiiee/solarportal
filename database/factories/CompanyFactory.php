@@ -14,6 +14,6 @@ $factory->define(Company::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'phone_2' => $faker->phoneNumber,
         'website' => $faker->domainName,
-        'description' => $faker->paragraph(rand(2, 5)),
+        'description' => $faker->paragraphs(rand(4, 8), true),
     ];
 });

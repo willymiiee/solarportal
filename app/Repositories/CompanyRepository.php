@@ -126,7 +126,7 @@ class CompanyRepository extends BaseRepository
                     if (!empty($serv['image'])) {
                         $service_attr['image'] = $this->_uploadServiceImage($serv['image'], $serv['previous_image']);
                     } else {
-                        $service_attr['image'] = array_get($serv, 'current_image') ?: null;
+                        $service_attr['image'] = array_get($serv, 'previous_image') ?: null;
                         // do we need delete removed image in our storage?
                     }
 

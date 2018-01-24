@@ -26,8 +26,14 @@ class CompanyController extends Controller
 
     public function show($slug)
     {
+        $company = $this->repo->getDetail($slug);
+        if (!$company) {
+            abort(404);
+        }
+
         $data = [
-            'company' => $this->repo->getDetail($slug),
+            'title' => $company['name'],
+            'company' => $company,
         ];
 
         return view('public_entity::contents.company.show', $data);

@@ -139,7 +139,7 @@ class CompanyController extends Controller
 
         $forgetId = $forgetId ?: 'NULL';
         $rules = [
-            'name' => 'required',
+            'name' => 'required|max:150',
             'email' => 'required|email',
             'avatar' => 'image',
             'domicile' => 'required',
