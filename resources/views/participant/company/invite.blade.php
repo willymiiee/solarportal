@@ -27,7 +27,7 @@
 								{!! Form::email('email', null, ['class' => 'form-control', 'required' => true]) !!}
 							</div>
 							<div class="form-group">
-								{!! Form::label('company_id', 'Added in Company', []) !!}
+								{!! Form::label('company_id', 'Perusahaan/Institusi', []) !!}
 								{!! Form::select('company_id', $company_dropdown, null, ['class' => 'form-control']) !!}
 							</div>
 
