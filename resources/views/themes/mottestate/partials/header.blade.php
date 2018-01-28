@@ -203,7 +203,7 @@
 
 <section class="tl-inner-banner">
     <div class="container">
-        <h3>Companies</h3>
+        <h3>Perusahaan/Institusi</h3>
         <!--Breadcrum Start-->
         {{-- <ul class="tl-breadcrumb-listed">
             <li><a href="{{ url('/') }}">Home</a></li>

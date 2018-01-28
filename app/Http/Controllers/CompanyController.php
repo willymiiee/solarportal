@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\CompanyRepository;
-
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -37,5 +36,21 @@ class CompanyController extends Controller
         ];
 
         return view('public_entity::contents.company.show', $data);
+    }
+
+    public function sendMessage($slug, Request $request)
+    {
+        app()->setLocale('id');
+
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'message' => 'required|min:20',
+        ], [], []);
+
+        $this->repo->sendMessage($slug, $request->all());
+
+        return redirect()->back()->withMessage(['type' => 'success', 'message' => 'Pesan berhasil terkirim!']);
     }
 }

@@ -98,6 +98,28 @@ class CompanyRepository extends BaseRepository
         });
     }
 
+    public function sendMessage($slug, $input)
+    {
+        return \DB::transaction(function () use ($slug, $input) {
+            $company = $this->model->where('slug', $slug)->firstOrFail();
+
+            // 1. check if the given email exists or not
+            $user = User::where('email', $input['email'])->first();
+            if (!$user) {
+                $user = User::create([
+                    'name' => $input['name'],
+                    'email' => $input['email'],
+                    'phone' => $input['phone'],
+                    'password' => bcrypt('secret'),
+                    'type' => 'C',
+                ]);
+            }
+
+            // 2. add message
+            return $company->messages()->create(['user_id' => $user->id, 'message' => $input['message']]);
+        });
+    }
+
     protected function _baseProcess($model, array $data, $isEdit = false)
     {
         return \DB::transaction(function () use ($model, $data, $isEdit) {
