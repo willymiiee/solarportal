@@ -82,7 +82,9 @@ class CompanyRepository extends BaseRepository
             // automatically deleted by mysql foreign cascade
             if (count($model->services) > 0) {
                 foreach ($model->services as $key => $serv) {
-                    Storage::delete('public/' . $serv['image']);
+                    if (!empty($serv['image'])) {
+                        Storage::delete('public/' . $serv['image']);
+                    }
 
                     // delete on s3 driver
                     // Storage::disk('s3')->delete('folder_path/file_name.jpg');
@@ -126,7 +128,7 @@ class CompanyRepository extends BaseRepository
                     if (!empty($serv['image'])) {
                         $service_attr['image'] = $this->_uploadServiceImage($serv['image'], $serv['previous_image']);
                     } else {
-                        $service_attr['image'] = array_get($serv, 'current_image') ?: null;
+                        $service_attr['image'] = array_get($serv, 'previous_image') ?: null;
                         // do we need delete removed image in our storage?
                     }
 

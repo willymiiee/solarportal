@@ -11,7 +11,7 @@
 					<div class="small-box bg-aqua">
 						<div class="inner">
 							<h3>{{ auth()->user()->companies->count() }}</h3>
-							<p>Companies</p>
+							<p>Perusahaan/Institusi</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-briefcase"></i>
@@ -29,7 +29,7 @@
 						<div class="icon">
 							<i class="ion ion-cube"></i>
 						</div>
-						<a href="{{ url('participant/products') }}" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="{{ url('participant/products') }}" class="small-box-footer">Coming soon <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div> <!-- Product ./col -->
 				<div class="col-lg-3 col-xs-6">
@@ -42,7 +42,7 @@
 						<div class="icon">
 							<i class="ion ion-ios-people"></i>
 						</div>
-						<a href="{{ url('participants/customers') }}" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="{{ url('participant/customers') }}" class="small-box-footer">Coming soon <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div> <!-- Customer ./col -->
 				<div class="col-lg-3 col-xs-6">
@@ -55,7 +55,7 @@
 						<div class="icon">
 							<i class="ion ion-navicon-round"></i>
 						</div>
-						<a href="{{ url('participant/hours') }}" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="{{ url('participant/hours') }}" class="small-box-footer">Coming soon <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div> <!-- Product ./col -->
 			</div>
@@ -78,7 +78,7 @@
 										<img src="{{ asset('img/boxed-bg.jpg') }}">
 									</div>
 									<div class="product-info">
-										<a href="javascript:void(0)" class="product-title">
+										<a href="{{ url('/'. $al['slug']) }}" class="product-title" target="_blank">
 											{{ $al['title'] }}
 											{{-- <span class="label label-warning pull-right">$1800</span> --}}
 										</a>

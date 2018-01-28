@@ -12,11 +12,11 @@
 
         <ul class="navbar-nav nav-menu">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ url('') }}">Home</a>
+                <a class="nav-link" href="{{ url('') }}">Beranda</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ request()->is('/') ? '#about' : url('/#about') }}">About</a>
+                <a class="nav-link" href="{{ request()->is('/') ? '#about' : url('/#about') }}">Tentang GNSSA</a>
             </li>
 
             <li class="nav-item">

@@ -22,7 +22,7 @@
                     <!--Top Right Listed Start-->
                     <div class="tl-top-right">
                         <!--Social Links Start-->
-                        <ul class="top-social-links">
+                        {{-- <ul class="top-social-links">
                             <li>
                                 <a href="https://demo-themelocation.co/mottestate/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                             </li>
@@ -32,16 +32,16 @@
                             <li>
                                 <a href="https://demo-themelocation.co/mottestate/"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                             </li>
-                        </ul><!--Social Links End-->
+                        </ul><!--Social Links End--> --}}
 
                         @if (!Auth::check())
-                            <div class="tl-signup-btns">
+                            {{-- <div class="tl-signup-btns">
                                 <a href="#" class="signin-btn" data-toggle="modal" data-target="#login">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     Sign In /
                                 </a>
                                 <a href="#" class="login-btn" data-toggle="modal" data-target="#register">Join</a>
-                            </div>
+                            </div> --}}
                         @endif
 
                     </div><!--Top Right Listed End-->
@@ -72,17 +72,13 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li class="dropdown">
-                                        <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="home-slider.html">Home With Slider</a></li>
-                                            <li><a href="home-map.html">Home With Map</a></li>
-                                            <li><a href="home-split.html">Home Split</a></li>
-                                            <li><a href="home-split-full.html">Home Split Full</a></li>
-                                        </ul>
+                                    <li>
+                                        <a href="{{ url('/') }}">Home</a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('company.index') }}">Perusahaan/Institusi</a>
+                                    </li>
+                                    {{-- <li>
                                         <a href="about-us.html">About Us</a>
                                     </li>
                                     <li class="dropdown"> <a href="team.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Companies <span class="caret"></span></a>
@@ -93,7 +89,7 @@
                                     </li>
                                     <li>
                                         <a href="about-us.html">Other Menu</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                             <!-- /.navbar-collapse -->
@@ -209,9 +205,9 @@
     <div class="container">
         <h3>Companies</h3>
         <!--Breadcrum Start-->
-        <ul class="tl-breadcrumb-listed">
-            <li><a href="index.html">Home</a></li>
+        {{-- <ul class="tl-breadcrumb-listed">
+            <li><a href="{{ url('/') }}">Home</a></li>
             <li class="active">Companies</li>
-        </ul>
+        </ul> --}}
     </div>
 </section>

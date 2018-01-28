@@ -18,10 +18,20 @@
 									<h3><a href="{{ route('company.show', $comp['slug']) }}">{{ $comp['name'] }}</a></h3>
 									<span class="desination">{{ $comp['domicile'] }}</span>
 									<ul class="ft-listed">
-										<li>
-											<i aria-hidden="true" class="fa fa-phone"></i>
-											<a href="tel:1234533">{{ $comp['phone'] }}</a>
-										</li>
+										@if (!empty($comp['phone']))
+											<li>
+												<i aria-hidden="true" class="fa fa-phone"></i>
+												<a href="tel:1234533">{{ $comp['phone'] }}</a>
+											</li>
+										@endif
+
+										@if (!empty($comp['phone_2']))
+											<li>
+												<i aria-hidden="true" class="fa fa-phone"></i>
+												<a href="tel:1234533">{{ $comp['phone_2'] }}</a>
+											</li>
+										@endif
+
 										<li>
 											<i aria-hidden="true" class="fa fa-envelope-o"></i>
 											<a href="mailto:david@realestate.com">{{ $comp['email'] }}</a>
@@ -32,9 +42,11 @@
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<!--Team Services Item Start-->
-								<div class="tl-team-services-info">
+								<div class="tl-team-services-info" style="min-height: 200px;">
 									<strong>About</strong>
-									{{ $comp['description'] }}
+									{!! substr(nl2br(strip_tags($comp['description'])), 0, 350) !!}
+									@if (strlen($comp['description']) > 350) ... @endif
+
 									<a href="{{ route('company.show', $comp['slug']) }}" class="btn-more">
 										<i aria-hidden="true" class="fa fa-angle-right"></i>
 									</a>

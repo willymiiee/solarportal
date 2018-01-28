@@ -12,7 +12,7 @@
 
 					@if (!$company_dropdown)
 						<div class="box-body">
-							<p class="text-center">You don't have any company at this moment. <br/> <a href="{{ route('participant.company.create') }}">Click here</a> to create your first company</p>
+							<p class="text-center">Saat ini anda tidak memiliki Perusahaan/Institusi. <br/> <a href="{{ route('participant.company.create') }}">Daftarkan Perusahaan/Institusi</a></p>
 						</div>
 					@else
 
@@ -27,7 +27,7 @@
 								{!! Form::email('email', null, ['class' => 'form-control', 'required' => true]) !!}
 							</div>
 							<div class="form-group">
-								{!! Form::label('company_id', 'Added in Company', []) !!}
+								{!! Form::label('company_id', 'Perusahaan/Institusi', []) !!}
 								{!! Form::select('company_id', $company_dropdown, null, ['class' => 'form-control']) !!}
 							</div>
 
