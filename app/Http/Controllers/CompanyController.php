@@ -16,7 +16,7 @@ class CompanyController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Companies',
+            'title' => 'Perusahaan / Institusi',
             'companies' => $this->repo->basePaginate(5),
         ];
 

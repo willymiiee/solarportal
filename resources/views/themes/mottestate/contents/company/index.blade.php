@@ -3,12 +3,11 @@
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
-            <h3>Companies</h3>
-            <!--Breadcrum Start-->
-            <ul class="tl-breadcrumb-listed">
+            <h3>{{$title}}</h3>
+            {{--  <ul class="tl-breadcrumb-listed">
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li class="active">Companies</li>
-            </ul>
+            </ul>  --}}
         </div>
     </section>
 @stop
