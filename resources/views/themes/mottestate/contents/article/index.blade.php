@@ -3,12 +3,11 @@
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
-            <h3>{{ $data['title'] }}</h3>
-            <!--Breadcrum Start-->
-            <ul class="tl-breadcrumb-listed">
+            <h3>{{ $title }}</h3>
+            {{--  <ul class="tl-breadcrumb-listed">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li class="active">{{ $data['title'] }}</li>
-            </ul>
+                <li class="active">{{ $title }}</li>
+            </ul>  --}}
         </div>
     </section>
 @stop
@@ -17,7 +16,7 @@
     <section class="tl-blog-section pd-tb-80">
         <div class="container">
             <div class="row">
-                @foreach ($data['items'] as $item)
+                @foreach ($items as $item)
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="tl-blog-box">
                         <figure class="tl-thumb">
@@ -41,14 +40,14 @@
 
                             <br>
                             <br>
-                            <a href="{{ route('article detail', ['slug' => $item->slug]) }}" class="tl-readmore">Read More</a>
+                            <a href="{{ route('article detail', ['slug' => $item->slug]) }}" class="tl-readmore">Lihat</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
 
-            {{ $data['items']->links() }}
+            {{ $items->links() }}
         </div>
     </section>
 @stop

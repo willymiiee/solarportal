@@ -60,10 +60,10 @@ class HomeController extends Controller
     public function getArticles()
     {
         $data = [
-            'title' => 'Articles',
+            'title' => 'Daftar Artikel',
             'items' => $this->repo->getLatest('mixed', 6),
         ];
 
-        return view('public_entity::contents.article.index', compact('data'));
+        return view('public_entity::contents.article.index', $data);
     }
 }
