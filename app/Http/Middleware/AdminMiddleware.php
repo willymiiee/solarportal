@@ -18,10 +18,10 @@ class AdminMiddleware
     {
         if ($user = $request->user()) {
             if ($user->type != 'A') {
-                return abort(403, 'You dont have access to this page');
+                return redirect('/');
             }
         } else {
-            return abort(403, 'You dont have access to this page');
+            return redirect('/');
             // return redirect('/login');
         }
 
