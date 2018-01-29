@@ -26,6 +26,6 @@ class ArticleRepository extends BaseRepository
             $model = $model->where('type', $type);
         }
 
-        return $model->limit($limit)->get();
+        return $model->paginate($limit);
     }
 }
