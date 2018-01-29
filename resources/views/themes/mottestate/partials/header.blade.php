@@ -200,14 +200,3 @@
     </div><!-- Modal content End-->
 
 </header><!--Header Content End-->
-
-<section class="tl-inner-banner">
-    <div class="container">
-        <h3>Perusahaan/Institusi</h3>
-        <!--Breadcrum Start-->
-        {{-- <ul class="tl-breadcrumb-listed">
-            <li><a href="{{ url('/') }}">Home</a></li>
-            <li class="active">Companies</li>
-        </ul> --}}
-    </div>
-</section>
