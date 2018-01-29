@@ -1,5 +1,18 @@
 @extends('themes::mottestate.layouts.default')
 
+@section('breadcrumb')
+    <section class="tl-inner-banner">
+        <div class="container">
+            <h3>Companies</h3>
+            <!--Breadcrum Start-->
+            <ul class="tl-breadcrumb-listed">
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li class="active">Companies</li>
+            </ul>
+        </div>
+    </section>
+@stop
+
 @section('content')
 
 	<section class="tl-team-section pd-tb-80">
@@ -10,7 +23,7 @@
 						<div class="row">
 							<div class="col-md-2 col-sm-6 col-xs-12">
 								<figure class="tl-thumb">
-									<img src="{{ $comp['avatar_url'] ?: getImgAvatar($comp['email']) }}" alt="{{ $comp['name'] }}" {{-- style="max-width: none; width: auto;" --}}>
+									<img src="{{ $comp['avatar_url'] ?: getImgAvatar($comp['email']) }}" alt="{{ $comp['name'] }}" style="object-fit: contain">
 								</figure>
 							</div>
 							<div class="col-md-4 col-sm-6 col-xs-12">
