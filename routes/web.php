@@ -71,4 +71,5 @@ Route::post('lost-password', 'UserController@postLostPassword');
 Route::get('reset-password/{code}', 'UserController@getResetPassword');
 Route::post('reset-password', 'UserController@postResetPassword');
 Route::get('register-thankyou', 'HomeController@getThankyouRegister');
-Route::get('{slug}', 'HomeController@getItem');
+Route::get('articles', 'HomeController@getArticles')->name('article list');
+Route::get('{slug}', 'HomeController@getItem')->name('article detail');

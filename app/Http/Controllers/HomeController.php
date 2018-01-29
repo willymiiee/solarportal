@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Repositories\ArticleRepository;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->repo = new ArticleRepository(new Article);
         // $this->middleware('auth');
     }
 
@@ -53,5 +55,15 @@ class HomeController extends Controller
     public function getThankyouRegister()
     {
         return view('register-thankyou')->with('data', $this->data);
+    }
+
+    public function getArticles()
+    {
+        $data = [
+            'title' => 'Articles',
+            'items' => $this->repo->getLatest('mixed', 6),
+        ];
+
+        return view('public_entity::contents.article.index', compact('data'));
     }
 }
