@@ -161,21 +161,11 @@
         <hr class="section-line">
 
         <div class="row" id="participant-items">
+            @foreach ($data['participant'] as $p)
             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
-                Company A
+                {{ $p->name }}
             </div>
-
-            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
-                Company B
-            </div>
-
-            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
-                Company C
-            </div>
-
-            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 participant-item">
-                Company D
-            </div>
+            @endforeach
         </div>
 
         <div class="row more-btn-container">
