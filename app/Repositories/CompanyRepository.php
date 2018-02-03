@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Company;
+use App\Models\CompanyMessage;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -116,8 +117,29 @@ class CompanyRepository extends BaseRepository
             }
 
             // 2. add message
-            return $company->messages()->create(['user_id' => $user->id, 'message' => $input['message']]);
+            $company->messages()->create(['user_id' => $user->id, 'message' => $input['message']]);
+
+            // 3. send message to company email
+            $this->_sendEmailToCompany($company, $user, $input['message']);
         });
+    }
+
+    /**
+     * Get latest company message by given user_id
+     * 
+     * @param  integer $user_id
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getMessages($user_id, $limit = 10)
+    {
+        $user = User::find($user_id);
+        $company_ids = $user->companies->pluck('id');
+
+        return CompanyMessage::with('user')
+            ->orderBy('created_at', 'desc')
+            ->whereIn('company_id', $company_ids)
+            ->limit($limit)
+            ->get();
     }
 
     protected function _baseProcess($model, array $data, $isEdit = false)
@@ -215,5 +237,32 @@ class CompanyRepository extends BaseRepository
         }
 
         return basename($path);
+    }
+
+    protected function _sendEmailToCompany(Company $company, User $user, $message)
+    {
+        $emailData = json_encode(
+            [
+                '-targetName-' => $company->name,
+                '-targetCompany-' => 'targetCompany?',
+                '-targetCompanyUrl-' => route('company.show', $company->slug),
+                '-senderName-' => $user->name,
+                '-senderPhone-' => $user->phone,
+                '-senderEmail-' => $user->email,
+                '-senderMessage-' => $message,
+            ]
+        );
+
+        sendMail(
+            'noreply@sejutasuryaatap.com',
+            $user->name,
+            $company->email,
+            $company->name,
+            'subject',
+            null,
+            $emailData,
+            null,
+            'd4c7b21f-d36b-4605-980b-645c6abe108a'
+        );
     }
 }
