@@ -23,6 +23,10 @@
                 <a class="nav-link" href="{{ url('info-listrik-surya') }}">Info Listrik Surya</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('company.index') }}">Lihat Partisipan</a>
+            </li>
+
             @if (Auth::check())
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('participant') }}">Hi, {{ Auth::user()->name }}</a>
