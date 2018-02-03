@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Company;
 use App\Repositories\ArticleRepository;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -60,12 +61,15 @@ class HomeController extends Controller
         return view('register-thankyou')->with('data', $this->data);
     }
 
-    public function getArticles()
+    public function getArticles(Request $request)
     {
-        $data = [
-            'title' => 'Daftar Artikel',
-            'items' => $this->repo->getLatest('mixed', 6),
-        ];
+        $data['title'] = 'Daftar Artikel';
+
+        if ($request->has('title')) {
+            $data['items'] = $this->repo->filterBy('title', $request->get('title'), 6);
+        } else {
+            $data['items'] = $this->repo->getLatest('mixed', 6);
+        }
 
         return view('public_entity::contents.article.index', $data);
     }

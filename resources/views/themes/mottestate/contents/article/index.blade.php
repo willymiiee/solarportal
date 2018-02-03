@@ -1,13 +1,39 @@
 @extends('themes::mottestate.layouts.default')
 
+@section('styles')
+    <style>
+        .tl-breadcrumb-listed input {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+
+        .tl-breadcrumb-listed button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tl-breadcrumb-listed button:hover {
+            background: #ccc;
+        }
+    </style>
+@stop
+
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
             <h3>{{ $title }}</h3>
-            {{--  <ul class="tl-breadcrumb-listed">
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li class="active">{{ $title }}</li>
-            </ul>  --}}
+            <form action="{{ route('article list') }}" class="tl-breadcrumb-listed">
+                <input type="text" name="title" placeholder="Search article">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </section>
 @stop
@@ -17,7 +43,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($items as $item)
-                <div class="col-md-4 col-sm-4 col-xs-12" style="height: 500px">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="tl-blog-box">
                         <figure class="tl-thumb">
                             <a href="{{ route('article detail', ['slug' => $item->slug]) }}">
@@ -36,7 +62,7 @@
                                 <li><i class="fa fa-clock-o"></i></li>
                             </ul>
 
-                            {!! str_limit($item->content, 150) !!}
+                            {!! str_limit(strip_tags($item->content), 150) !!}
 
                             <br>
                             <br>

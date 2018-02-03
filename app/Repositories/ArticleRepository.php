@@ -28,4 +28,20 @@ class ArticleRepository extends BaseRepository
 
         return $model->paginate($limit);
     }
+
+    /**
+     * Filter Article
+     *
+     * @param  string $filterKey [title]
+     * @param  string $filterValue
+     * @param integer $limit
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function filterBy($filterKey, $filterValue, $limit = 10)
+    {
+        $model = $this->model->where($filterKey, 'like', '%'.$filterValue.'%')
+            ->orderBy('created_at', 'desc');
+
+        return $model->paginate($limit);
+    }
 }
