@@ -120,7 +120,7 @@
 								</p>
 							</div>
 						@empty
-							<p class="lead">Saat ini tidak ada pesan untuk Perusahaan/Institusi anda</p>
+							<p class="text-muted text-center">Saat ini tidak ada pesan untuk Perusahaan/Institusi anda</p>
 						@endforelse
 					</div>
 				</div>
