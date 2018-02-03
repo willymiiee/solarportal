@@ -65,8 +65,8 @@ class HomeController extends Controller
     {
         $data['title'] = 'Daftar Artikel';
 
-        if ($request->has('title')) {
-            $data['items'] = $this->repo->filterBy('title', $request->get('title'), 6);
+        if ($request->has('search')) {
+            $data['items'] = $this->repo->filter($request->get('search'), 6);
         } else {
             $data['items'] = $this->repo->getLatest('mixed', 6);
         }

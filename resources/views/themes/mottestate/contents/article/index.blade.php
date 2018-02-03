@@ -31,7 +31,7 @@
         <div class="container">
             <h3>{{ $title }}</h3>
             <form action="{{ route('article list') }}" class="tl-breadcrumb-listed">
-                <input type="text" name="title" placeholder="Search article">
+                <input type="text" name="search" placeholder="Search article">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
