@@ -116,9 +116,7 @@
 										</small>
 										{{ $msg['user']['name'] }}
 									</a>
-									I would like to meet you to discuss the latest news about
-									the arrival of the new theme. They say it is going to be one the
-									best themes on the market
+									{{  $msg['message'] }}
 								</p>
 							</div>
 						@empty
