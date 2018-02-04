@@ -1,5 +1,11 @@
 @extends('themes::mottestate.layouts.default')
 
+@section('meta')
+    <meta property="og:title" content="{{ $company->name }}" />
+    <meta property="og:description" content="{{ substr($company->description, 0, 150) }}" />
+    <meta property="og:image" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" />
+@endsection
+
 @section('content')
 
 	<section class="tl-team-section pd-tb-80">
