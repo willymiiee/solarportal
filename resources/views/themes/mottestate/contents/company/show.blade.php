@@ -1,7 +1,7 @@
 @extends('themes::mottestate.layouts.default')
 
 @section('meta')
-    <meta property="og:title" content="{{ $company->name }}" />
+    <meta property="og:title" content="Gerakan Nasional Sejuta Surya App | {{ $company->name }}" />
     <meta property="og:description" content="{{ substr($company->description, 0, 150) }}" />
     <meta property="og:image" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" />
     <meta property="og:image:width" content=600 />
