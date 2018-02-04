@@ -241,10 +241,11 @@ class CompanyRepository extends BaseRepository
 
     protected function _sendEmailToCompany(Company $company, User $user, $message)
     {
+        $admin_company = $company->users->first();
         $emailData = json_encode(
             [
-                '-targetName-' => $company->name,
-                '-targetCompany-' => 'targetCompany?',
+                '-targetName-' => $admin_company ? $admin_company->name : $company->name,
+                '-targetCompany-' => $company->name,
                 '-targetCompanyUrl-' => route('company.show', $company->slug),
                 '-senderName-' => $user->name,
                 '-senderPhone-' => $user->phone,
