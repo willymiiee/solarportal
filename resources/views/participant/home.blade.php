@@ -111,7 +111,9 @@
 
 								<p class="message">
 									<a href="#" class="name">
-										<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
+										<small class="text-muted pull-right">
+											<i class="fa fa-clock-o"></i> {{ $msg['created_at']->format('H:i - M j, Y') }}
+										</small>
 										{{ $msg['user']['name'] }}
 									</a>
 									I would like to meet you to discuss the latest news about
