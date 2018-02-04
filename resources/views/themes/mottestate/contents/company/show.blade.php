@@ -2,10 +2,11 @@
 
 @section('meta')
     <meta property="og:title" content="Gerakan Nasional Sejuta Surya App | {{ $company->name }}" />
-    <meta property="og:description" content="{{ substr($company->description, 0, 150) }}" />
+    <meta property="og:description" content="{{ substr($company->description, 0, 150) }} {{ strlen($company->description) > 150 ? '...' : '' }}" />
     <meta property="og:image" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" />
     <meta property="og:image:width" content=600 />
 	<meta property="og:image:height" content=400 />
+    <meta property="og:image:secure_url" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" />
 @endsection
 
 @section('content')
