@@ -27,6 +27,8 @@
 
         @include('themes::mottestate.partials.header')
 
+        @yield('breadcrumb')
+
         <!--Main Content Start-->
         <div class="tl-main-content">
             @yield('content')

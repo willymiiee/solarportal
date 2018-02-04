@@ -1,5 +1,14 @@
 @extends('themes::mottestate.layouts.default')
 
+@section('meta')
+    <meta property="og:title" content="Gerakan Nasional Sejuta Surya App | {{ $company->name }}" />
+    <meta property="og:description" content="{{ substr($company->description, 0, 150) }} {{ strlen($company->description) > 150 ? '...' : '' }}" />
+    <meta property="og:image" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" />
+    {{-- <meta property="og:image:width" content="600" />
+	<meta property="og:image:height" content="400" />
+    <meta property="og:image:secure_url" content="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" /> --}}
+@endsection
+
 @section('content')
 
 	<section class="tl-team-section pd-tb-80">
@@ -80,23 +89,29 @@
 						<!--Widget Start-->
 						<div class="widget widget-agent">
 							<h3>Contact {{ $company['name'] }}</h3>
-							<form method="get" class="agent-form-outer" onsubmit="alert('Kami sedang membangun Fitur ini'); return false;">
+
+							@include('participant::partials.alert')
+
+							{!! Form::open(['url' => route('company.sendMessage', $company['slug']), 'method' => 'POST', 'class' => 'agent-form-outer']) !!}
 								<div class="inner-holder">
-									<input type="text" placeholder="Your Name">
+									{!! Form::text('name', null, ['placeholder' => 'Nama anda', 'required' => true]) !!}
 								</div>
 								<div class="inner-holder">
-									<input type="tel" placeholder="Phone">
+									{!! Form::text('phone', null, ['placeholder' => 'Nomor telefon anda', 'required' => true]) !!}
 								</div>
 								<div class="inner-holder">
-									<input type="email" placeholder="Email">
+									{!! Form::email('email', null, ['placeholder' => 'Alamat email anda', 'required' => true]) !!}
 								</div>
 								<div class="inner-holder">
-									<textarea name="Message" placeholder="Message"></textarea>
+									{!! Form::textarea('message', null, ['placeholder' => 'Tulis Pesan anda disini', 'required' => true, 'style' => 'height: 150px;']) !!}
 								</div>
 								<div class="inner-holder">
-									<button class="btn-submit" type="submit">Contact Agent</button>
+									<button class="btn-submit" type="submit">
+										<i class="fa fa-send"></i>
+										Send Message
+									</button>
 								</div>
-							</form>
+							{!! Form::close() !!}
 						</div><!--Widget Holder End-->
 					</aside><!--Sidebar Outer End-->
 				</div>

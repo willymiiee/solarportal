@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Company;
+use App\Models\CompanyMessage;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -96,6 +97,49 @@ class CompanyRepository extends BaseRepository
 
             return $model->delete();
         });
+    }
+
+    public function sendMessage($slug, $input)
+    {
+        return \DB::transaction(function () use ($slug, $input) {
+            $company = $this->model->where('slug', $slug)->firstOrFail();
+
+            // 1. check if the given email exists or not
+            $user = User::where('email', $input['email'])->first();
+            if (!$user) {
+                $user = User::create([
+                    'name' => $input['name'],
+                    'email' => $input['email'],
+                    'phone' => $input['phone'],
+                    'password' => bcrypt('secret'),
+                    'type' => 'C',
+                ]);
+            }
+
+            // 2. add message
+            $company->messages()->create(['user_id' => $user->id, 'message' => $input['message']]);
+
+            // 3. send message to company email
+            $this->_sendEmailToCompany($company, $user, $input['message']);
+        });
+    }
+
+    /**
+     * Get latest company message by given user_id
+     * 
+     * @param  integer $user_id
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getMessages($user_id, $limit = 10)
+    {
+        $user = User::find($user_id);
+        $company_ids = $user->companies->pluck('id');
+
+        return CompanyMessage::with('user')
+            ->orderBy('created_at', 'desc')
+            ->whereIn('company_id', $company_ids)
+            ->limit($limit)
+            ->get();
     }
 
     protected function _baseProcess($model, array $data, $isEdit = false)
@@ -193,5 +237,33 @@ class CompanyRepository extends BaseRepository
         }
 
         return basename($path);
+    }
+
+    protected function _sendEmailToCompany(Company $company, User $user, $message)
+    {
+        $admin_company = $company->users->first();
+        $emailData = json_encode(
+            [
+                '-targetName-' => $admin_company ? $admin_company->name : $company->name,
+                '-targetCompany-' => $company->name,
+                '-targetCompanyUrl-' => route('company.show', $company->slug),
+                '-senderName-' => $user->name,
+                '-senderPhone-' => $user->phone,
+                '-senderEmail-' => $user->email,
+                '-senderMessage-' => $message,
+            ]
+        );
+
+        sendMail(
+            'noreply@sejutasuryaatap.com',
+            $user->name,
+            $company->email,
+            $company->name,
+            'subject',
+            null,
+            $emailData,
+            null,
+            'd4c7b21f-d36b-4605-980b-645c6abe108a'
+        );
     }
 }

@@ -26,6 +26,23 @@ class ArticleRepository extends BaseRepository
             $model = $model->where('type', $type);
         }
 
-        return $model->limit($limit)->get();
+        return $model->paginate($limit);
+    }
+
+    /**
+     * Filter Article
+     *
+     * @param  string $filterKey [title]
+     * @param  string $filterValue
+     * @param integer $limit
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function filter($filterValue, $limit = 10)
+    {
+        $model = $this->model->where('title', 'like', '%'.$filterValue.'%')
+            ->orWhere('content', 'like', '%'.$filterValue.'%')
+            ->orderBy('created_at', 'desc');
+
+        return $model->paginate($limit);
     }
 }

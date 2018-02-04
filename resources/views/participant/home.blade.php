@@ -104,8 +104,33 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">Pesan</h3>
 					</div>
-					<div class="box-body">
-						<p class="lead text-center">coming soon</p>
+					<div class="box-body chat" id="chat-box">
+						@forelse ($messages_latest as $msg)
+							<div class="item" style="border-bottom: 1px solid #f5f5f5;">
+								<img src="{{ getImgAvatar($msg['user']['email']) }}" alt="user image">
+
+								<p class="message">
+									<span class="name">
+										<small class="text-muted pull-right">
+											<i class="fa fa-clock-o"></i> {{ $msg['created_at']->format('H:i - M j, Y') }}
+										</small>
+										{{ $msg['user']['name'] }}
+									</span>
+									{{  $msg['message'] }}
+
+									<span class="name text-muted clearfix" style="display: block; margin-top: 10px;">
+										<a href="mailto:{{ $msg['user']['email'] }}" class="pull-left">
+											<small><i class="fa fa-envelope"></i> {{ $msg['user']['email'] }}</small>
+										</a>
+										<small class="pull-right">
+											<i class="fa fa-phone"></i> {{ $msg['user']['phone'] }}
+										</small>
+									</span>
+								</p>
+							</div>
+						@empty
+							<p class="text-muted text-center">Saat ini tidak ada pesan untuk Perusahaan/Institusi anda</p>
+						@endforelse
 					</div>
 				</div>
 			</div>

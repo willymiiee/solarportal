@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CompanyMessage;
 use App\Models\CompanyService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -55,6 +56,11 @@ class Company extends Model
     public function services()
     {
         return $this->hasMany(CompanyService::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(CompanyMessage::class);
     }
 
     public function getAvatarUrlAttribute()

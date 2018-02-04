@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Company;
+use App\Repositories\ArticleRepository;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -14,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->repo = new ArticleRepository(new Article);
         // $this->middleware('auth');
     }
 
@@ -26,11 +30,13 @@ class HomeController extends Controller
     {
         $this->data['about'] = Article::where('slug', 'tentang-gnssa')->first();
         $this->data['about']->content = explode("\n", $this->data['about']->content);
-        $this->data['blog'] = Article::whereNull('deleted_at')
-            ->take(3)
-            ->where('type', 'post')
+        $this->data['blog'] = Article::where('type', 'post')
             ->where('published', true)
             ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+        $this->data['participant'] = Company::orderBy('created_at', 'desc')
+            ->take(4)
             ->get();
 
         foreach ($this->data['blog'] as $k => $b) {
@@ -53,5 +59,18 @@ class HomeController extends Controller
     public function getThankyouRegister()
     {
         return view('register-thankyou')->with('data', $this->data);
+    }
+
+    public function getArticles(Request $request)
+    {
+        $data['title'] = 'Daftar Artikel';
+
+        if ($request->has('search')) {
+            $data['items'] = $this->repo->filter($request->get('search'), 6);
+        } else {
+            $data['items'] = $this->repo->getLatest('mixed', 6);
+        }
+
+        return view('public_entity::contents.article.index', $data);
     }
 }

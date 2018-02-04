@@ -58,6 +58,7 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
 Route::prefix('companies')->group(function () {
     Route::get('/', 'CompanyController@index')->name('company.index');
     Route::get('/{slug}', 'CompanyController@show')->name('company.show');
+    Route::post('/{slug}/send-message', 'CompanyController@sendMessage')->name('company.sendMessage');
 });
 
 Route::get('/', 'HomeController@index');
@@ -70,4 +71,5 @@ Route::post('lost-password', 'UserController@postLostPassword');
 Route::get('reset-password/{code}', 'UserController@getResetPassword');
 Route::post('reset-password', 'UserController@postResetPassword');
 Route::get('register-thankyou', 'HomeController@getThankyouRegister');
-Route::get('{slug}', 'HomeController@getItem');
+Route::get('articles', 'HomeController@getArticles')->name('article list');
+Route::get('{slug}', 'HomeController@getItem')->name('article detail');
