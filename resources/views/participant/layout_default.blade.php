@@ -25,6 +25,8 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    @include('includes._ga')
 </head>
 <body class="fixed skin-yellow sidebar-mini">
     <div id="app-participant" class="wrapper">

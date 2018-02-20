@@ -28,6 +28,8 @@
 
     {{-- Sweetalert --}}
     <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
+
+    @include('includes._ga')
 </head>
 <body>
     @include('includes.frontend.menu')
