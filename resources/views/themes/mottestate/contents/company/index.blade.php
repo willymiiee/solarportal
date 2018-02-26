@@ -3,11 +3,11 @@
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
-            <h3>{{$title}}</h3>
-            {{--  <ul class="tl-breadcrumb-listed">
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li class="active">Companies</li>
-            </ul>  --}}
+            <h3>{{ $title }}</h3>
+            <form action="{{ route('company.index') }}" class="tl-breadcrumb-listed">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search companies">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </section>
 @stop

@@ -4,3 +4,27 @@
 @import "../vendor/theme_mottestate/css/responsive.css";
 @import "../vendor/theme_mottestate/css/theme-color.css";
 @import "../vendor/theme_mottestate/css/owl.carousel.css";
+
+.tl-breadcrumb-listed {
+	input {
+		padding: 6px;
+		margin-top: 8px;
+		font-size: 17px;
+		border: none;
+	}
+
+	button {
+		float: right;
+		padding: 6px 10px;
+		margin-top: 8px;
+		margin-right: 16px;
+		background: #ddd;
+		font-size: 17px;
+		border: none;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background: #ccc;
+	}
+}
