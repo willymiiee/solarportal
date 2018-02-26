@@ -17,7 +17,7 @@ class CompanyController extends Controller
     {
         $data = [
             'title' => 'Perusahaan / Institusi',
-            'companies' => $this->repo->basePaginate(5),
+            'companies' => $this->repo->basePaginate(10),
         ];
 
         return view('public_entity::contents.company.index', $data);
