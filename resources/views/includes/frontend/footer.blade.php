@@ -5,7 +5,9 @@
 
             <div class="footer-col-content">
                 <i class="icon icon-location-pin"></i>
-                <span>Gedung BPPT. Jl. M.H. Thamrin No.8, RT.2/RW.1, Menteng, Kota Jakarta Pusat</span><br>
+                <span>Gedung 625 Cluster Energi Puspiptek Serpong</span><br>
+                <span class="ml-2">Tangerang Selatan</span><br>
+                <span class="ml-2">15314</span><br>
                 {{--  <i class="icon icon-phone"></i>
                 <span>+1 212-431-2100</span><br>  --}}
                 <i class="icon icon-envelope"></i>
