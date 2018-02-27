@@ -10,7 +10,7 @@ pipelines:
     - step:
         script:
           - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev ssh
-          - ssh root@45.76.145.137 "cd /var/www/html && git pull && composer update && php artisan migrate"
+          - ssh root@45.76.145.137 "cd /var/www/html && git pull && composer install && php artisan migrate"
           
           # Production pipelines
           # - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev ssh
