@@ -71,6 +71,10 @@ class HomeController extends Controller
             $data['items'] = $this->repo->getLatest('mixed', 6);
         }
 
+        foreach ($data['items'] as $k => $b) {
+            $data['items'][$k]->image = $b->images()->first();
+        }
+
         return view('public_entity::contents.article.index', $data);
     }
 }
