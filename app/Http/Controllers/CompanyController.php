@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,17 @@ class CompanyController extends Controller
 
     public function index()
     {
+        $companies = $this->repo->basePaginate(10);
+        if ($filterValue = request('search')) {
+            $companies = Company::where('name', 'like', '%'.$filterValue.'%')
+                ->orWhere('description', 'like', '%'.$filterValue.'%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+
         $data = [
             'title' => 'Perusahaan / Institusi',
-            'companies' => $this->repo->basePaginate(10),
+            'companies' => $companies,
         ];
 
         return view('public_entity::contents.company.index', $data);

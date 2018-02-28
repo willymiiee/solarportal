@@ -107,7 +107,7 @@
 
                 <div id="about-description">
                     {!! $data['about']->content[0] !!}
-                    <a href="{{ route('article detail', ['slug' => $data['about']->slug]) }}" class="readmore">Lihat</a>
+                    <a href="{{ route('article.detail', ['slug' => $data['about']->slug]) }}" class="readmore">Lihat</a>
                 </div>
             </div>
         </div>
@@ -125,13 +125,13 @@
                 <div class="blog-item-content">
                     {!! str_limit($b->content, 150) !!}
                 </div>
-                <a href="{{ route('article detail', ['slug' => $b->slug]) }}" class="blog-item-readmore">Lihat</a>
+                <a href="{{ route('article.detail', ['slug' => $b->slug]) }}" class="blog-item-readmore">Lihat</a>
             </div>
             @endforeach
         </div>
 
         <div class="row align-items-center justify-content-center more-btn-container">
-            <a href="{{ route('article list') }}" class="btn-more">Daftar Artikel</a>
+            <a href="{{ route('article.list') }}" class="btn-more">Daftar Artikel</a>
         </div>
     </div>
 
