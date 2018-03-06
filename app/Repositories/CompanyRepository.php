@@ -57,10 +57,10 @@ class CompanyRepository extends BaseRepository
      */
     public function getDetail($identifier)
     {
-        $model = $this->model->with('services')->find($identifier);
+        $model = $this->model->with('services', 'categories')->find($identifier);
         if (!$model) {
             $model = $this->model
-                ->with('services')
+                ->with('services', 'categories')
                 ->where('slug', $identifier)
                 ->first();
         }
@@ -126,7 +126,7 @@ class CompanyRepository extends BaseRepository
 
     /**
      * Get latest company message by given user_id
-     * 
+     *
      * @param  integer $user_id
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -158,6 +158,11 @@ class CompanyRepository extends BaseRepository
             if ($isEdit) {
                 $ids = collect(request()->get('services'))->pluck('id')->toArray();
                 $model->services()->whereNotIn('id', $ids)->delete();
+            }
+
+            // handle categories
+            if (!empty($data['categories'])) {
+                $model->categories()->sync($data['categories']);
             }
 
             // handle services attributes

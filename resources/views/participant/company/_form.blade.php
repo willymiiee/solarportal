@@ -48,6 +48,22 @@
 		</div>
 	</div>
 	<div class="form-group">
+		{!! Form::label('categories', 'Kategori', ['class' => 'col-sm-3 control-label']) !!}
+		<div class="col-sm-9">
+			@foreach (array_chunk($categories, 2) as $row)
+				<div class="row">
+					@foreach ($row as $id => $cat)
+						<div class="col-md-6">
+							<label class="checkbox-inline">
+								{!! Form::checkbox('categories[]', $cat['id'], null) !!} {{ $cat['name'] }}
+							</label>
+						</div>
+					@endforeach
+				</div>
+			@endforeach
+		</div>
+	</div>
+	<div class="form-group">
 		{!! Form::label('address', 'Alamat', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
 			{!! Form::textarea('address', null, ['class' => 'form-control', 'rows' => 3]) !!}

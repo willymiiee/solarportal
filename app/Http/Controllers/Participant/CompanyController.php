@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Participant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Company;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
@@ -39,10 +40,12 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        $categories = $this->_getCategoryList();
         $title = 'Daftarkan Perusahaan/Institusi';
         $data = [
             'title' => $title,
             'content_title' => $title,
+            'categories' => $categories,
         ];
         return view('participant::company.create', $data);
     }
@@ -89,11 +92,13 @@ class CompanyController extends Controller
             abort(404, 'Company not found');
         }
 
+        $categories = $this->_getCategoryList();
         $title = 'Edit Perusahaan/Institusi: ' . $company['name'];
         $data = [
             'title' => $title,
             'content_title' => $title,
             'company' => $company,
+            'categories' => $categories,
         ];
         return view('participant::company.edit', $data);
     }
@@ -156,6 +161,11 @@ class CompanyController extends Controller
             'description' => 'Penjelasan Singkat',
             'services.*.name' => 'Nama Layanan',
         ]);
+    }
+
+    public function _getCategoryList()
+    {
+        return Category::get()->toArray();
     }
 
     public function invite()

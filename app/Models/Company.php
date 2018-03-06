@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use App\Models\CompanyMessage;
 use App\Models\CompanyService;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -50,12 +52,17 @@ class Company extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany(User::class);
     }
 
     public function services()
     {
         return $this->hasMany(CompanyService::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     public function messages()

@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Models\User;
+use Closure;
 
 class ParticipantMiddleware
 {
@@ -16,11 +16,8 @@ class ParticipantMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($user = $request->user()) {
-            if ($user->type != 'V') {
-                return redirect()->route('login');
-            }
-        } else {
+        $user = $request->user();
+        if (!$user || $user->type != 'V') {
             return redirect()->route('login');
         }
 
