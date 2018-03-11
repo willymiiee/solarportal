@@ -52,7 +52,7 @@
 
                         @if (isset($item) && $item->images()->get())
                             @foreach ($item->images()->get() as $i)
-                            <img src="{{ url($i->url) }}" width=300 alt="">
+                            <img src="{{ getFromS3($i->url) }}" width=300 alt="">
                             @endforeach
                         @endif
                     </div>

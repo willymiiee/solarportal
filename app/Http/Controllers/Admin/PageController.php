@@ -63,14 +63,8 @@ class PageController extends HomeController
         ]);
 
         if ($request->image) {
-            $photoName = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('upload'), $photoName);
-
-            $image = Image::create([
-                'url' => 'upload/'.$photoName
-            ]);
-
-            $page->images()->attach($image->id);
+            $img = uploadToS3($request->file('image'));
+            $page->images()->attach($img->id);
         }
 
         return redirect('admin/pages')->with('status', 'Success add page!');
@@ -110,14 +104,8 @@ class PageController extends HomeController
         $item->save();
 
         if ($request->image) {
-            $photoName = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('upload'), $photoName);
-
-            $image = Image::create([
-                'url' => 'upload/'.$photoName
-            ]);
-
-            $item->images()->sync($image->id);
+            $img = uploadToS3($request->file('image'));
+            $item->images()->attach($img->id);
         }
 
         return redirect('admin/pages')->with('status', 'Success update page!');
