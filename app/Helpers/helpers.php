@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Image;
+
 /**
  * Helper for save email data to database and send using sendgrid
  */
@@ -83,5 +85,35 @@ if (!function_exists('getImgAvatar')) {
     {
         $grav_url = "//www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=" . $size;
         return $grav_url;
+    }
+}
+
+if (!function_exists('uploadToS3')) {
+    /**
+     * Post image to S3
+     *
+     * @param  file $file
+     * @return Image
+     */
+    function uploadToS3($file)
+    {
+        $path = \Storage::disk('s3')->putFile('upload', $file, 'public');
+        $image = Image::create(['url' => $path]);
+        return $image;
+    }
+}
+
+if (!function_exists('getFromS3')) {
+    /**
+     * Get image from S3
+     *
+     * @param  string $path
+     * @return string
+     */
+    function getFromS3($path)
+    {
+        \Storage::setVisibility($path, 'public');
+        $image = \Storage::disk('s3')->url($path);
+        return $image;
     }
 }
