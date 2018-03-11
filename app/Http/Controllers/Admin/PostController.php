@@ -75,14 +75,8 @@ class PostController extends HomeController
         ]);
 
         if ($request->image) {
-            $photoName = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('upload'), $photoName);
-
-            $image = Image::create([
-                'url' => 'upload/'.$photoName
-            ]);
-
-            $post->images()->attach($image->id);
+            $img = uploadToS3($request->file('image'));
+            $post->images()->attach($img->id);
         }
 
         if ($request->label_id) {
@@ -133,14 +127,8 @@ class PostController extends HomeController
         $item->save();
 
         if ($request->image) {
-            $photoName = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('upload'), $photoName);
-
-            $image = Image::create([
-                'url' => 'upload/'.$photoName
-            ]);
-
-            $item->images()->sync($image->id, ['item_type' => 'post']);
+            $img = uploadToS3($request->file('image'));
+            $item->images()->sync($img->id, ['item_type' => 'post']);
         }
 
         if ($request->label_id) {
