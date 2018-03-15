@@ -42,6 +42,15 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
         'destroy' => 'participant.company.destroy',
     ]]);
 
+    Route::resource('projects', 'ProjectController', ['names' => [
+        'index' => 'participant.project.index',
+        'create' => 'participant.project.create',
+        'store' => 'participant.project.store',
+        'edit' => 'participant.project.edit',
+        'update' => 'participant.project.update',
+        'destroy' => 'participant.project.destroy',
+    ]]);
+
     /* Coming Soon */
     Route::get('products', function () {
         return view('participant::coming_soon');
