@@ -3,6 +3,11 @@
         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
     </a>
 </li>
+<li class="{{ Request::segment(2) == 'companies' ? 'active' : '' }}">
+    <a href="{{ url('admin/companies') }}">
+        <i class="fa fa-building"></i> <span>Companies</span>
+    </a>
+</li>
 <li class="{{ Request::segment(2) == 'pages' ? 'active' : '' }}">
     <a href="{{ url('admin/pages') }}">
         <i class="fa fa-files-o"></i> <span>Pages</span>
