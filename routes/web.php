@@ -14,13 +14,18 @@
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
-Route::prefix('admin')->namespace('Admin')->middleware('admin')->group(function () {
-    Route::get('/', 'HomeController@index');
-    Route::get('home', 'HomeController@index');
+Route::prefix('admin')->namespace('Admin')->middleware('admin')->as('admin.')->group(function () {
+    Route::get('/', function() {
+        return redirect()->route('admin.home');
+    });
+    Route::get('home', 'HomeController@index')->name('home');
 
-    Route::resource('pages', 'PageController');
-    Route::resource('posts', 'PostController');
-    Route::resource('users', 'UserController');
+    Route::resources([
+        'pages' => 'PageController',
+        'posts' => 'PostController',
+        'users' => 'UserController',
+        'companies' => 'CompanyController'
+    ]);
 });
 
 Route::prefix('participant')->namespace('Participant')->middleware('participant')->group(function () {
