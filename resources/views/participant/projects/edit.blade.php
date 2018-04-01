@@ -10,7 +10,7 @@
 					Daftar Project
 				</a>
 				<div class="box box-default box-solid">
-					{!! Form::open(['method' => 'POST', 'url' => route('participant.project.store'), 'class' => 'form-horizontal', 'files' => true]) !!}
+					{!! Form::model($project, ['method' => 'PUT', 'url' => route('participant.project.update', $project->id), 'class' => 'form-horizontal', 'files' => true]) !!}
 						@include('participant::projects._form')
 					{!! Form::close() !!}
 				</div>

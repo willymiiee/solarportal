@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'capacity', 'type_installation', 'type_connection', 'location', 'is_location_allow_public', 'is_involved_installation', 'image', 'brand', 'capacity_panel', 'amount',
+        'installed_capacity', 'type_installation', 'type_connection', 'location', 'is_location_allow_public', 'is_involved_installation', 'image', 'brand', 'capacity_panel', 'amount', 'province'
     ];
 
     const DROPDOWN_TYPE_INSTALLATION = [
-        'Surya Atap (Rooftop)',
-        'Instalasi di atas tanah (Ground)',
-        'Lain lain',
+        'Surya Atap (Rooftop)' => 'Surya Atap (Rooftop)',
+        'Instalasi di atas tanah (Ground)' => 'Instalasi di atas tanah (Ground)',
+        'Lain lain' => 'Lain lain',
     ];
 
     const DROPDOWN_TYPE_CONNECTION = [
-        'Grid tie/terhubung dengan PLN',
-        'Grid tie hibrid dengan Baterai',
-        'Off grid atau di belakang meter',
-        'Off grid dengan Baterai',
-        'Lain-lain',
+        'Grid tie/terhubung dengan PLN' => 'Grid tie/terhubung dengan PLN',
+        'Grid tie hibrid dengan Baterai' => 'Grid tie hibrid dengan Baterai',
+        'Off grid atau di belakang meter' => 'Off grid atau di belakang meter',
+        'Off grid dengan Baterai' => 'Off grid dengan Baterai',
+        'Lain-lain' => 'Lain-lain',
     ];
 
     const META_ATTRIBUTES = [
@@ -47,9 +47,9 @@ class Project extends Model
         'meterExim_experience_pln' => 'string',
     ];
 
-    public function meta()
+    public function metas()
     {
-        return $this->hasOne(Projectmeta::class);
+        return $this->hasMany(Projectmeta::class);
     }
 
     public function companies()

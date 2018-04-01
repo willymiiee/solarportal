@@ -18,7 +18,7 @@ class CreateProjectmetasTable extends Migration
             $table->integer('project_id')->unsigned()->index();
             $table->string('key');
             $table->string('type');
-            $table->longText('value');
+            $table->longText('value')->nullable();
             $table->timestamps();
 
             // constraint
