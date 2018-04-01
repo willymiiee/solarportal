@@ -27,7 +27,13 @@
 							</div>
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="tl-text-holder">
-									<h3><a href="{{ route('company.show', $comp['slug']) }}">{{ $comp['name'] }}</a></h3>
+									<h3>
+                                        <a href="{{ route('company.show', $comp['slug']) }}">{{ $comp['name'] }}</a>
+                                        &nbsp;
+                                        @if ($comp['verified'])
+                                        <i style="color: blue" class="fa fa-check-circle"></i>
+                                        @endif
+                                    </h3>
 									<span class="desination">{{ $comp['domicile'] }}</span>
 									<ul class="ft-listed">
 										@if (!empty($comp['phone']))
