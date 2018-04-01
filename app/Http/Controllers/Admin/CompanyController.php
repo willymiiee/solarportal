@@ -74,6 +74,7 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->except(['_method', '_token']);
+        $input['verified'] = $input['verified'] == 'on' ? 1 : 0;
         $item = Company::find($id);
         $item->update($input);
         $item->save();
