@@ -27,7 +27,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.company.form');
     }
 
     /**
@@ -60,7 +60,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Company::find($id);
+        return view('admin.company.form', compact('item'));
     }
 
     /**
@@ -72,7 +73,11 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->except(['_method', '_token']);
+        $item = Company::find($id);
+        $item->update($input);
+        $item->save();
+        return redirect()->route('admin.companies.index')->with('status', 'Success update company!');
     }
 
     /**
