@@ -20,6 +20,7 @@ class CompanyController extends Controller
         if ($filterValue = request('search')) {
             $companies = Company::where('name', 'like', '%'.$filterValue.'%')
                 ->orWhere('description', 'like', '%'.$filterValue.'%')
+                ->orderBy('verified', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }

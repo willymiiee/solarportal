@@ -271,4 +271,18 @@ class CompanyRepository extends BaseRepository
             'd4c7b21f-d36b-4605-980b-645c6abe108a'
         );
     }
+
+    /**
+     * Get latest created resources as paginated
+     *
+     * @param  integer $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function basePaginate($limit = 10)
+    {
+        return $this->model
+            ->orderBy('verified', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
+    }
 }
