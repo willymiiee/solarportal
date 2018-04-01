@@ -31,7 +31,7 @@
                                         <a href="{{ route('company.show', $comp['slug']) }}">{{ $comp['name'] }}</a>
                                         &nbsp;
                                         @if ($comp['verified'])
-                                        <i style="color: blue" class="fa fa-check-circle"></i>
+                                        <small style="font-size:10px" class="label label-success">GNSSA Verified</small>
                                         @endif
                                     </h3>
 									<span class="desination">{{ $comp['domicile'] }}</span>
