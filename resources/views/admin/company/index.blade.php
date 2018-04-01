@@ -53,11 +53,11 @@
                             <td>{{ date('j M Y', strtotime($item->created_at)) }}</td>
                             <td>
                                 <a href="{{ route('admin.companies.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-warning pull-left"><i class="fa fa-pencil"></i></a>
-                                <form action="{{ route('admin.companies.destroy', ['id' => $item->id]) }}" method="post" onsubmit="return confirm('Do you really want to delete?');">
+                                {{-- <form action="{{ route('admin.companies.destroy', ['id' => $item->id]) }}" method="post" onsubmit="return confirm('Do you really want to delete?');">
                                     {{ csrf_field() }}
                                     <input name="_method" type="hidden" value="DELETE">
                                     <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @endforeach
