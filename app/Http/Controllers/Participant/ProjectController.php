@@ -11,11 +11,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $userCompanyIds = auth()->user()->companies->pluck('id')->all();
-        $projects = Project::with('metas', 'companies')
-            ->whereHas('companies', function ($q) use ($userCompanyIds) {
-                $q->whereIn('company_id', $userCompanyIds);
-            })
+        $projects = $this->_startQuery()
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -49,7 +45,7 @@ class ProjectController extends Controller
 
     public function edit($id, Request $request)
     {
-        $project = Project::with('metas', 'companies')->findOrFail($id);
+        $project = $this->_startQuery()->findOrFail($id);
         $project->meta_data = $project->metas->pluck('value', 'key');
         $data = [
             'title' => 'Rooftop PV Installation Edit',
@@ -168,5 +164,14 @@ class ProjectController extends Controller
         }
 
         return $project->metas;
+    }
+
+    protected function _startQuery()
+    {
+        $userCompanyIds = auth()->user()->companies->pluck('id')->all();
+        return Project::with('metas', 'companies')
+            ->whereHas('companies', function ($q) use ($userCompanyIds) {
+                $q->whereIn('company_id', $userCompanyIds);
+            });
     }
 }
