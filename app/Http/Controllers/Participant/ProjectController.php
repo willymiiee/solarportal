@@ -11,7 +11,14 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('metas', 'companies')->orderBy('created_at', 'desc')->paginate(10);
+        $userCompanyIds = auth()->user()->companies->pluck('id')->all();
+        $projects = Project::with('metas', 'companies')
+            ->whereHas('companies', function ($q) use ($userCompanyIds) {
+                $q->whereIn('company_id', $userCompanyIds);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         $data = [
             'title' => 'Projects',
             'projects' => $projects,
