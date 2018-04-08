@@ -26,7 +26,7 @@
 								<div class="tl-text-holder">
 									<h3>
                                         {{ $company['name'] }}
-                                        @if ($comp['verified'])
+                                        @if ($company['verified'])
                                         <small style="font-size:10px" class="label label-success">GNSSA Verified</small>
                                         @endif
                                     </h3>
