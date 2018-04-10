@@ -24,7 +24,12 @@
 							</div>
 							<div class="col-md-8 col-sm-12 col-xs-12">
 								<div class="tl-text-holder">
-									<h3>{{ $company['name'] }}</h3>
+									<h3>
+                                        {{ $company['name'] }}
+                                        @if ($company['verified'])
+                                        <small style="font-size:10px" class="label label-success">GNSSA Verified</small>
+                                        @endif
+                                    </h3>
 									<span class="desination">{{ $company['domicile'] }}</span>
 									<ul class="ft-listed">
 										@if (!empty($company['phone']))
