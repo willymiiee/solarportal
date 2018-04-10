@@ -70,7 +70,7 @@ class Project extends Model
 
     public function scopeFilterableQuery($q)
     {
-        $sort = request('sort');
+        $sort = request('sort', 'latest');
         $query = $q->when($sort, function ($b) use ($sort) {
             if (!in_array($sort, ['latest', 'oldest'])) {
                 return $b;
