@@ -10,6 +10,8 @@ class Project extends Model
         'installed_capacity', 'type_installation', 'type_connection', 'location', 'is_location_allow_public', 'is_involved_installation', 'image', 'brand', 'capacity_panel', 'amount', 'province'
     ];
 
+    protected $appends = ['transform_installed_capacity'];
+
     const DROPDOWN_TYPE_INSTALLATION = [
         'Surya Atap (Rooftop)' => 'Surya Atap (Rooftop)',
         'Instalasi di atas tanah (Ground)' => 'Instalasi di atas tanah (Ground)',
@@ -55,5 +57,25 @@ class Project extends Model
     public function companies()
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    public function getTransformInstalledCapacityAttribute()
+    {
+        if ($ic = $this->attributes['installed_capacity']) {
+            return $ic / 1000 .' kWp';
+        }
+
+        return 0;
+    }
+
+    public function scopeFilterableQuery($q)
+    {
+        $sort = request('sort');
+        $query = $q->when($sort, function ($b) use ($sort) {
+            if (!in_array($sort, ['latest', 'oldest'])) {
+                return $b;
+            }
+            return $sort == 'latest' ? $b->latest() : $b->oldest();
+        });
     }
 }

@@ -75,6 +75,11 @@ Route::prefix('companies')->group(function () {
     Route::post('/{slug}/send-message', 'CompanyController@sendMessage')->name('company.sendMessage');
 });
 
+Route::prefix('projects')->group(function () {
+    Route::get('/', 'ProjectController@index')->name('project.index');
+    Route::get('/{id}', 'ProjectController@show')->name('project.show');
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('profile', 'UserController@getProfile');
