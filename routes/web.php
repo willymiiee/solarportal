@@ -26,6 +26,12 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->as('admin.')->g
         'users' => 'UserController',
         'companies' => 'CompanyController'
     ]);
+
+    Route::prefix('verify')->namespace('Verify')->as('verify.')->group(function () {
+        Route::resources([
+            'packages' => 'PackageController'
+        ]);
+    });
 });
 
 Route::prefix('participant')->namespace('Participant')->middleware('participant')->group(function () {
