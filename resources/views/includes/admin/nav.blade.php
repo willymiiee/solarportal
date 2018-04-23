@@ -31,8 +31,8 @@
         </span>
     </a>
 
-    <ul class="treeview-menu">
-        <li>
+    <ul class="treeview-menu" style="display: {{ Request::segment(2) == 'verify' ? 'block' : 'none' }}">
+        <li class="{{ Request::segment(3) == 'packages' ? 'active' : '' }}">
             <a href="{{ route('admin.verify.packages.index') }}"><i class="fa fa-circle-o"></i> Packages</a>
         </li>
 
