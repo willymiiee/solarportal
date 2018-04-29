@@ -68,6 +68,44 @@ class Project extends Model
         return 0;
     }
 
+    /**
+     * [getImageAttribute description]
+     * @return array|null
+     */
+    public function getImageAttribute()
+    {
+        if (empty($this->attributes['image'])) {
+            return null;
+        }
+
+        return explode(',', $this->attributes['image']);
+    }
+
+    public function getImageForEdit()
+    {
+        $result = [];
+        $images = $this->image;
+        if (!empty($images)) {
+            foreach ($images as $key => $img) {
+                array_push($result, [
+                    'path' => $img,
+                    'url' => getFromS3($img),
+                ]);
+            }
+            return $result;
+        }
+    }
+
+    public function setImageAttribute($value)
+    {
+        $transformed = $value;
+        if (is_array($value)) {
+            $transformed = implode(',', $value);
+        }
+
+        $this->attributes['image'] = $transformed;
+    }
+
     public function scopeFilterableQuery($q)
     {
         $sort = request('sort', 'latest');
