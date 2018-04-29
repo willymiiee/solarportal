@@ -15,6 +15,7 @@ if (token) {
 window.Vue = require('vue');
 
 Vue.component('services', require('./components/Services.vue'));
+Vue.component('project', require('./components/Project.vue'));
 
 Array.prototype.unique = function() {
     var a = this.concat();

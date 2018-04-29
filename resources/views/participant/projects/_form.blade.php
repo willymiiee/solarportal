@@ -3,7 +3,7 @@
 	<div class="form-group {{ $errors->has('installed_capacity') ? ' has-error' : '' }}">
 		{!! Form::label('installed_capacity', __('project.installed_capacity'), ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			{!! Form::number('installed_capacity', null, ['class' => 'form-control']) !!}
+			{!! Form::number('installed_capacity', null, ['class' => 'form-control', 'required' => true]) !!}
 		</div>
 	</div>
 	<div class="form-group {{ $errors->has('type_installation') ? ' has-error' : '' }}">
@@ -21,21 +21,26 @@
 	<div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
 		{!! Form::label('location', __('project.location'), ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			{!! Form::text('location', null, ['class' => 'form-control']) !!}
+			{!! Form::text('location', null, ['class' => 'form-control', 'required' => true]) !!}
 		</div>
 	</div>
 	<div class="form-group {{ $errors->has('is_location_allow_public') ? 'has-error' : '' }}">
 		{!! Form::label('is_location_allow_public', __('project.is_location_allow_public'), ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			<div class="checkbox">
+			<div class="radio">
 				<label>
-					{!! Form::checkbox('is_location_allow_public', 1, null) !!} Yes
+					{!! Form::radio('is_location_allow_public', 1, old('is_location_allow_public', @$project['is_location_allow_public'] ?: true)) !!} Yes
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					{!! Form::radio('is_location_allow_public', 0, old('is_location_allow_public', @$project['is_location_allow_public'])) !!} No
 				</label>
 			</div>
 		</div>
 	</div>
 	<div class="form-group {{ $errors->has('province') ? ' has-error' : '' }}">
-		{!! Form::label('province', 'Provinsi', ['class' => 'col-sm-3 control-label']) !!}
+		{!! Form::label('province', '* Provinsi', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
 			{!! Form::select('province', getMainDomicileDropdown('< Pilih Provinsi >'), null, ['class' => 'form-control']) !!}
 		</div>
@@ -49,9 +54,14 @@
 	<div class="form-group {{ $errors->has('is_involved_installation') ? 'has-error' : '' }}">
 		{!! Form::label('is_involved_installation', __('project.is_involved_installation'), ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			<div class="checkbox">
+			<div class="radio">
 				<label>
-					{!! Form::checkbox('is_involved_installation', 1, null) !!} Yes
+					{!! Form::radio('is_involved_installation', 1, old('is_involved_installation', @$project['is_involved_installation'] ?: true)) !!} Yes
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					{!! Form::radio('is_involved_installation', 0, old('is_involved_installation', @$project['is_involved_installation'])) !!} No
 				</label>
 			</div>
 		</div>
@@ -59,10 +69,13 @@
 	<div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
 		{!! Form::label('image', 'Upload Foto', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			@if (!empty($project))
+			{{-- @if (!empty($project))
 				<a href="#" class="thumbnail"><img src="{{ getFromS3($project->image) }}"></a>
 			@endif
-			{!! Form::file('image', ['class' => 'form-control']) !!}
+			{!! Form::file('images[]', ['class' => 'form-control', 'multiple' => true]) !!} --}}
+
+			<project current-value="{{ !empty($project) ? json_encode($project->getImageForEdit()) : '' }}"></project>
+
 		</div>
 	</div>
 

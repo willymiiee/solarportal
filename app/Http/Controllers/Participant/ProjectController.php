@@ -35,7 +35,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->_runValidate($request);
-        
+
         $project = $this->_saveProject((new Project)->newInstance(), $request);
         return redirect()->route('participant.project.index')->withMessage([
             'type' => 'success',
@@ -59,7 +59,7 @@ class ProjectController extends Controller
     public function update($id, Request $request)
     {
         $this->_runValidate($request, $id, true);
-        
+
         $project = $this->_saveProject(Project::findOrFail($id), $request);
         return redirect()->route('participant.project.index')->withMessage([
             'type' => 'success',
@@ -92,7 +92,7 @@ class ProjectController extends Controller
             'is_location_allow_public' => 'required',
             'province' => 'required',
             'is_involved_installation' => 'required',
-            'image' => 'required|image',
+            'images.*' => 'required|image',
 
             // metas value
             'meta_data.infoPanel_capacity' => 'nullable|numeric',
@@ -120,19 +120,14 @@ class ProjectController extends Controller
         ]);
     }
 
-    protected function _saveProject($project, Request $request)
+    protected function _saveProject(Project $project, Request $request)
     {
         DB::beginTransaction();
         try {
-
-            $img_url = object_get($project, 'image', '');
-            if ($request->file('image')) {
-                $img = uploadToS3($request->file('image'));
-                $img_url = $img->url;
-            }
+            $images = $this->_processImages($request->get('imgCurrents'), $request->file('images'));
 
             $project = $project->fill($request->except('meta_data'));
-            $project->image = $img_url;
+            $project->image = $images;
             $project->save();
 
             if (!empty($request->get('meta_data'))) {
@@ -164,6 +159,28 @@ class ProjectController extends Controller
         }
 
         return $project->metas;
+    }
+
+    protected function _processImages(array $imgCurrents, $images = [])
+    {
+        // 1. We check for imgCurrents because imgCurrent is from input instead of file input
+        if (empty($imgCurrents)) {
+            return [];
+        }
+
+        // 2. Loop input imgCurrents
+        $result = []; // we use this for store $img_url
+        foreach ($imgCurrents as $key => $curr) {
+            $img_url = $curr;
+            $img = array_get($images, $key);
+            if ($img) {
+                $s3 = uploadToS3($img);
+                $img_url = $s3->url;
+            }
+            array_push($result, $img_url);
+        }
+
+        return $result;
     }
 
     protected function _startQuery()
