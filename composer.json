@@ -14,7 +14,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "sendgrid/sendgrid": "~6.0"
+        "sendgrid/sendgrid": "~6.0",
+		"veritrans/veritrans-php": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
