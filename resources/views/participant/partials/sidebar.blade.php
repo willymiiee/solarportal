@@ -24,6 +24,11 @@
           <i class="fa fa-briefcase"></i> <span>Perusahaan/Institusi</span>
         </a>
       </li>
+      <li class="@if(@$active_page == 'verify') active @endif">
+        <a href="{{ route('participant.verify.index') }}">
+          <i class="fa fa-check"></i> <span>Verifikasi</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>
