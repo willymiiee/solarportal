@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('type');
             $table->integer('user_id');
             $table->integer('address_id')->nullable();
+            $table->string('note')->nullable();
             $table->decimal('total', 15, 2);
             $table->decimal('fee', 15, 2);
             $table->decimal('grand_total', 15, 2);
