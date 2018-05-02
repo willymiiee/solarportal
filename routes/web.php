@@ -62,6 +62,15 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
         'destroy' => 'participant.project.destroy',
     ]]);
 
+    Route::resource('verify', 'VerifyController', ['names' => [
+        'index' => 'participant.verify.index',
+        'create' => 'participant.verify.create',
+        'store' => 'participant.verify.store',
+        'edit' => 'participant.verify.edit',
+        'update' => 'participant.verify.update',
+        'destroy' => 'participant.verify.destroy',
+    ]]);
+
     /* Coming Soon */
     Route::get('products', function () {
         return view('participant::coming_soon');

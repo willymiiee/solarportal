@@ -27,7 +27,14 @@ Route::middleware('auth:api')->group(function () {
 });
 
 // routes without auth
-Route::namespace ('Api')->group(function () {
-    Route::apiResource('companies', 'CompanyController');
-    Route::apiResource('articles', 'ArticleController');
+Route::namespace ('Api')->as('api.')->group(function () {
+    Route::apiResources([
+        'articles' => 'ArticleController',
+        'companies' => 'CompanyController',
+        'orders' => 'OrderController',
+        'payments' => 'PaymentController'
+    ]);
+    Route::post('snap', 'OrderController@getSnapToken')->name('snap');
+    Route::get('clean-order', 'OrderController@getCleanOrder')->name('clean-order');
+    Route::get('midtrans', 'PaymentController@getMidtransResult')->name('midtrans');
 });
