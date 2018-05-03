@@ -27,7 +27,7 @@
 									{{-- <a href="{{ route('project.show', $pro['id']) }}" class="tl-properties-item"> --}}
 									<a href="#" class="tl-properties-item">
 										<figure class="tl-properties-thumb">
-											<img src="{{ getFromS3($pro['image']) }}">
+											<img src="{{ getFromS3($pro['image'][0]) }}">
 											<figcaption class="tl-caption">
 												<div class="bottom-text" style="background-color: rgba(0,0,0,.3);">
 													<h3>{{ $pro['transform_installed_capacity'] }}</h3>
