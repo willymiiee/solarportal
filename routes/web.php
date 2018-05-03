@@ -26,6 +26,12 @@ Route::prefix('admin')->namespace('Admin')->middleware('admin')->as('admin.')->g
         'users' => 'UserController',
         'companies' => 'CompanyController'
     ]);
+
+    Route::prefix('verify')->namespace('Verify')->as('verify.')->group(function () {
+        Route::resources([
+            'packages' => 'PackageController'
+        ]);
+    });
 });
 
 Route::prefix('participant')->namespace('Participant')->middleware('participant')->group(function () {
@@ -54,6 +60,15 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
         'edit' => 'participant.project.edit',
         'update' => 'participant.project.update',
         'destroy' => 'participant.project.destroy',
+    ]]);
+
+    Route::resource('verify', 'VerifyController', ['names' => [
+        'index' => 'participant.verify.index',
+        'create' => 'participant.verify.create',
+        'store' => 'participant.verify.store',
+        'edit' => 'participant.verify.edit',
+        'update' => 'participant.verify.update',
+        'destroy' => 'participant.verify.destroy',
     ]]);
 
     /* Coming Soon */

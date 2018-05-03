@@ -23,3 +23,21 @@
         <i class="fa fa-users"></i> <span>Users</span>
     </a>
 </li>
+<li class="{{ Request::segment(2) == 'verify' ? 'menu-open' : '' }} treeview">
+    <a href="#">
+        <i class="fa fa-check"></i> <span>Verify</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+
+    <ul class="treeview-menu" style="display: {{ Request::segment(2) == 'verify' ? 'block' : 'none' }}">
+        <li class="{{ Request::segment(3) == 'packages' ? 'active' : '' }}">
+            <a href="{{ route('admin.verify.packages.index') }}"><i class="fa fa-circle-o"></i> Packages</a>
+        </li>
+
+        <li>
+            <a href=""><i class="fa fa-circle-o"></i> Transactions</a>
+        </li>
+    </ul>
+</li>
