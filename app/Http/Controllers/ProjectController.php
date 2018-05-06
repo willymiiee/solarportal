@@ -20,6 +20,13 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-    	abort(503, ' Under construction, Be right back.');
+    	$project = Project::with('companies')->filterableQuery()->findOrFail($id);
+        $data = [
+            'title' => 'Project',
+            'project' => $project,
+            'company' => $project->companies->first()
+        ];
+
+        return view('public_entity::contents.project.show', $data);
     }
 }

@@ -69,13 +69,7 @@
 	<div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
 		{!! Form::label('image', 'Upload Foto', ['class' => 'col-sm-3 control-label']) !!}
 		<div class="col-sm-9">
-			{{-- @if (!empty($project))
-				<a href="#" class="thumbnail"><img src="{{ getFromS3($project->image) }}"></a>
-			@endif
-			{!! Form::file('images[]', ['class' => 'form-control', 'multiple' => true]) !!} --}}
-
 			<project current-value="{{ !empty($project) ? json_encode($project->getImageForEdit()) : '' }}"></project>
-
 		</div>
 	</div>
 

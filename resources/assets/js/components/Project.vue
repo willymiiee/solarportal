@@ -34,8 +34,8 @@
     },
     methods: {
       addItem () {
-        if (this.items.length >= 5) {
-          return alert('Maximal Images is 5')
+        if (this.items.length > 3) {
+          return alert('Maximal Images is 3')
         }
 
         this.items.push({

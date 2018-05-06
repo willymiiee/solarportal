@@ -92,7 +92,7 @@ class ProjectController extends Controller
             'is_location_allow_public' => 'required',
             'province' => 'required',
             'is_involved_installation' => 'required',
-            'images.*' => 'required|image',
+            'images' => 'required',
 
             // metas value
             'meta_data.infoPanel_capacity' => 'nullable|numeric',

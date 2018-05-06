@@ -24,8 +24,7 @@
 						<div class="tl-filterOuter row">
 							@forelse ($projects as $pro)
 								<div class="col-md-4 col-sm-6 col-xs-12 tl-item5">
-									{{-- <a href="{{ route('project.show', $pro['id']) }}" class="tl-properties-item"> --}}
-									<a href="#" class="tl-properties-item">
+									<a href="{{ route('project.show', $pro['id']) }}" class="tl-properties-item">
 										<figure class="tl-properties-thumb">
 											<img src="{{ getFromS3($pro['image'][0]) }}">
 											<figcaption class="tl-caption">
