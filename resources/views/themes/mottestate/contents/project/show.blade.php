@@ -3,8 +3,8 @@
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
-        	<div class="left-holder">
-        		<h3>{{ $project['transform_installed_capacity'] }}</h3>
+        	<div class="left-holder" style="text-align: left;">
+        		<h3>Kapasitas terpasang {{ $project['transform_installed_capacity'] }}</h3>
         		<span class="sub-title">{{ $project['province'] }}</span>
         	</div>
         </div>
