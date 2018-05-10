@@ -10,8 +10,8 @@ mix.js('resources/assets/js/participant.js', 'public/js')
 // public directory theme mottestate
 mix.options({
     processCssUrls: false
-}).js('resources/assets/js/mottestate.js', 'public/js')
-  .sass('resources/assets/sass/mottestate.scss', 'public/css')
+}).js('resources/assets/js/mottestate.js', 'public/js').sourceMaps()
+  .sass('resources/assets/sass/mottestate.scss', 'public/css').sourceMaps()
 
 
 if (mix.inProduction()) {

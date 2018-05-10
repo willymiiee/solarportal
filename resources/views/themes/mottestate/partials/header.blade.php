@@ -1,5 +1,5 @@
 <!--Header Content Start-->
-<header class="tl-header" id="tl-header_v1">
+<header class="tl-header" id="tl-header_v1" style="z-index: 99;">
     <!--Topbar Row Start-->
     <div class="tl-top-row">
         <div class="container">

@@ -1,5 +1,34 @@
 @extends('themes::mottestate.layouts.default')
 
+@section('styles')
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+@stop
+
+@section('scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+	<script>
+		// delegate calls to data-toggle="lightbox"
+		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+			event.preventDefault();
+			return $(this).ekkoLightbox({
+				onShown: function() {
+					if (window.console) {
+						return console.log('Checking our the events huh?');
+					}
+				},
+				onNavigate: function(direction, itemIndex) {
+					console.log('halo')
+					if (window.console) {
+						return console.log('Navigating '+direction+'. Current item: '+itemIndex);
+					}
+				}
+			});
+		});
+	</script>
+@stop
+
 @section('breadcrumb')
     <section class="tl-inner-banner">
         <div class="container">
@@ -17,17 +46,27 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="tl-properties-gallery">
-						<div class="col-md-8 col-sm-8 col-xs-12">
-							<figure class="properties-thumb">
-								<img src="{{ getFromS3($project->image[0]) }}" style="height: auto;">
-							</figure>
-						</div>
-						<div class="col-sm-4 col-sm-4 col-xs-12">
-							@if (count($project->image) > 1)
-								@foreach (collect($project->image)->slice(0,2) as $img)
-									<figure class="properties-thumb">
-										<img src="{{ getFromS3($img) }}" style="height: auto;">
-									</figure>
+						{{-- <div class="col-md-8 col-sm-8 col-xs-12">
+							<a href="{{ getFromS3($project->image[0]) }}" data-toggle="lightbox" data-gallery="project-gallery">
+								<figure class="properties-thumb">
+									<img src="{{ getFromS3($project->image[0]) }}" style="height: auto;">
+								</figure>
+							</a>
+						</div> --}}
+						<div class="col-md-12">
+							@if (count($project->image) > 0)
+								@foreach (array_chunk($project->image, 3) as $rows)
+									<div class="row">
+										@foreach ($rows as $img)
+											<div class="col-md-4">
+												<a href="{{ getFromS3($img) }}" data-toggle="lightbox" data-gallery="project-gallery" style="display: block; height: 220px; padding: 4px; overflow: hidden;">
+													<figure class="properties-thumb">
+														<img src="{{ getFromS3($img) }}" style="height: auto;">
+													</figure>
+												</a>
+											</div>
+										@endforeach
+									</div>
 								@endforeach
 							@endif
 						</div>

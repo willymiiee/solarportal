@@ -57,5 +57,7 @@
     </div><!--Wrapper Content End-->
 
     <script src="{{ mix('js/mottestate.js') }}"></script>
+
+    @yield('scripts')
 </body>
 </html>

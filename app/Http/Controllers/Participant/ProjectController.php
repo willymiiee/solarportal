@@ -177,17 +177,16 @@ class ProjectController extends Controller
         // 2. Loop input imgCurrents
         $result = []; // we use this for store $img_url
         foreach ($imgCurrents as $key => $curr) {
-            if (!$curr) {
-                continue;
-            }
-
             $img_url = $curr;
             $img = array_get($images, $key);
             if ($img) {
                 $s3 = uploadToS3($img);
                 $img_url = $s3->url;
             }
-            array_push($result, $img_url);
+
+            if ($img_url) {
+                array_push($result, $img_url);
+            }
         }
 
         return $result;
