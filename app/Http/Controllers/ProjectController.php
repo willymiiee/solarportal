@@ -24,7 +24,8 @@ class ProjectController extends Controller
         $data = [
             'title' => 'Project',
             'project' => $project,
-            'company' => $project->companies->first()
+            'company' => $project->companies->first(),
+            'isMobile' => isMobile(),
         ];
 
         return view('public_entity::contents.project.show', $data);

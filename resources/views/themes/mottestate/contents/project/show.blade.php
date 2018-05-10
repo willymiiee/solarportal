@@ -55,11 +55,14 @@
 						</div> --}}
 						<div class="col-md-12">
 							@if (count($project->image) > 0)
-								@foreach (array_chunk($project->image, 3) as $rows)
+								@php
+								$column = $isMobile ? 2 : 3;
+								@endphp
+								@foreach (array_chunk($project->image, $column) as $rows)
 									<div class="row">
 										@foreach ($rows as $img)
-											<div class="col-md-4">
-												<a href="{{ getFromS3($img) }}" data-toggle="lightbox" data-gallery="project-gallery" style="display: block; height: 220px; padding: 4px; overflow: hidden;">
+											<div class="{{ $isMobile ? 'col-xs-6' : 'col-xs-4' }}">
+												<a href="{{ getFromS3($img) }}" data-toggle="lightbox" data-gallery="project-gallery" style="display: block; height: {{ $isMobile ? '100px' : '220px'}}; padding: 4px; overflow: hidden;">
 													<figure class="properties-thumb">
 														<img src="{{ getFromS3($img) }}" style="height: auto;">
 													</figure>
