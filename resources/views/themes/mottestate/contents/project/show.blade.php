@@ -48,32 +48,39 @@
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4 col-xs-12">
-					<h3>{{ $company->name }}</h3>
-					<div class="row">
-						<div class="col-md-4">
-							<img src="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" alt="{{ $company['name'] }}" style="width: 100%;">
-						</div>
-						<div class="col-md-8">
-							<ul class="ft-listed">
-								@if (!empty($company['phone']))
-								<li>
-									<i aria-hidden="true" class="fa fa-phone"></i>
-									<a href="tel:1234533">{{ $company['phone'] }}</a>
-								</li>
-								@endif
-								@if (!empty($company['phone_2']))
-								<li>
-									<i aria-hidden="true" class="fa fa-phone"></i>
-									<a href="tel:1234533">{{ $company['phone_2'] }}</a>
-								</li>
-								@endif
-								<li>
-									<i aria-hidden="true" class="fa fa-envelope-o"></i>
-									<a href="mailto:david@realestate.com">{{ $company['email'] }}</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<aside class="tl-sidebar-outer">
+						<!--Widget Start-->
+						<div class="widget widget-agent">
+							<h3>Info Perusahaan/Institusi</h3>
+							<!--Agent Info Start-->
+							<div class="agent-info">
+								{{-- <img src="images/agent-sm-01.jpg" alt=""> --}}
+								<img src="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" alt="{{ $company['name'] }}">
+								<div class="text-holder">
+									<strong>{{ $company->name }}</strong>
+									<span>{{ $company->domicile }}</span>
+									<ul class="ft-listed">
+										@if (!empty($company['phone']))
+										<li>
+											<i aria-hidden="true" class="fa fa-phone"></i>
+											<a href="tel:{{ $company['phone'] }}">{{ $company['phone'] }}</a>
+										</li>
+										@endif
+										@if (!empty($company['phone_2']))
+										<li>
+											<i aria-hidden="true" class="fa fa-phone"></i>
+											<a href="tel:{{ $company['phone_2'] }}">{{ $company['phone_2'] }}</a>
+										</li>
+										@endif
+										<li style="word-wrap: break-word;">
+											<i aria-hidden="true" class="fa fa-envelope-o"></i>
+											<a href="mailto:david@realestate.com">{{ $company['email'] }}</a>
+										</li>
+									</ul>
+								</div>
+							</div><!--Agent Info End-->
+						</div><!--Widget Holder End-->
+					</aside>
 				</div>
 			</div>
 		</div>
