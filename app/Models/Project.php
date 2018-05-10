@@ -87,10 +87,12 @@ class Project extends Model
         $images = $this->image;
         if (!empty($images)) {
             foreach ($images as $key => $img) {
-                array_push($result, [
-                    'path' => $img,
-                    'url' => getFromS3($img),
-                ]);
+                if ($img) {
+                    array_push($result, [
+                        'path' => $img,
+                        'url' => getFromS3($img),
+                    ]);
+                }
             }
             return $result;
         }

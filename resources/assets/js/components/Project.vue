@@ -1,7 +1,7 @@
 <template>
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">Galleri</h3>
+      <h3 class="box-title">Galeri</h3>
       <div class="box-tools pull-right">
         <button type="button" @click.prevent="addItem" class="btn btn-box-tool" ><i class="fa fa-plus"></i> Tambah</button>
       </div> <!-- /.box-tools -->
@@ -35,7 +35,7 @@
     methods: {
       addItem () {
         if (this.items.length > 3) {
-          return alert('Maximal Images is 3')
+          return alert('Maximal Images is 5')
         }
 
         this.items.push({

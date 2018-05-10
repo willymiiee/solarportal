@@ -35,6 +35,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->_runValidate($request);
+        dd($request->all());
 
         $project = $this->_saveProject((new Project)->newInstance(), $request);
         return redirect()->route('participant.project.index')->withMessage([
@@ -92,7 +93,9 @@ class ProjectController extends Controller
             'is_location_allow_public' => 'required',
             'province' => 'required',
             'is_involved_installation' => 'required',
-            'images' => 'required',
+            'imgCurrents' => 'required',
+            'imgCurrents.*' => 'required',
+            'images.*' => 'required|image',
 
             // metas value
             'meta_data.infoPanel_capacity' => 'nullable|numeric',
@@ -105,7 +108,9 @@ class ProjectController extends Controller
         ];
 
         if ($isEdit) {
-            $rules['image'] = 'image';
+            $rules['imgCurrents'] = '';
+            $rules['imgCurrents.*'] = '';
+            $rules['images.*'] = 'image';
         }
 
         $this->validate($request, $rules, [], [
@@ -117,6 +122,7 @@ class ProjectController extends Controller
             'province' => 'Provinsi',
             'is_involved_installation' => __('project.is_involved_installation'),
             'image' => 'Gambar',
+            'imgCurrents' => 'Gambar',
         ]);
     }
 
@@ -171,6 +177,10 @@ class ProjectController extends Controller
         // 2. Loop input imgCurrents
         $result = []; // we use this for store $img_url
         foreach ($imgCurrents as $key => $curr) {
+            if (!$curr) {
+                continue;
+            }
+
             $img_url = $curr;
             $img = array_get($images, $key);
             if ($img) {
