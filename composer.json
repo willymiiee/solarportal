@@ -15,7 +15,8 @@
         "laravelcollective/html": "^5.5",
         "league/flysystem-aws-s3-v3": "~1.0",
         "sendgrid/sendgrid": "~6.0",
-		"veritrans/veritrans-php": "dev-master"
+        "veritrans/veritrans-php": "dev-master",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
