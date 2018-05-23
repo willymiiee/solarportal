@@ -37,4 +37,12 @@ Route::namespace ('Api')->as('api.')->group(function () {
     Route::post('snap', 'OrderController@getSnapToken')->name('snap');
     Route::get('clean-order', 'OrderController@getCleanOrder')->name('clean-order');
     Route::get('midtrans', 'PaymentController@getMidtransResult')->name('midtrans');
+
+    Route::get('provinces', 'RegionController@getProvinces')->name('provinces');
+    Route::get('provinces/{provinceId}', 'RegionController@getProvince')->name('province');
+    Route::get('provinces/{provinceId}/regencies', 'RegionController@getRegencies')->name('regencies');
+    Route::get('provinces/{provinceId}/regencies/{regencyId}', 'RegionController@getRegency')->name('regency');
+    Route::get('provinces/{provinceId}/regencies/{regencyId}/districts', 'RegionController@getDistricts')->name('districts');
+    Route::get('provinces/{provinceId}/regencies/{regencyId}/districts/{districtId}/villages', 'RegionController@getVillages')->name('villages');
+    Route::get('provinces/{provinceId}/regencies/{regencyId}/districts/{districtId}/villages/{villageId}', 'RegionController@getVillage')->name('village');
 });
