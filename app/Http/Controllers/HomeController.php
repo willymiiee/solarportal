@@ -77,4 +77,9 @@ class HomeController extends Controller
 
         return view('public_entity::contents.article.index', $data);
     }
+
+    public function getRequestQuote($step = 1, Request $request)
+    {
+        return view('quote', compact('step'));
+    }
 }
