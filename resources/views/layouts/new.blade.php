@@ -24,10 +24,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 
     {{--  Font Awesome 5  --}}
-    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> --}}
 
     {{-- Sweetalert --}}
     <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
+
+    @yield('style')
 
     @include('includes._ga')
 </head>
@@ -68,5 +70,7 @@
             );
         @endif
     </script>
+
+    @yield('script')
 </body>
 </html>
