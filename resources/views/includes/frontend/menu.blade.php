@@ -27,6 +27,10 @@
                 <a class="nav-link" href="{{ route('company.index') }}">Lihat Partisipan</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('request-quote', ['step' => 1]) }}">Kalkulator Listrik</a>
+            </li>
+
             @if (Auth::check())
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('participant') }}">Hi, {{ Auth::user()->name }}</a>
