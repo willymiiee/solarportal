@@ -122,6 +122,11 @@
             margin: 6px;
         }
 
+        .error {
+            color: red;
+            font-size: 11px;
+        }
+
         @media (max-width: 768px) {
             .container h1 {
                 font-size: 25px;
@@ -181,14 +186,6 @@
         .next {
             margin: 50px 0;
         }
-
-        .next .next2 {
-            display: none;
-        }
-
-        .next .next3 {
-            display: none;
-        }
     </style>
 @stop
 
@@ -199,49 +196,48 @@
                 <h1 class="text-center">Kalkulator Listrik Surya Atap</h1>
 
                 <div class="progress">
-                    <div id="p" class="progress-bar bg-info {{ $step > 1 ? ($step == 2 ? 'progreso1' : 'progreso2') : '' }}" role="progressbar" aria-valuenow="0" aria-valuemin="0" ariavaluemax="100"></div>
+                    <div id="p" class="progress-bar bg-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" ariavaluemax="100"></div>
                 </div>
 
                 <div class="block1">
                     <div id="b1" class="text-center activecirculo">
-                        <i class="icon1 fas fa-check"></i>
+                        <i class="icon1 fa fa-check"></i>
                     </div>
                 </div>
 
-                <div id="block2A" class="{{ $step == 2 ? 'active' : '' }}block2">
-                    <div id="b2" class="text-center {{ $step == 2 ? 'active' : '' }}circulo">
-                        <i class="icon2 {{ $step == 2 ? 'fas fa-check' : '' }}"></i>
+                <div id="block2A" class="block2">
+                    <div id="b2" class="text-center circulo">
+                        <i class="icon2"></i>
                     </div>
                 </div>
 
-                <div id="block3A" class="{{ $step == 3 ? 'active' : '' }}block3">
-                    <div id="b3" class="text-center {{ $step == 3 ? 'active' : '' }}circulo">
-                        <i class="icon3 {{ $step == 3 ? 'fas fa-check' : '' }}"></i>
+                <div id="block3A" class="block3">
+                    <div id="b3" class="text-center circulo">
+                        <i class="icon3"></i>
                     </div>
                 </div>
 
                 <div class="mt-3">
-                    @if ($step == 1)
-                    <form action="">
+                    <form id="quote-form">
                         <div class="form-group">
                             <label for="">Alamat</label>
                         </div>
 
                         <div class="form-row">
                             <div class="col">
-                                <select name="province" id="province" class="form-control select2" data-placeholder="Pilih Provinsi">
+                                <select name="province" id="province" class="form-control select2" data-placeholder="Pilih Provinsi" required>
                                     <option disabled selected>Pilih Provinsi</option>
                                 </select>
                             </div>
 
                             <div class="col">
-                                <select name="regency" id="regency" class="form-control select2" data-placeholder="Pilih Kabupaten">
+                                <select name="regency" id="regency" class="form-control select2" data-placeholder="Pilih Kabupaten" required>
                                     <option disabled selected>Pilih Kabupaten</option>
                                 </select>
                             </div>
 
                             <div class="col">
-                                <select name="district" id="district" class="form-control select2" data-placeholder="Pilih Kecamatan">
+                                <select name="district" id="district" class="form-control select2" data-placeholder="Pilih Kecamatan" required>
                                     <option disabled selected>Pilih Kecamatan</option>
                                 </select>
                             </div>
@@ -249,21 +245,36 @@
 
                         <div class="form-group mt-1">
                             <label for="">Tagihan PLN per bulan (Rupiah)</label>
-                            <input type="text" id="listrik" name="listrik" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            <input type="text" id="tagihan" name="tagihan" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">Kapasitas (kW atau kVA)</label>
-                            <input type="text" id="kapasitas" name="kapasitas" class="form-control"  onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            <input type="text" id="kapasitas" name="kapasitas" class="form-control"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                        </div>
+
+                        <!--Just to test!!!-->
+                        <div class="text-center next">
+                            <button type="submit" class="btn btn-primary">Next</button>
                         </div>
                     </form>
-                    @endif
-                </div>
 
-                <!--Just to test!!!-->
-                <div class="text-center next">
-                    <button onclick="enviar()" id="next1" class="next1 btn btn-primary">Next</button>
-                    <button onclick="enviar2()" id="next2" class="next2 btn btn-primary">Next</button>
+                    <div class="text-center" id="loading">
+                        <i class="fa fa-spinner fa-4x fa-spin"></i>
+                        <br>
+                        <h3 class="mt-2">Silahkan tunggu proses perhitungan...</h3>
+                    </div>
+
+                    <div class="px-4 py-2" id="result">
+                        <form action="" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-6 col-form-label">Potensi Penghematan</label>
+                                <div class="col-sm-6">
+                                    <label for="" class="col-form-label" id="saving"></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -274,11 +285,15 @@
     <!-- Select2 -->
     <script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+
     <script>
         $(function() {
             let provinceId, regencyId
 
             $('.select2').select2()
+            $('#loading').hide()
+            $('#result').hide()
 
             $.get("{{ route('api.provinces') }}")
                 .then((res) => {
@@ -329,6 +344,56 @@
                             data: result
                         })
                     })
+            })
+
+            $('#quote-form').validate({
+                rules: {
+                    province: {
+                        required: true
+                    },
+                    regency: {
+                        required: true
+                    },
+                    district: {
+                        required: true
+                    },
+                    tagihan: {
+                        required: true
+                    },
+                    kapasitas: {
+                        required: true
+                    }
+                },
+                messages: {
+                    province: "Silahkan pilih provinsi",
+                    regency: "Silahkan pilih kabupaten",
+                    district: "Silahkan pilih kecamatan",
+                    tagihan: "Silahkan masukkan total tagihan",
+                    kapasitas: "Silahkan masukkan kapasitas"
+                },
+                submitHandler: function (form) {
+                    $('#block2A').addClass('activeblock2')
+                    $('#b2').addClass('activecirculo')
+                    $('#p').addClass('progreso1')
+                    $('#icon2').addClass('fa fa-check')
+                    $('#quote-form').hide()
+                    $('#loading').show()
+
+                    let data = $('#quote-form').serializeArray()
+                    $.post("{{ route('api.quote') }}", data)
+                        .then((res) => {
+                            setTimeout(function() {
+                                $('#block3A').addClass('activeblock3')
+                                $('#b3').addClass('activecirculo')
+                                $('#p').addClass('progreso2')
+                                $('#icon3').addClass('fa fa-check')
+                                $('#loading').hide()
+                                $('#saving').html(res)
+                                $('#result').show()
+                            }, 3000, res)
+                        })
+                    return false
+                }
             })
         })
     </script>
