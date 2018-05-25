@@ -78,8 +78,8 @@ class HomeController extends Controller
         return view('public_entity::contents.article.index', $data);
     }
 
-    public function getRequestQuote($step = 1, Request $request)
+    public function getRequestQuote()
     {
-        return view('quote', compact('step'));
+        return view('quote');
     }
 }
