@@ -45,4 +45,6 @@ Route::namespace ('Api')->as('api.')->group(function () {
     Route::get('provinces/{provinceId}/regencies/{regencyId}/districts', 'RegionController@getDistricts')->name('districts');
     Route::get('provinces/{provinceId}/regencies/{regencyId}/districts/{districtId}/villages', 'RegionController@getVillages')->name('villages');
     Route::get('provinces/{provinceId}/regencies/{regencyId}/districts/{districtId}/villages/{villageId}', 'RegionController@getVillage')->name('village');
+
+    Route::post('quote', 'QuoteController@postQuote')->name('quote');
 });
