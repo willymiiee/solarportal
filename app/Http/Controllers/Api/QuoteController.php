@@ -14,9 +14,9 @@ class QuoteController extends Controller
     public function postQuote(Request $request)
     {
         $data = $request->all();
-        $usePerDay = $data['tagihan'] / Config::get('constants.pln_tld') * 30;
+        $usePerDay = intval(preg_replace('/[^\d.]/', '', $data['tagihan'])) / Config::get('constants.pln_tld') * 30;
         $pvRequired = $usePerDay / Config::get('constants.sun_hour');
-        $pvAllowed = min($pvRequired, $data['kapasitas']);
+        $pvAllowed = min($pvRequired, intval(preg_replace('/[^\d.]/', '', $data['kapasitas'])));
         $cost = $pvRequired * Config::get('constants.cost_kw');
         $roofArea = $pvAllowed * Config::get('constants.panel_area') * 1000;
         $saving = $pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30;
