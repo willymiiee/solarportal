@@ -245,12 +245,12 @@
 
                         <div class="form-group mt-1">
                             <label for="">Tagihan PLN per bulan (Rupiah)</label>
-                            <input type="text" id="tagihan" name="tagihan" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                            <input type="text" id="tagihan" name="tagihan" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="this.value=addThousandsSeparator(this.value)" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">Kapasitas (kW atau kVA)</label>
-                            <input type="text" id="kapasitas" name="kapasitas" class="form-control"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                            <input type="text" id="kapasitas" name="kapasitas" class="form-control"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="this.value=addThousandsSeparator(this.value)" required>
                         </div>
 
                         <!--Just to test!!!-->
@@ -267,6 +267,20 @@
 
                     <div class="px-4 py-2" id="result">
                         <form action="" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
+                                <div class="col-sm-6">
+                                    <label for="" class="col-form-label" id="tagihan-result"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-6 col-form-label">Kapasitas (kW atau kVA)</label>
+                                <div class="col-sm-6">
+                                    <label for="" class="col-form-label" id="kapasitas-result"></label>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-6 col-form-label">Potensi Penghematan</label>
                                 <div class="col-sm-6">
@@ -288,6 +302,14 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 
     <script>
+        function addThousandsSeparator(x) {
+            //remove commas
+            retVal = x ? parseFloat(x.replace(/,/g, '')) : 0;
+
+            //apply formatting
+            return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         $(function() {
             let provinceId, regencyId
 
@@ -375,7 +397,6 @@
                     $('#block2A').addClass('activeblock2')
                     $('#b2').addClass('activecirculo')
                     $('#p').addClass('progreso1')
-                    $('#icon2').addClass('fa fa-check')
                     $('#quote-form').hide()
                     $('#loading').show()
 
@@ -383,12 +404,16 @@
                     $.post("{{ route('api.quote') }}", data)
                         .then((res) => {
                             setTimeout(function() {
+                                console.log(data)
                                 $('#block3A').addClass('activeblock3')
                                 $('#b3').addClass('activecirculo')
                                 $('#p').addClass('progreso2')
-                                $('#icon3').addClass('fa fa-check')
+                                $('.icon2').addClass('fa fa-check')
+                                $('.icon3').addClass('fa fa-check')
                                 $('#loading').hide()
-                                $('#saving').html(res)
+                                $('#tagihan-result').html('Rp. ' + $('#tagihan').val())
+                                $('#kapasitas-result').html($('#kapasitas').val())
+                                $('#saving').html('Rp. ' + Number(res).toLocaleString('en'))
                                 $('#result').show()
                             }, 3000, res)
                         })
