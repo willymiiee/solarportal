@@ -404,7 +404,6 @@
                     $.post("{{ route('api.quote') }}", data)
                         .then((res) => {
                             setTimeout(function() {
-                                console.log(data)
                                 $('#block3A').addClass('activeblock3')
                                 $('#b3').addClass('activecirculo')
                                 $('#p').addClass('progreso2')
