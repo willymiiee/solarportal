@@ -106,5 +106,5 @@ Route::get('reset-password/{code}', 'UserController@getResetPassword');
 Route::post('reset-password', 'UserController@postResetPassword');
 Route::get('register-thankyou', 'HomeController@getThankyouRegister');
 Route::get('articles', 'HomeController@getArticles')->name('article.list');
-Route::get('request-quote', 'HomeController@getRequestQuote')->name('request-quote');
+Route::get('calculator', 'HomeController@getCalculator')->name('calculator');
 Route::get('{slug}', 'HomeController@getItem')->name('article.detail');

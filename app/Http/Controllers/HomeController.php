@@ -78,7 +78,7 @@ class HomeController extends Controller
         return view('public_entity::contents.article.index', $data);
     }
 
-    public function getRequestQuote()
+    public function getCalculator()
     {
         return view('quote');
     }

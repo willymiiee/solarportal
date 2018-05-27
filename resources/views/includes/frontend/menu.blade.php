@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('request-quote') }}">Kalkulator Listrik</a>
+                <a class="nav-link" href="{{ route('calculator') }}">Kalkulator Listrik</a>
             </li>
 
             @if (Auth::check())
