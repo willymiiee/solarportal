@@ -193,7 +193,8 @@
     <div class="container">
         <div class="row">
             <div class="main col-12">
-                <h1 class="text-center">Kalkulator Listrik Surya Atap</h1>
+                <h1 class="text-center my-0 pb-1">Kalkulator Listrik Surya Atap</h1>
+                <h3 class="text-center pb-3">Pemasangan On Grid (Terkoneksi ke PLN)</h3>
 
                 <div class="progress">
                     <div id="p" class="progress-bar bg-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" ariavaluemax="100"></div>
@@ -217,7 +218,7 @@
                     </div>
                 </div>
 
-                <div class="mt-3">
+                <div class="mt-3 mb-3">
                     <form id="quote-form">
                         <div class="form-group">
                             <label for="">Alamat</label>
@@ -235,12 +236,6 @@
                                     <option disabled selected>Pilih Kabupaten</option>
                                 </select>
                             </div>
-
-                            <div class="col">
-                                <select name="district" id="district" class="form-control select2" data-placeholder="Pilih Kecamatan" required>
-                                    <option disabled selected>Pilih Kecamatan</option>
-                                </select>
-                            </div>
                         </div>
 
                         <div class="form-group mt-1">
@@ -249,13 +244,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">Kapasitas (kW atau kVA)</label>
-                            <input type="text" id="kapasitas" name="kapasitas" class="form-control"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="this.value=addThousandsSeparator(this.value)" required>
+                            <label for="">Batas Daya (VA atau Watt)</label>
+                            <select name="kapasitas" id="kapasitas" class="form-control select2">
+                                <option disabled selected>Pilih Batas Daya</option>
+                                <option value=900>900</option>
+                                <option value=1300>1300</option>
+                                <option value=2200>2200</option>
+                                <option value=3500>3500</option>
+                                <option value=5500>5500</option>
+                                <option value=6600>Lebih dari 5500</option>
+                            </select>
                         </div>
 
                         <!--Just to test!!!-->
                         <div class="text-center next">
-                            <button type="submit" class="btn btn-primary">Next</button>
+                            <button type="submit" class="btn btn-primary">Hitung Sekarang</button>
                         </div>
                     </form>
 
@@ -265,26 +268,59 @@
                         <h3 class="mt-2">Silahkan tunggu proses perhitungan...</h3>
                     </div>
 
-                    <div class="px-4 py-2" id="result">
+                    <div class="px-4" id="result">
                         <form action="" class="form-horizontal">
-                            <div class="form-group row">
-                                <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
-                                <div class="col-sm-6">
-                                    <label for="" class="col-form-label" id="tagihan-result"></label>
+                            <div id="resultLabel">
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="tagihan-result"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Batas Daya (VA atau Watt)</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="kapasitas-result"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Kapasitas Listrik Surya Atap</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="capacity"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Luas atap yang dibutuhkan</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="large"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Estimasi biaya pemasangan</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="cost"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-6 col-form-label">Potensi Penghematan</label>
+                                    <div class="col-sm-6">
+                                        <label for="" class="col-form-label font-weight-bold" id="saving"></label>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="" class="col-sm-6 col-form-label">Kapasitas (kW atau kVA)</label>
-                                <div class="col-sm-6">
-                                    <label for="" class="col-form-label" id="kapasitas-result"></label>
+                            <div class="form-group row text-center mt-3">
+                                <div class="col">
+                                    <button class="btn btn-primary" type="button" id="printBtn">Simpan</button>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="" class="col-sm-6 col-form-label">Potensi Penghematan</label>
-                                <div class="col-sm-6">
-                                    <label for="" class="col-form-label" id="saving"></label>
+                                <div class="col">
+                                    <button class="btn btn-primary" type="button">Minta Penawaran</button>
                                 </div>
                             </div>
                         </form>
@@ -298,8 +334,8 @@
 @section('script')
     <!-- Select2 -->
     <script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js') }}"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <script src="{{ asset('bower_components/html2canvas/html2canvas.min.js') }}"></script>
 
     <script>
         function addThousandsSeparator(x) {
@@ -348,35 +384,12 @@
                     })
             })
 
-            $('#regency').on('select2:select', function(e) {
-                $('#district').empty().append($('<option>').text('Pilih Kecamatan').attr('disabled', 'true').attr('selected', 'true'));
-
-                let data = e.params.data
-                let url = "{{ route('api.districts', [':provinceId', ':regencyId']) }}"
-                regencyId = data.id
-                url = url.replace(':provinceId', provinceId).replace(':regencyId', regencyId)
-
-                $.get(url)
-                    .then((res) => {
-                        let result = $.map(res, function(obj) {
-                            return {id: obj.id, text: obj.name}
-                        })
-
-                        $('#district').select2({
-                            data: result
-                        })
-                    })
-            })
-
             $('#quote-form').validate({
                 rules: {
                     province: {
                         required: true
                     },
                     regency: {
-                        required: true
-                    },
-                    district: {
                         required: true
                     },
                     tagihan: {
@@ -389,9 +402,8 @@
                 messages: {
                     province: "Silahkan pilih provinsi",
                     regency: "Silahkan pilih kabupaten",
-                    district: "Silahkan pilih kecamatan",
                     tagihan: "Silahkan masukkan total tagihan",
-                    kapasitas: "Silahkan masukkan kapasitas"
+                    kapasitas: "Silahkan pilih batas daya"
                 },
                 submitHandler: function (form) {
                     $('#block2A').addClass('activeblock2')
@@ -411,13 +423,28 @@
                                 $('.icon3').addClass('fa fa-check')
                                 $('#loading').hide()
                                 $('#tagihan-result').html('Rp. ' + $('#tagihan').val())
-                                $('#kapasitas-result').html($('#kapasitas').val())
-                                $('#saving').html('Rp. ' + Number(res).toLocaleString('en'))
+                                $('#kapasitas-result').html(Number($('#kapasitas').val()).toLocaleString('en') + ' Watt')
+                                $('#capacity').html(Number(res.pv_allowed).toLocaleString('en') + ' Watt')
+                                $('#large').html(Number(res.roof_area).toLocaleString('en') + ' m²')
+                                $('#cost').html('Rp. ' + Number(res.cost).toLocaleString('en'))
+                                $('#saving').html('Rp. ' + Number(res.saving).toLocaleString('en'))
                                 $('#result').show()
                             }, 3000, res)
                         })
                     return false
                 }
+            })
+
+            $('#printBtn').click(function(e) {
+                e.preventDefault()
+                html2canvas(document.getElementById('resultLabel'))
+                    .then((canvas) => {
+                        let a = document.createElement('a')
+                        // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+                        a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
+                        a.download = 'result-calculator.jpg'
+                        a.click()
+                    })
             })
         })
     </script>
