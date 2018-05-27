@@ -220,6 +220,10 @@
 
                 <div class="mt-3 mb-3">
                     <form id="quote-form">
+                        @if (Auth::check())
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        @endif
+
                         <div class="form-group">
                             <label for="">Alamat</label>
                         </div>
