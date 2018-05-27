@@ -252,7 +252,7 @@
                                 <option value=2200>2200</option>
                                 <option value=3500>3500</option>
                                 <option value=5500>5500</option>
-                                <option value=6600>Lebih dari 5500</option>
+                                <option value="Lebih dari 5500">Lebih dari 5500</option>
                             </select>
                         </div>
 
@@ -423,7 +423,7 @@
                                 $('.icon3').addClass('fa fa-check')
                                 $('#loading').hide()
                                 $('#tagihan-result').html('Rp. ' + $('#tagihan').val())
-                                $('#kapasitas-result').html(Number($('#kapasitas').val()).toLocaleString('en') + ' Watt')
+                                $('#kapasitas-result').html($('#kapasitas').val() + ' Watt')
                                 $('#capacity').html(Number(res.pv_allowed).toLocaleString('en') + ' Watt')
                                 $('#large').html(Number(res.roof_area).toLocaleString('en') + ' m²')
                                 $('#cost').html('Rp. ' + Number(res.cost).toLocaleString('en'))
