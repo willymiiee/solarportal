@@ -35,7 +35,6 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->_runValidate($request);
-        dd($request->all());
 
         $project = $this->_saveProject((new Project)->newInstance(), $request);
         return redirect()->route('participant.project.index')->withMessage([
@@ -94,7 +93,6 @@ class ProjectController extends Controller
             'province' => 'required',
             'is_involved_installation' => 'required',
             'imgCurrents' => 'required',
-            'imgCurrents.*' => 'required',
             'images.*' => 'required|image',
 
             // metas value
