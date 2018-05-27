@@ -406,8 +406,8 @@
                     kapasitas: "Silahkan pilih batas daya"
                 },
                 submitHandler: function (form) {
-                    $('#block2A').addClass('activeblock2')
-                    $('#b2').addClass('activecirculo')
+                    $('#block2A').removeClass('block2').addClass('activeblock2')
+                    $('#b2').removeClass('circulo').addClass('activecirculo')
                     $('#p').addClass('progreso1')
                     $('#quote-form').hide()
                     $('#loading').show()
@@ -416,9 +416,9 @@
                     $.post("{{ route('api.quote') }}", data)
                         .then((res) => {
                             setTimeout(function() {
-                                $('#block3A').addClass('activeblock3')
-                                $('#b3').addClass('activecirculo')
-                                $('#p').addClass('progreso2')
+                                $('#block3A').removeClass('block3').addClass('activeblock3')
+                                $('#b3').removeClass('circulo').addClass('activecirculo')
+                                $('#p').removeClass('progreso1').addClass('progreso2')
                                 $('.icon2').addClass('fa fa-check')
                                 $('.icon3').addClass('fa fa-check')
                                 $('#loading').hide()
