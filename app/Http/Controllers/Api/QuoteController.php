@@ -16,7 +16,7 @@ class QuoteController extends Controller
         $data = $request->all();
         $usePerDay = number_format(intval(preg_replace('/[^\d.]/', '', $data['tagihan'])) / (Config::get('constants.pln_tld') * 30), 1);
         $pvRequired = $usePerDay / Config::get('constants.sun_hour');
-        $pvAllowed = min($pvRequired, gettype($data['kapasitas']) == 'integer' ? $data['kapasitas']/1000 : 1000);
+        $pvAllowed = min($pvRequired, intval($data['kapasitas']) > 0 ? $data['kapasitas']/1000 : 1000);
         $cost = $pvRequired * Config::get('constants.cost_kw');
         $roofArea = $pvAllowed * Config::get('constants.panel_area') * 1000;
         $saving = $pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30;
