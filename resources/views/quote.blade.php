@@ -230,13 +230,13 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <select name="province" id="province" class="form-control select2" data-placeholder="Pilih Provinsi" required>
+                                <select name="province_id" id="province" class="form-control select2" data-placeholder="Pilih Provinsi" required>
                                     <option disabled selected>Pilih Provinsi</option>
                                 </select>
                             </div>
 
                             <div class="col">
-                                <select name="regency" id="regency" class="form-control select2" data-placeholder="Pilih Kabupaten" required>
+                                <select name="regency_id" id="regency" class="form-control select2" data-placeholder="Pilih Kabupaten" required>
                                     <option disabled selected>Pilih Kabupaten</option>
                                 </select>
                             </div>
@@ -244,12 +244,12 @@
 
                         <div class="form-group mt-1">
                             <label for="">Tagihan PLN per bulan (Rupiah)</label>
-                            <input type="text" id="tagihan" name="tagihan" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="this.value=addThousandsSeparator(this.value)" required>
+                            <input type="text" id="tagihan" name="bill" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="this.value=addThousandsSeparator(this.value)" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">Batas Daya (VA atau Watt)</label>
-                            <select name="kapasitas" id="kapasitas" class="form-control select2">
+                            <select name="capacity" id="kapasitas" class="form-control select2">
                                 <option disabled selected>Pilih Batas Daya</option>
                                 <option value=900>900</option>
                                 <option value=1300>1300</option>
