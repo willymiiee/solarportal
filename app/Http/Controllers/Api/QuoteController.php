@@ -8,6 +8,7 @@ use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
 use App\Models\Quote;
+use App\Models\User;
 use Config;
 
 class QuoteController extends Controller
@@ -27,18 +28,46 @@ class QuoteController extends Controller
             'use_per_day' => $usePerDay,
             'pv_required' => $pvRequired * 1000,
             'cost' => $cost,
-            'saving' => $saving
+            'saving' => $saving,
+            'status' => 'calculator'
         ]);
 
-        Quote::create($data);
+        $quote = Quote::create($data);
 
         return response()->json([
+            'id' => $quote->id,
+            'user_id' => $quote->user_id,
             'use_per_day' => $usePerDay,
             'pv_required' => $pvRequired * 1000,
             'pv_allowed' => $pvAllowed * 1000,
             'cost' => $cost,
             'roof_area' => $roofArea,
             'saving' => $saving
+        ]);
+    }
+
+    public function updateQuote($id, Request $request)
+    {
+        $quote = Quote::find($id);
+
+        if (!$request->get('user_id')) {
+            $user = User::where('email', 'LIKE', '%'.$request->get('email').'%')->first();
+
+            if ($user) {
+                $quote->user_id = $user->id;
+            }
+
+            $quote->user_email = $request->get('email');
+        } else {
+            $user = User::find($quote->user_id);
+            $quote->user_email = $user->email;
+        }
+
+        $quote->status = 'quotation';
+        $quote->save();
+
+        return response()->json([
+            'message' => 'Sukses!'
         ]);
     }
 }
