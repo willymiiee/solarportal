@@ -16,6 +16,7 @@ class Quote extends Model
      */
     protected $fillable = [
         'user_id',
+        'user_email',
         'province_id',
         'regency_id',
         'bill',
@@ -23,7 +24,8 @@ class Quote extends Model
         'use_per_day',
         'pv_required',
         'cost',
-        'saving'
+        'saving',
+        'status'
     ];
 
     /**
