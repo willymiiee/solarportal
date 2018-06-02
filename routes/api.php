@@ -47,4 +47,5 @@ Route::namespace ('Api')->as('api.')->group(function () {
     Route::get('provinces/{provinceId}/regencies/{regencyId}/districts/{districtId}/villages/{villageId}', 'RegionController@getVillage')->name('village');
 
     Route::post('quote', 'QuoteController@postQuote')->name('quote');
+    Route::put('quote/{quoteId}', 'QuoteController@updateQuote')->name('update-quote');
 });
