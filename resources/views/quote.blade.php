@@ -220,9 +220,9 @@
 
                 <div class="mt-3 mb-3">
                     <form id="quote-form">
-                        @if (Auth::check())
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        @endif
+                        <input name="_method" type="hidden" id="method" value="POST">
+                        <input type="hidden" name="id" id="quoteId">
+                        <input type="hidden" name="user_id" id="userId" value="{{ Auth::check() ? Auth::user()->id : null }}">
 
                         <div class="form-group">
                             <label for="">Alamat</label>
@@ -324,7 +324,7 @@
                                 </div>
 
                                 <div class="col">
-                                    <button class="btn btn-primary" type="button">Minta Penawaran</button>
+                                    <button class="btn btn-primary" type="button" id="requestQuote">Minta Penawaran</button>
                                 </div>
                             </div>
                         </form>
@@ -344,10 +344,10 @@
     <script>
         function addThousandsSeparator(x) {
             //remove commas
-            retVal = x ? parseFloat(x.replace(/,/g, '')) : 0;
+            retVal = x ? parseFloat(x.replace(/,/g, '')) : 0
 
             //apply formatting
-            return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
         $(function() {
@@ -369,7 +369,7 @@
                 })
 
             $('#province').on('select2:select', function(e) {
-                $('#regency').empty().append($('<option>').text('Pilih Kabupaten').attr('disabled', 'true').attr('selected', 'true'));
+                $('#regency').empty().append($('<option>').text('Pilih Kabupaten').attr('disabled', 'true').attr('selected', 'true'))
 
                 let data = e.params.data
                 let url = "{{ route('api.regencies', ':provinceId') }}"
@@ -432,6 +432,9 @@
                                 $('#large').html(Number(res.roof_area).toLocaleString('en') + ' m²')
                                 $('#cost').html('Rp. ' + Number(res.cost).toLocaleString('en'))
                                 $('#saving').html('Rp. ' + Number(res.saving).toLocaleString('en'))
+                                $('#userId').val(res.user_id)
+                                $('#quoteId').val(res.id)
+                                $('#method').val('PUT')
                                 $('#result').show()
                             }, 3000, res)
                         })
@@ -449,6 +452,56 @@
                         a.download = 'result-calculator.jpg'
                         a.click()
                     })
+            })
+
+            $('#requestQuote').click(function(e) {
+                e.preventDefault()
+                let data = $('#quote-form').serializeArray()
+
+                if (!$('#userId').val()) {
+                    swal({
+                        title: 'Form meminta penawaran',
+                        text: 'Masukkan email anda',
+                        type: 'input',
+                        input: 'email',
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        confirmButtonText: 'Submit',
+                        allowOutsideClick: false
+                    },
+                    function(inputValue) {
+                        if (inputValue === false) return false
+
+                        if (inputValue === "") {
+                            swal.showInputError("Silahkan isi alamat email!")
+                            return false
+                        }
+
+                        data = data.concat({
+                            name: "email",
+                            value: inputValue
+                        })
+
+                        $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                            .then((res) => {
+                                swal(
+                                    'Sukses meminta penawaran!',
+                                    'Silahkan tunggu konfirmasi dari pihak kami',
+                                    'success'
+                                )
+                            })
+                    })
+                } else {
+                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                        .then((res) => {
+                            swal(
+                                'Sukses meminta penawaran!',
+                                'Silahkan tunggu konfirmasi dari pihak kami',
+                                'success'
+                            )
+                        })
+                }
             })
         })
     </script>
