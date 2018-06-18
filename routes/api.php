@@ -48,4 +48,6 @@ Route::namespace ('Api')->as('api.')->group(function () {
 
     Route::post('quote', 'QuoteController@postQuote')->name('quote');
     Route::put('quote/{quoteId}', 'QuoteController@updateQuote')->name('update-quote');
+
+    Route::post('check-user', 'UserController@getCheckUser')->name('check-user');
 });
