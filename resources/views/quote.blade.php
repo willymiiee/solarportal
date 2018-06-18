@@ -320,7 +320,7 @@
 
                             <div class="form-group row text-center mt-3">
                                 <div class="col">
-                                    <button class="btn btn-primary" type="button" id="printBtn">Simpan</button>
+                                    <button class="btn btn-primary" type="button" id="{{ Auth::check() ? 'printBtn' : 'showDialog' }}">Simpan</button>
                                 </div>
 
                                 <div class="col">
@@ -454,6 +454,10 @@
                     })
             })
 
+            $('#showDialog').click(function(e) {
+                e.preventDefault()
+            })
+
             $('#requestQuote').click(function(e) {
                 e.preventDefault()
                 let data = $('#quote-form').serializeArray()
@@ -462,35 +466,26 @@
                     swal({
                         title: 'Form meminta penawaran',
                         text: 'Masukkan email anda',
-                        type: 'input',
                         input: 'email',
                         showCancelButton: true,
-                        closeOnConfirm: false,
                         showLoaderOnConfirm: true,
                         confirmButtonText: 'Submit',
-                        allowOutsideClick: false
-                    },
-                    function(inputValue) {
-                        if (inputValue === false) return false
-
-                        if (inputValue === "") {
-                            swal.showInputError("Silahkan isi alamat email!")
-                            return false
-                        }
-
-                        data = data.concat({
-                            name: "email",
-                            value: inputValue
-                        })
-
-                        $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                            .then((res) => {
-                                swal(
-                                    'Sukses meminta penawaran!',
-                                    'Silahkan tunggu konfirmasi dari pihak kami',
-                                    'success'
-                                )
+                        allowOutsideClick: false,
+                        preConfirm: (input) => {
+                            data = data.concat({
+                                name: "email",
+                                value: input
                             })
+
+                            $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                                .then((res) => {
+                                    swal(
+                                        'Sukses meminta penawaran!',
+                                        'Silahkan tunggu konfirmasi dari pihak kami',
+                                        'success'
+                                    )
+                                })
+                        }
                     })
                 } else {
                     $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
