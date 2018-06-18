@@ -51,7 +51,7 @@
     <script src="{{ asset('js/bootstrap4.min.js') }}"></script>
 
     {{-- Sweetalert --}}
-    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert2@7.22.2/dist/sweetalert2.all.js"></script>
 
     <script>
         @if ($errors->any())
