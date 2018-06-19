@@ -55,6 +55,16 @@ class QuoteController extends Controller
 
             if ($user) {
                 $quote->user_id = $user->id;
+            } else {
+                $newUser = User::create([
+                    'name' => $request->get('email'),
+                    'email' => $request->get('email'),
+                    'type' => 'C',
+                    'password' => bcrypt(str_random(6)),
+                    'confirmation_code' => str_random(30)
+                ]);
+
+                $quote->user_id = $newUser->id;
             }
 
             $quote->user_email = $request->get('email');
