@@ -444,18 +444,104 @@
 
             $('#printBtn').click(function(e) {
                 e.preventDefault()
-                html2canvas(document.getElementById('resultLabel'))
-                    .then((canvas) => {
-                        let a = document.createElement('a')
-                        // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-                        a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
-                        a.download = 'result-calculator.jpg'
-                        a.click()
-                    })
+                swal(
+                    'Sukses menyimpan hasil kalkulator!',
+                    'Hasil kalkulator telah disimpan di dalam akun anda!',
+                    'success'
+                )
             })
 
             $('#showDialog').click(function(e) {
                 e.preventDefault()
+                swal({
+                    title: 'Silahkan masuk atau mendaftar akun',
+                    text: 'Untuk dapat menggunakan fitur ini, anda harus memiliki akun.',
+                    type: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Masuk',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonText: 'Daftar',
+                    cancelButtonClass: 'btn btn-primary',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        swal({
+                            title: 'Login Partisipan',
+                            html: '<input id="login-email" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
+                                  '<input id="login-password" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
+                            focusConfirm: false,
+                            preConfirm: () => {
+                                let email = $('#login-email').val()
+                                let pass = $('#login-password').val()
+
+                                if (email && pass) {
+                                    let data = [{
+                                        name: "email",
+                                        value: email
+                                    }, {
+                                        name: "password",
+                                        value: pass
+                                    }]
+
+                                    $.post("{{ route('api.check-user') }}", data)
+                                        .then((res) => {
+                                            let updateData = [{
+                                                name: '_method',
+                                                value: 'PUT'
+                                            }, {
+                                                name: 'email',
+                                                value: email
+                                            }]
+
+                                            $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), updateData)
+                                                .then((res) => {
+                                                    swal(
+                                                        'Sukses menyimpan hasil kalkulator!',
+                                                        'Hasil kalkulator telah disimpan di dalam akun anda!',
+                                                        'success'
+                                                    )
+                                                })
+                                        }).fail(function(xhr, status, error) {
+                                            swal({
+                                                title: 'Error!',
+                                                type: 'error',
+                                                text: 'Email atau password yang anda masukkan salah!'
+                                            })
+                                        })
+
+                                } else {
+                                    swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
+                                }
+                            }
+                        })
+                    } else {
+                        swal({
+                            title: 'Daftar Partisipan',
+                            text: 'Masukkan email anda',
+                            input: 'email',
+                            showLoaderOnConfirm: true,
+                            confirmButtonText: 'Submit',
+                            allowOutsideClick: false,
+                            preConfirm: (input) => {
+                                data = data.concat({
+                                    name: "email",
+                                    value: input
+                                })
+
+                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                                    .then((res) => {
+                                        swal(
+                                            'Sukses menyimpan hasil kalkulator!',
+                                            'Hasil kalkulator telah disimpan di dalam akun anda!',
+                                            'success'
+                                        )
+                                    })
+                            }
+                        })
+                    }
+                })
             })
 
             $('#requestQuote').click(function(e) {
@@ -464,27 +550,92 @@
 
                 if (!$('#userId').val()) {
                     swal({
-                        title: 'Form meminta penawaran',
-                        text: 'Masukkan email anda',
-                        input: 'email',
-                        showCancelButton: true,
-                        showLoaderOnConfirm: true,
-                        confirmButtonText: 'Submit',
+                        title: 'Silahkan masuk atau mendaftar akun',
+                        text: 'Untuk dapat menggunakan fitur ini, anda harus memiliki akun.',
+                        type: 'warning',
                         allowOutsideClick: false,
-                        preConfirm: (input) => {
-                            data = data.concat({
-                                name: "email",
-                                value: input
-                            })
+                        showCancelButton: true,
+                        confirmButtonText: 'Masuk',
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonText: 'Daftar',
+                        cancelButtonClass: 'btn btn-primary',
+                        buttonsStyling: false,
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: 'Login Partisipan',
+                                html: '<input id="loginEmail" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
+                                    '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
+                                focusConfirm: false,
+                                preConfirm: () => {
+                                    let email = $('#loginEmail').val()
+                                    let pass = $('#loginPassword').val()
 
-                            $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                                .then((res) => {
-                                    swal(
-                                        'Sukses meminta penawaran!',
-                                        'Silahkan tunggu konfirmasi dari pihak kami',
-                                        'success'
-                                    )
-                                })
+                                    if (email && pass) {
+                                        let data = [{
+                                            name: "email",
+                                            value: email
+                                        }, {
+                                            name: "password",
+                                            value: pass
+                                        }]
+
+                                        $.post("{{ route('api.check-user') }}", data)
+                                            .then((res) => {
+                                                let updateData = [{
+                                                    name: '_method',
+                                                    value: 'PUT'
+                                                }, {
+                                                    name: 'email',
+                                                    value: email
+                                                }]
+
+                                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), updateData)
+                                                    .then((res) => {
+                                                        swal(
+                                                            'Sukses meminta penawaran!',
+                                                            'Silahkan tunggu konfirmasi dari pihak kami',
+                                                            'success'
+                                                        )
+                                                    })
+                                            }).fail(function(xhr, status, error) {
+                                                swal({
+                                                    title: 'Error!',
+                                                    type: 'error',
+                                                    text: 'Email atau password yang anda masukkan salah!'
+                                                })
+                                            })
+
+                                    } else {
+                                        swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
+                                    }
+                                }
+                            })
+                        } else {
+                            swal({
+                                title: 'Daftar Partisipan',
+                                text: 'Masukkan email anda',
+                                input: 'email',
+                                showLoaderOnConfirm: true,
+                                confirmButtonText: 'Submit',
+                                allowOutsideClick: false,
+                                preConfirm: (input) => {
+                                    data = data.concat({
+                                        name: "email",
+                                        value: input
+                                    })
+
+                                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                                        .then((res) => {
+                                            swal(
+                                                'Sukses meminta penawaran!',
+                                                'Silahkan tunggu konfirmasi dari pihak kami',
+                                                'success'
+                                            )
+                                        })
+                                }
+                            })
                         }
                     })
                 } else {
