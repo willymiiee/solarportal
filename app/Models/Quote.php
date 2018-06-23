@@ -20,6 +20,7 @@ class Quote extends Model
         'capacity',
         'use_per_day',
         'pv_required',
+        'pv_allowed',
         'cost',
         'saving',
         'status'
