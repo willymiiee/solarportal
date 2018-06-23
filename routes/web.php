@@ -95,6 +95,7 @@ Route::prefix('projects')->group(function () {
     Route::get('/{id}', 'ProjectController@show')->name('project.show');
 });
 
+Route::post('alternate-login', 'UserController@postAlternateLogin')->name('alternate-login');
 Route::get('/', 'HomeController@index');
 Route::get('user/verify/{code}', 'UserController@getVerify');
 Route::get('profile', 'UserController@getProfile');
