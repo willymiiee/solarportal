@@ -501,7 +501,12 @@
                                                         'Sukses menyimpan hasil kalkulator!',
                                                         'Hasil kalkulator telah disimpan di dalam akun anda!',
                                                         'success'
-                                                    )
+                                                    ).then((res) => {
+                                                        $.post("{{ route('alternate-login') }}", data)
+                                                            .then((res) => {
+                                                                location.reload()
+                                                            })
+                                                    })
                                                 })
                                         }).fail(function(xhr, status, error) {
                                             swal({
@@ -537,7 +542,16 @@
                                             'Sukses menyimpan hasil kalkulator!',
                                             'Hasil kalkulator telah disimpan di dalam akun anda!',
                                             'success'
-                                        )
+                                        ).then((res) => {
+                                            let dt = {
+                                                email: input
+                                            }
+
+                                            $.post("{{ route('alternate-login') }}", dt)
+                                                .then((res) => {
+                                                    location.reload()
+                                                })
+                                        })
                                     })
                             }
                         })
@@ -598,7 +612,12 @@
                                                             'Sukses meminta penawaran!',
                                                             'Silahkan tunggu konfirmasi dari pihak kami',
                                                             'success'
-                                                        )
+                                                        ).then((res) => {
+                                                            $.post("{{ route('alternate-login') }}", data)
+                                                                .then((res) => {
+                                                                    location.reload()
+                                                                })
+                                                        })
                                                     })
                                             }).fail(function(xhr, status, error) {
                                                 swal({
@@ -633,7 +652,16 @@
                                                 'Sukses meminta penawaran!',
                                                 'Silahkan tunggu konfirmasi dari pihak kami',
                                                 'success'
-                                            )
+                                            ).then((res) => {
+                                                let dt = {
+                                                    email: input
+                                                }
+
+                                                $.post("{{ route('alternate-login') }}", dt)
+                                                    .then((res) => {
+                                                        location.reload()
+                                                    })
+                                            })
                                         })
                                 }
                             })
