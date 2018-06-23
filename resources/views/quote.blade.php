@@ -426,7 +426,7 @@
                                 $('.icon2').addClass('fa fa-check')
                                 $('.icon3').addClass('fa fa-check')
                                 $('#loading').hide()
-                                $('#tagihan-result').html('Rp. ' + $('#tagihan').val().replace(',', '.'))
+                                $('#tagihan-result').html('Rp. ' + $('#tagihan').val().replace(/\,/g, '.'))
                                 $('#kapasitas-result').html(Number($('#kapasitas').val()).toLocaleString('id') + ' Watt')
                                 $('#capacity').html(Number(res.pv_allowed).toLocaleString('id') + ' Watt')
                                 $('#large').html(Number(res.roof_area).toLocaleString('id') + ' m²')
@@ -525,6 +525,7 @@
                             confirmButtonText: 'Submit',
                             allowOutsideClick: false,
                             preConfirm: (input) => {
+                                let data = $('#quote-form').serializeArray()
                                 data = data.concat({
                                     name: "email",
                                     value: input
