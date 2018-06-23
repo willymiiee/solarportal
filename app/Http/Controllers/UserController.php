@@ -183,4 +183,11 @@ class UserController extends Controller
             return redirect('/')->with('success', 'Success update password');
         }
     }
+
+    public function postAlternateLogin(Request $request)
+    {
+        $user = User::where('email', $request->get('email'))->first();
+        \Auth::login($user);
+        return response()->json($user);
+    }
 }
