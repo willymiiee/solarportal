@@ -328,6 +328,10 @@
                                 <div class="col">
                                     <button class="btn btn-primary" type="button" id="requestQuote">Minta Penawaran</button>
                                 </div>
+
+                                <div class="col">
+                                    <a href="{{ route('calculator') }}" class="btn btn-primary">Kembali</a>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -457,107 +461,13 @@
                 e.preventDefault()
                 swal({
                     title: 'Silahkan masuk atau mendaftar akun',
-                    text: 'Untuk dapat menggunakan fitur ini, anda harus memiliki akun.',
                     type: 'warning',
-                    allowOutsideClick: false,
-                    showCancelButton: true,
-                    confirmButtonText: 'Masuk',
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonText: 'Daftar',
-                    cancelButtonClass: 'btn btn-primary',
-                    buttonsStyling: false,
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        swal({
-                            title: 'Login Partisipan',
-                            html: '<input id="login-email" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
-                                  '<input id="login-password" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
-                            focusConfirm: false,
-                            preConfirm: () => {
-                                let email = $('#login-email').val()
-                                let pass = $('#login-password').val()
-
-                                if (email && pass) {
-                                    let data = [{
-                                        name: "email",
-                                        value: email
-                                    }, {
-                                        name: "password",
-                                        value: pass
-                                    }]
-
-                                    $.post("{{ route('api.check-user') }}", data)
-                                        .then((res) => {
-                                            let updateData = [{
-                                                name: '_method',
-                                                value: 'PUT'
-                                            }, {
-                                                name: 'email',
-                                                value: email
-                                            }]
-
-                                            $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), updateData)
-                                                .then((res) => {
-                                                    swal(
-                                                        'Sukses menyimpan hasil kalkulator!',
-                                                        'Hasil kalkulator telah disimpan di dalam akun anda!',
-                                                        'success'
-                                                    ).then((res) => {
-                                                        $.post("{{ route('alternate-login') }}", data)
-                                                            .then((res) => {
-                                                                location.reload()
-                                                            })
-                                                    })
-                                                })
-                                        }).fail(function(xhr, status, error) {
-                                            swal({
-                                                title: 'Error!',
-                                                type: 'error',
-                                                text: 'Email atau password yang anda masukkan salah!'
-                                            })
-                                        })
-
-                                } else {
-                                    swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
-                                }
-                            }
-                        })
-                    } else {
-                        swal({
-                            title: 'Daftar Partisipan',
-                            text: 'Masukkan email anda',
-                            input: 'email',
-                            showLoaderOnConfirm: true,
-                            confirmButtonText: 'Submit',
-                            allowOutsideClick: false,
-                            preConfirm: (input) => {
-                                let data = $('#quote-form').serializeArray()
-                                data = data.concat({
-                                    name: "email",
-                                    value: input
-                                })
-
-                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                                    .then((res) => {
-                                        swal(
-                                            'Sukses menyimpan hasil kalkulator!',
-                                            'Hasil kalkulator telah disimpan di dalam akun anda!',
-                                            'success'
-                                        ).then((res) => {
-                                            let dt = {
-                                                email: input
-                                            }
-
-                                            $.post("{{ route('alternate-login') }}", dt)
-                                                .then((res) => {
-                                                    location.reload()
-                                                })
-                                        })
-                                    })
-                            }
-                        })
-                    }
+                    allowOutsideClick: true,
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    html: '<p>Untuk dapat menggunakan fitur ini, anda harus memiliki akun.</p>' +
+                        '<button class="btn btn-primary mr-3 registerBtn">Daftar</button>' +
+                        '<button class="btn btn-primary loginBtn">Masuk</button>'
                 })
             })
 
@@ -568,106 +478,13 @@
                 if (!$('#userId').val()) {
                     swal({
                         title: 'Silahkan masuk atau mendaftar akun',
-                        text: 'Untuk dapat menggunakan fitur ini, anda harus memiliki akun.',
                         type: 'warning',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        confirmButtonText: 'Masuk',
-                        confirmButtonClass: 'btn btn-success',
-                        cancelButtonText: 'Daftar',
-                        cancelButtonClass: 'btn btn-primary',
-                        buttonsStyling: false,
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.value) {
-                            swal({
-                                title: 'Login Partisipan',
-                                html: '<input id="loginEmail" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
-                                    '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
-                                focusConfirm: false,
-                                preConfirm: () => {
-                                    let email = $('#loginEmail').val()
-                                    let pass = $('#loginPassword').val()
-
-                                    if (email && pass) {
-                                        let data = [{
-                                            name: "email",
-                                            value: email
-                                        }, {
-                                            name: "password",
-                                            value: pass
-                                        }]
-
-                                        $.post("{{ route('api.check-user') }}", data)
-                                            .then((res) => {
-                                                let updateData = [{
-                                                    name: '_method',
-                                                    value: 'PUT'
-                                                }, {
-                                                    name: 'email',
-                                                    value: email
-                                                }]
-
-                                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), updateData)
-                                                    .then((res) => {
-                                                        swal(
-                                                            'Sukses meminta penawaran!',
-                                                            'Silahkan tunggu konfirmasi dari pihak kami',
-                                                            'success'
-                                                        ).then((res) => {
-                                                            $.post("{{ route('alternate-login') }}", data)
-                                                                .then((res) => {
-                                                                    location.reload()
-                                                                })
-                                                        })
-                                                    })
-                                            }).fail(function(xhr, status, error) {
-                                                swal({
-                                                    title: 'Error!',
-                                                    type: 'error',
-                                                    text: 'Email atau password yang anda masukkan salah!'
-                                                })
-                                            })
-
-                                    } else {
-                                        swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
-                                    }
-                                }
-                            })
-                        } else {
-                            swal({
-                                title: 'Daftar Partisipan',
-                                text: 'Masukkan email anda',
-                                input: 'email',
-                                showLoaderOnConfirm: true,
-                                confirmButtonText: 'Submit',
-                                allowOutsideClick: false,
-                                preConfirm: (input) => {
-                                    data = data.concat({
-                                        name: "email",
-                                        value: input
-                                    })
-
-                                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                                        .then((res) => {
-                                            swal(
-                                                'Sukses meminta penawaran!',
-                                                'Silahkan tunggu konfirmasi dari pihak kami',
-                                                'success'
-                                            ).then((res) => {
-                                                let dt = {
-                                                    email: input
-                                                }
-
-                                                $.post("{{ route('alternate-login') }}", dt)
-                                                    .then((res) => {
-                                                        location.reload()
-                                                    })
-                                            })
-                                        })
-                                }
-                            })
-                        }
+                        allowOutsideClick: true,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        html: '<p>Untuk dapat menggunakan fitur ini, anda harus memiliki akun.</p>' +
+                            '<button class="btn btn-primary mr-3 registerBtn">Daftar</button>' +
+                            '<button class="btn btn-primary loginBtn">Masuk</button>'
                     })
                 } else {
                     $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
@@ -678,6 +495,104 @@
                                 'success'
                             )
                         })
+                }
+            })
+
+        })
+
+        $(document).on('click', '.registerBtn', function() {
+            swal({
+                title: 'Daftar Partisipan',
+                text: 'Masukkan email anda',
+                input: 'email',
+                showCloseButton: true,
+                showLoaderOnConfirm: true,
+                confirmButtonText: 'Submit',
+                allowOutsideClick: false,
+                preConfirm: (input) => {
+                    let data = [{
+                        name: '_method',
+                        value: 'PUT'
+                    },{
+                        name: "email",
+                        value: input
+                    }]
+
+                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                        .then((res) => {
+                            swal(
+                                'Sukses meminta penawaran!',
+                                'Silahkan tunggu konfirmasi dari pihak kami',
+                                'success'
+                            ).then((res) => {
+                                let dt = {
+                                    email: input
+                                }
+
+                                $.post("{{ route('alternate-login') }}", dt)
+                                    .then((res) => {
+                                        location.reload()
+                                    })
+                            })
+                        })
+                }
+            })
+        })
+
+        $(document).on('click', '.loginBtn', function() {
+            swal({
+                title: 'Login Partisipan',
+                html: '<input id="loginEmail" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
+                    '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
+                focusConfirm: false,
+                showCloseButton: true,
+                preConfirm: () => {
+                    let email = $('#loginEmail').val()
+                    let pass = $('#loginPassword').val()
+
+                    if (email && pass) {
+                        let data = [{
+                            name: "email",
+                            value: email
+                        }, {
+                            name: "password",
+                            value: pass
+                        }]
+
+                        $.post("{{ route('api.check-user') }}", data)
+                            .then((res) => {
+                                let updateData = [{
+                                    name: '_method',
+                                    value: 'PUT'
+                                }, {
+                                    name: 'email',
+                                    value: email
+                                }]
+
+                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), updateData)
+                                    .then((res) => {
+                                        swal(
+                                            'Sukses meminta penawaran!',
+                                            'Silahkan tunggu konfirmasi dari pihak kami',
+                                            'success'
+                                        ).then((res) => {
+                                            $.post("{{ route('alternate-login') }}", data)
+                                                .then((res) => {
+                                                    location.reload()
+                                                })
+                                        })
+                                    })
+                            }).fail(function(xhr, status, error) {
+                                swal({
+                                    title: 'Error!',
+                                    type: 'error',
+                                    text: 'Email atau password yang anda masukkan salah!'
+                                })
+                            })
+
+                    } else {
+                        swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
+                    }
                 }
             })
         })
