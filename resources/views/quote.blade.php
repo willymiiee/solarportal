@@ -319,9 +319,11 @@
                             </div>
 
                             <div class="form-group row text-center mt-3">
+                                @if (!Auth::check())
                                 <div class="col">
                                     <button class="btn btn-primary" type="button" id="{{ Auth::check() ? 'printBtn' : 'showDialog' }}">Simpan</button>
                                 </div>
+                                @endif
 
                                 <div class="col">
                                     <button class="btn btn-primary" type="button" id="requestQuote">Minta Penawaran</button>
