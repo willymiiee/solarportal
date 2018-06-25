@@ -62,8 +62,26 @@ class QuoteController extends Controller
                     'email' => $request->get('email'),
                     'type' => 'C',
                     'password' => bcrypt(str_random(6)),
-                    'confirmation_code' => str_random(30)
+                    'lost_password' => str_random(30),
                 ]);
+
+                $emailData = json_encode(
+                    [
+                        '-resetPasswordUrl-' => url('reset-password') . '/' . $newUser->lost_password,
+                    ]
+                );
+
+                sendMail(
+                    'noreply@sejutasuryaatap.com',
+                    'noreply',
+                    $newUser->email,
+                    $newUser->name,
+                    'Reset password',
+                    null,
+                    $emailData,
+                    null,
+                    '9d8906f1-d25b-4d4b-b2ba-0e73fcff27b6'
+                );
 
                 $quote->user_id = $newUser->id;
             }
