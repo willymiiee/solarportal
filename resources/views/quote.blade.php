@@ -511,30 +511,43 @@
                 allowOutsideClick: false,
                 preConfirm: (input) => {
                     let data = [{
-                        name: '_method',
-                        value: 'PUT'
-                    },{
                         name: "email",
                         value: input
                     }]
 
-                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                        .then((res) => {
-                            swal(
-                                'Sukses meminta penawaran!',
-                                'Silahkan tunggu konfirmasi dari pihak kami',
-                                'success'
-                            ).then((res) => {
-                                let dt = {
-                                    email: input
-                                }
+                    return new Promise((resolve) => {
+                        $.post("{{ route('api.check-user') }}", data)
+                            .then((result) => {
+                                data = data.concat({
+                                    name: "_method",
+                                    value: "PUT"
+                                })
 
-                                $.post("{{ route('alternate-login') }}", dt)
+                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
                                     .then((res) => {
-                                        location.reload()
+                                        swal(
+                                            'Sukses meminta penawaran!',
+                                            'Silahkan tunggu konfirmasi dari pihak kami',
+                                            'success'
+                                        ).then((res) => {
+                                            let dt = {
+                                                email: input
+                                            }
+
+                                            $.post("{{ route('alternate-login') }}", dt)
+                                                .then((res) => {
+                                                    location.reload()
+                                                })
+                                        })
                                     })
+                                resolve()
                             })
-                        })
+                            .fail(function(xhr, status, error) {
+                                swal.showValidationError('Email sudah terdaftar!')
+                                swal.hideLoading()
+                                return false
+                            })
+                    })
                 }
             })
         })
@@ -582,7 +595,8 @@
                                                 })
                                         })
                                     })
-                            }).fail(function(xhr, status, error) {
+                            })
+                            .fail(function(xhr, status, error) {
                                 swal({
                                     title: 'Error!',
                                     type: 'error',
