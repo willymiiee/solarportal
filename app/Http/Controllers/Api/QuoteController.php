@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Config;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
@@ -57,7 +58,7 @@ class QuoteController extends Controller
             if ($user) {
                 $quote->user_id = $user->id;
             } else {
-                $newUser = User::create([
+                $user = User::create([
                     'name' => $request->get('email'),
                     'email' => $request->get('email'),
                     'type' => 'C',
@@ -67,15 +68,15 @@ class QuoteController extends Controller
 
                 $emailData = json_encode(
                     [
-                        '-resetPasswordUrl-' => url('reset-password') . '/' . $newUser->lost_password,
+                        '-resetPasswordUrl-' => url('reset-password') . '/' . $user->lost_password,
                     ]
                 );
 
                 sendMail(
                     'noreply@sejutasuryaatap.com',
                     'noreply',
-                    $newUser->email,
-                    $newUser->name,
+                    $user->email,
+                    $user->name,
                     'Reset password',
                     null,
                     $emailData,
@@ -83,7 +84,7 @@ class QuoteController extends Controller
                     '9d8906f1-d25b-4d4b-b2ba-0e73fcff27b6'
                 );
 
-                $quote->user_id = $newUser->id;
+                $quote->user_id = $user->id;
             }
 
             $quote->user_email = $request->get('email');
@@ -94,6 +95,27 @@ class QuoteController extends Controller
 
         $quote->status = 'quotation';
         $quote->save();
+
+        $quoteAdmin = Config::where('key', 'quote_admin')->first();
+        $emailData = json_encode(
+            [
+                '-senderName-' => $user->name,
+                '-senderEmail-' => $user->email,
+                '-senderPhone-' => $user->phone
+            ]
+        );
+
+        sendMail(
+            'noreply@sejutasuryaatap.com',
+            'noreply',
+            $quoteAdmin->value,
+            'Admin Solar Quote',
+            'New Quote',
+            null,
+            $emailData,
+            null,
+            'b83bf718-2612-413e-9fe9-13d9914e01b1'
+        );
 
         return response()->json([
             'message' => 'Sukses!'
