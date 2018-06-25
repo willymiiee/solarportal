@@ -1,5 +1,9 @@
 @extends('layouts.new')
 
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+@stop
+
 @section('style')
     <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
     <style>
@@ -518,34 +522,35 @@
                     return new Promise((resolve) => {
                         $.post("{{ route('api.check-user') }}", data)
                             .then((result) => {
-                                data = data.concat({
-                                    name: "_method",
-                                    value: "PUT"
-                                })
-
-                                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                                    .then((res) => {
-                                        swal(
-                                            'Sukses meminta penawaran!',
-                                            'Silahkan tunggu konfirmasi dari pihak kami',
-                                            'success'
-                                        ).then((res) => {
-                                            let dt = {
-                                                email: input
-                                            }
-
-                                            $.post("{{ route('alternate-login') }}", dt)
-                                                .then((res) => {
-                                                    location.reload()
-                                                })
-                                        })
+                                if (result.status == 0) {
+                                    data = data.concat({
+                                        name: "_method",
+                                        value: "PUT"
                                     })
-                                resolve()
-                            })
-                            .fail(function(xhr, status, error) {
-                                swal.showValidationError('Email sudah terdaftar!')
-                                swal.hideLoading()
-                                return false
+
+                                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                                        .then((res) => {
+                                            swal(
+                                                'Sukses meminta penawaran!',
+                                                'Silahkan tunggu konfirmasi dari pihak kami',
+                                                'success'
+                                            ).then((res) => {
+                                                let dt = {
+                                                    email: input
+                                                }
+
+                                                $.post("{{ route('alternate-login') }}", dt)
+                                                    .then((res) => {
+                                                        location.reload()
+                                                    })
+                                            })
+                                        })
+                                    resolve()
+                                } else {
+                                    swal.showValidationError('Email sudah terdaftar!')
+                                    swal.hideLoading()
+                                    return false
+                                }
                             })
                     })
                 }
@@ -556,9 +561,13 @@
             swal({
                 title: 'Login Partisipan',
                 html: '<input id="loginEmail" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
-                    '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">',
+                    '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">' +
+                    '<small><a href="javascript:void(0)" id="forgetPass" class="text-primary">Lupa Password?</a></small>',
                 focusConfirm: false,
                 showCloseButton: true,
+                showLoaderOnConfirm: true,
+                confirmButtonText: 'Submit',
+                allowOutsideClick: false,
                 preConfirm: () => {
                     let email = $('#loginEmail').val()
                     let pass = $('#loginPassword').val()
@@ -607,6 +616,49 @@
                     } else {
                         swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
                     }
+                }
+            })
+        })
+
+        $(document).on('click', '#forgetPass', function() {
+            swal({
+                title: 'Lost Password',
+                text: 'Masukkan email anda. Kami akan mengirimkan email untuk me-reset password anda.',
+                input: 'email',
+                showCloseButton: true,
+                showLoaderOnConfirm: true,
+                confirmButtonText: 'Submit',
+                allowOutsideClick: false,
+                preConfirm: (input) => {
+                    let data = [{
+                        name: "email",
+                        value: input
+                    }]
+
+                    return new Promise((resolve) => {
+                        $.post("{{ route('api.check-user') }}", data)
+                            .then((result) => {
+                                swal.showLoading()
+
+                                if (result.status == 1) {
+                                    data = data.concat({
+                                        name: "_token",
+                                        value: $('meta[name="csrf-token"]').attr('content')
+                                    })
+
+                                    $.post("{{ route('lost-password') }}", data)
+                                        .then((res) => {
+                                            swal("Success!", res.message, "success");
+                                        })
+
+                                    resolve()
+                                } else {
+                                    swal.showValidationError('Email tidak terdaftar!')
+                                    swal.hideLoading()
+                                    return false
+                                }
+                            })
+                    })
                 }
             })
         })
