@@ -29,6 +29,11 @@
           <i class="fa fa-check"></i> <span>Verifikasi</span>
         </a>
       </li> --}}
+      <li class="@if(@$active_page == 'quotes') active @endif">
+        <a href="{{ route('participant.quote.index') }}">
+          <i class="fa fa-calculator"></i> <span>Solar Calculator</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>

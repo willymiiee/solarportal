@@ -71,6 +71,8 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
         'destroy' => 'participant.verify.destroy',
     ]]);
 
+    Route::get('quotes', 'QuoteController@index')->name('participant.quote.index');
+
     /* Coming Soon */
     Route::get('products', function () {
         return view('participant::coming_soon');
