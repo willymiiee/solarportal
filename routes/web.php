@@ -102,7 +102,7 @@ Route::get('profile', 'UserController@getProfile');
 Route::post('profile', 'UserController@postProfile');
 Route::get('change-password', 'UserController@getChangePassword');
 Route::post('change-password', 'UserController@postChangePassword');
-Route::post('lost-password', 'UserController@postLostPassword');
+Route::post('lost-password', 'UserController@postLostPassword')->name('lost-password');
 Route::get('reset-password/{code}', 'UserController@getResetPassword');
 Route::post('reset-password', 'UserController@postResetPassword');
 Route::get('register-thankyou', 'HomeController@getThankyouRegister');
