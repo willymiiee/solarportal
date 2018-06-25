@@ -311,7 +311,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Potensi Penghematan</label>
+                                    <label for="" class="col-sm-6 col-form-label">Potensi Penghematan per Bulan</label>
                                     <div class="col-sm-6">
                                         <label for="" class="col-form-label font-weight-bold" id="saving"></label>
                                     </div>
