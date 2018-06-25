@@ -131,20 +131,33 @@ class UserController extends Controller
         return response()->json($this->_result, $this->_statusCode);
     }
 
-    public function getCheckUser(Request $request)
+    public function postCheckUser(Request $request)
     {
-        if (\Auth::attempt([
-            'email' => $request->get('email'),
-            'password' => $request->get('password'),
-            'confirmation_code' => null
-        ])) {
-            $user = \Auth::user();
+        if ($request->has('password')) {
+            if (\Auth::attempt([
+                'email' => $request->get('email'),
+                'password' => $request->get('password'),
+                'confirmation_code' => null
+            ])) {
+                $user = \Auth::user();
+            } else {
+                return response()->json([
+                    'error' => 'Wrong credentials!'
+                ], 500);
+            }
+            return $user;
         } else {
-            return response()->json([
-                'error' => 'Wrong credentials!'
-            ], 500);
-        }
+            $user = User::where('email', $request->get('email'))->first();
 
-        return $user;
+            if ($user) {
+                return response()->json([
+                    'message' => 'Email already exists!'
+                ], 500);
+            } else {
+                return response()->json([
+                    'message' => 'Email available!'
+                ]);
+            }
+        }
     }
 }
