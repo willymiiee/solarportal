@@ -151,11 +151,13 @@ class UserController extends Controller
 
             if ($user) {
                 return response()->json([
-                    'message' => 'Email already exists!'
-                ], 500);
+                    'message' => 'Email already exists!',
+                    'status' => 1
+                ]);
             } else {
                 return response()->json([
-                    'message' => 'Email available!'
+                    'message' => 'Email available!',
+                    'status' => 0
                 ]);
             }
         }
