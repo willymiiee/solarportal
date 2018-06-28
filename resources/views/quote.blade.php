@@ -468,6 +468,13 @@
                                     })
                                 return false
                             })
+                            .fail((xhr, status, response) => {
+                                $('#block2A').removeClass('activeblock2').addClass('block2')
+                                $('#b2').removeClass('activecirculo').addClass('circulo')
+                                $('#p').removeClass('progreso1')
+                                $('#quote-form').show()
+                                $('#loading').hide()
+                            })
                     })
                 }
             })
