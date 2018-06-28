@@ -428,7 +428,7 @@
 
                         $.post("https://www.google.com/recaptcha/api/siteverify", {
                             secret: "{{ env('RECAPTCHA_SECRET_KEY') }}",
-                            response: data.g-recaptcha-response,
+                            response: data[7].value,
                             remoteip: ip
                         })
                             .then((res) => {
