@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Config;
+use App\Models\Config as GlobalConfig;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
@@ -96,7 +96,7 @@ class QuoteController extends Controller
         $quote->status = 'quotation';
         $quote->save();
 
-        $quoteAdmin = Config::where('key', 'quote_admin')->first();
+        $quoteAdmin = GlobalConfig::where('key', 'quote_admin')->first();
         $emailData = json_encode(
             [
                 '-senderName-' => $user->name,
