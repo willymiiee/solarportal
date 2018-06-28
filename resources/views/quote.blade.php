@@ -422,9 +422,9 @@
                     kapasitas: "Silahkan pilih batas daya"
                 },
                 submitHandler: function (form) {
-                    $.getJSON('http://ip-api.com/json?callback=?', function(data) {
+                    $.getJSON('http://ip-api.com/json?callback=?', function(ipData) {
                         let data = $('#quote-form').serializeArray()
-                        const ip = data.query
+                        const ip = ipData.query
 
                         $.post("https://www.google.com/recaptcha/api/siteverify", {
                             secret: "{{ env('RECAPTCHA_SECRET_KEY') }}",
