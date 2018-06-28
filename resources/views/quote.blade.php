@@ -427,7 +427,7 @@
                         const ip = data.query
 
                         $.post("https://www.google.com/recaptcha/api/siteverify", {
-                            secret: {{ env('RECAPTCHA_SECRET_KEY') }},
+                            secret: "{{ env('RECAPTCHA_SECRET_KEY') }}",
                             response: data.g-recaptcha-response,
                             remoteip: ip
                         })
