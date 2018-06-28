@@ -17,6 +17,17 @@ class QuoteController extends Controller
     public function postQuote(Request $request)
     {
         $data = $request->all();
+
+        $recaptchaData = [
+            "secret" => env('RECAPTCHA_SECRET_KEY'),
+            "response" => $data['g-recaptcha-response'],
+            "remoteip" => $data['ip']
+        ];
+        $client = new \GuzzleHttp\Client;
+        $request = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
+
+        dd($request);
+
         $data['bill'] = intval(preg_replace('/[^\d.]/', '', $data['bill']));
         $usePerDay = number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30), 1);
         $pvRequired = $usePerDay / Config::get('constants.sun_hour');
