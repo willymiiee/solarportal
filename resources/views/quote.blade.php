@@ -424,49 +424,37 @@
                 submitHandler: function (form) {
                     $.getJSON('http://ip-api.com/json?callback=?', function(ipData) {
                         let data = $('#quote-form').serializeArray()
-                        const ip = ipData.query
-
-                        $.post("https://www.google.com/recaptcha/api/siteverify", {
-                            secret: "{{ env('RECAPTCHA_SECRET_KEY') }}",
-                            response: data[7].value,
-                            remoteip: ip
+                        data = data.concat({
+                            name: "ip",
+                            value: ipData.query
                         })
-                            .then((res) => {
-                                $('#block2A').removeClass('block2').addClass('activeblock2')
-                                $('#b2').removeClass('circulo').addClass('activecirculo')
-                                $('#p').addClass('progreso1')
-                                $('#quote-form').hide()
-                                $('#loading').show()
 
-                                $.post("{{ route('api.quote') }}", data)
-                                    .then((res) => {
-                                        setTimeout(function() {
-                                            $('#block3A').removeClass('block3').addClass('activeblock3')
-                                            $('#b3').removeClass('circulo').addClass('activecirculo')
-                                            $('#p').removeClass('progreso1').addClass('progreso2')
-                                            $('.icon2').addClass('fa fa-check')
-                                            $('.icon3').addClass('fa fa-check')
-                                            $('#loading').hide()
-                                            $('#tagihan-result').html('Rp. ' + $('#tagihan').val().replace(/\,/g, '.'))
-                                            $('#kapasitas-result').html(Number($('#kapasitas').val()).toLocaleString('id') + ' Watt')
-                                            $('#capacity').html(Number(res.pv_allowed).toLocaleString('id') + ' Watt')
-                                            $('#large').html(Number(res.roof_area).toLocaleString('id') + ' m²')
-                                            $('#cost').html('Rp. ' + Number(res.cost).toLocaleString('id'))
-                                            $('#saving').html('Rp. ' + Number(res.saving).toLocaleString('id'))
-                                            $('#userId').val(res.user_id)
-                                            $('#quoteId').val(res.id)
-                                            $('#method').val('PUT')
-                                            $('#result').show()
-                                        }, 3000, res)
-                                    })
-                                    .fail((xhr, status, response) => {
-                                        $('#block2A').removeClass('activeblock2').addClass('block2')
-                                        $('#b2').removeClass('activecirculo').addClass('circulo')
-                                        $('#p').removeClass('progreso1')
-                                        $('#quote-form').show()
-                                        $('#loading').hide()
-                                    })
-                                return false
+                        $('#block2A').removeClass('block2').addClass('activeblock2')
+                        $('#b2').removeClass('circulo').addClass('activecirculo')
+                        $('#p').addClass('progreso1')
+                        $('#quote-form').hide()
+                        $('#loading').show()
+
+                        $.post("{{ route('api.quote') }}", data)
+                            .then((res) => {
+                                setTimeout(function() {
+                                    $('#block3A').removeClass('block3').addClass('activeblock3')
+                                    $('#b3').removeClass('circulo').addClass('activecirculo')
+                                    $('#p').removeClass('progreso1').addClass('progreso2')
+                                    $('.icon2').addClass('fa fa-check')
+                                    $('.icon3').addClass('fa fa-check')
+                                    $('#loading').hide()
+                                    $('#tagihan-result').html('Rp. ' + $('#tagihan').val().replace(/\,/g, '.'))
+                                    $('#kapasitas-result').html(Number($('#kapasitas').val()).toLocaleString('id') + ' Watt')
+                                    $('#capacity').html(Number(res.pv_allowed).toLocaleString('id') + ' Watt')
+                                    $('#large').html(Number(res.roof_area).toLocaleString('id') + ' m²')
+                                    $('#cost').html('Rp. ' + Number(res.cost).toLocaleString('id'))
+                                    $('#saving').html('Rp. ' + Number(res.saving).toLocaleString('id'))
+                                    $('#userId').val(res.user_id)
+                                    $('#quoteId').val(res.id)
+                                    $('#method').val('PUT')
+                                    $('#result').show()
+                                }, 3000, res)
                             })
                             .fail((xhr, status, response) => {
                                 $('#block2A').removeClass('activeblock2').addClass('block2')
@@ -475,6 +463,8 @@
                                 $('#quote-form').show()
                                 $('#loading').hide()
                             })
+
+                        return false
                     })
                 }
             })
