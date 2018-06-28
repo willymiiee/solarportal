@@ -26,7 +26,7 @@ class QuoteController extends Controller
         $client = new \GuzzleHttp\Client;
         $request = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
 
-        dd($request);
+        dd($request->getBody());
 
         $data['bill'] = intval(preg_replace('/[^\d.]/', '', $data['bill']));
         $usePerDay = number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30), 1);
