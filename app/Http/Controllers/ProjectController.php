@@ -53,7 +53,7 @@ class ProjectController extends Controller
 
         // 1. Validation first
 
-        // 2. Create User
+        // 2. Create User with type C
 
         // 3. Create Project that associated with created user and give company
     }

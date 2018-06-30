@@ -90,6 +90,16 @@
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="inner-holder">
+									{!! Form::label('image', 'Upload Foto') !!}
+									{!! Form::file('image', ['class' => 'form-control', 'multiple' => true]) !!}
+									<p style="margin: 10px 0px;" class="help-block">Tekan CTRL + Click foto yg di inginkan untuk memilih foto lebih dari 1. Anda dapat upload maximal: 5 foto</p>
+								</div>
+							</div>
+						</div>
+
 						<h3>Tentang Anda</h3><p>&nbsp;</p>
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-12">
