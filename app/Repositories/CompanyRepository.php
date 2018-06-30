@@ -36,8 +36,12 @@ class CompanyRepository extends BaseRepository
      * @param  string $display_field
      * @return array
      */
-    public function getDropdownByUser($user_id, $display_field = 'name')
+    public function getDropdownByUser($user_id = null, $display_field = 'name')
     {
+        if (!$user_id) {
+            return Company::orderBy($display_field, 'asc')->get()->pluck('name', 'id');
+        }
+
         $user = User::find($user_id);
 
         if (empty($user->companies)) {

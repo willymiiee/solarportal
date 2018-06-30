@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
@@ -94,6 +83,8 @@ Route::prefix('companies')->group(function () {
 
 Route::prefix('projects')->group(function () {
     Route::get('/', 'ProjectController@index')->name('project.index');
+    Route::get('/register', 'ProjectController@create')->name('project.create');
+    Route::post('/register-process', 'ProjectController@store')->name('project.store');
     Route::get('/{id}', 'ProjectController@show')->name('project.show');
 });
 
