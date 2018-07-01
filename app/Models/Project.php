@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -57,6 +58,16 @@ class Project extends Model
     public function companies()
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    /**
+     * Get project customers
+     * 
+     * @return \App\Models\User
+     */
+    public function customers()
+    {
+        return $this->belongsToMany(User::class)->withPivot('unregistered_company_name');
     }
 
     public function getTransformInstalledCapacityAttribute()

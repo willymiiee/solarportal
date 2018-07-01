@@ -28,9 +28,19 @@
         @include('themes::mottestate.partials.header')
 
         @yield('breadcrumb')
+        
 
         <!--Main Content Start-->
         <div class="tl-main-content">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        @include('participant::partials.alert')
+                    </div>
+                </div>
+            </div>
+
             @yield('content')
 
             {{-- call to action for unauthenticated visitor --}}

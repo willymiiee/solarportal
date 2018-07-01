@@ -96,30 +96,40 @@
 							<h3>Info Perusahaan/Institusi</h3>
 							<!--Agent Info Start-->
 							<div class="agent-info">
-								{{-- <img src="images/agent-sm-01.jpg" alt=""> --}}
-								<img src="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" alt="{{ $company['name'] }}">
-								<div class="text-holder">
-									<strong>{{ $company->name }}</strong>
-									<span>{{ $company->domicile }}</span>
-									<ul class="ft-listed">
-										@if (!empty($company['phone']))
-										<li>
-											<i aria-hidden="true" class="fa fa-phone"></i>
-											<a href="tel:{{ $company['phone'] }}">{{ $company['phone'] }}</a>
-										</li>
-										@endif
-										@if (!empty($company['phone_2']))
-										<li>
-											<i aria-hidden="true" class="fa fa-phone"></i>
-											<a href="tel:{{ $company['phone_2'] }}">{{ $company['phone_2'] }}</a>
-										</li>
-										@endif
-										<li style="word-wrap: break-word;">
-											<i aria-hidden="true" class="fa fa-envelope-o"></i>
-											<a href="mailto:david@realestate.com">{{ $company['email'] }}</a>
-										</li>
-									</ul>
-								</div>
+								{{-- This means the company is not registered yet, because CREATED by customer --}}
+								@if (!$company && $customer)
+									<div class="alert alert-warning">
+										<i class="fa fa-warning"></i> <small>Perusahaan ini masih belum resmi terdaftar di website ini</small>
+									</div>
+									<img src="{{ url('img/default-50x50.gif') }}" alt="{{ $customer->pivot->unregistered_company_name }}">
+									<div class="text-holder">
+										<strong>{{ $customer->pivot->unregistered_company_name }}</strong>
+									</div>
+								@else
+									<img src="{{ $company['avatar_url'] ?: getImgAvatar($company['email']) }}" alt="{{ $company['name'] }}">
+									<div class="text-holder">
+										<strong>{{ $company->name }}</strong>
+										<span>{{ $company->domicile }}</span>
+										<ul class="ft-listed">
+											@if (!empty($company['phone']))
+											<li>
+												<i aria-hidden="true" class="fa fa-phone"></i>
+												<a href="tel:{{ $company['phone'] }}">{{ $company['phone'] }}</a>
+											</li>
+											@endif
+											@if (!empty($company['phone_2']))
+											<li>
+												<i aria-hidden="true" class="fa fa-phone"></i>
+												<a href="tel:{{ $company['phone_2'] }}">{{ $company['phone_2'] }}</a>
+											</li>
+											@endif
+											<li style="word-wrap: break-word;">
+												<i aria-hidden="true" class="fa fa-envelope-o"></i>
+												<a href="mailto:david@realestate.com">{{ $company['email'] }}</a>
+											</li>
+										</ul>
+									</div>
+								@endif
 							</div><!--Agent Info End-->
 						</div><!--Widget Holder End-->
 					</aside>

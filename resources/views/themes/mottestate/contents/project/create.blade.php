@@ -84,7 +84,7 @@
 							</div>
 							<div id="unregistered_company_field" class="col-md-6 col-sm-6 col-xs-12" style="display: none;">
 								<div class="inner-holder">
-									{!! Form::label('unregistered_company_name', 'Tulis Nama Perusahaan/Institusi') !!}
+									{!! Form::label('unregistered_company_name', 'Nama Perusahaan/Institusi') !!}
 									{!! Form::text('unregistered_company_name', null, ['class' => 'form-control']) !!}
 								</div>
 							</div>
@@ -94,7 +94,7 @@
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="inner-holder">
 									{!! Form::label('image', 'Upload Foto') !!}
-									{!! Form::file('image', ['class' => 'form-control', 'multiple' => true]) !!}
+									{!! Form::file('image[]', ['class' => 'form-control', 'multiple' => true]) !!}
 									<p style="margin: 10px 0px;" class="help-block">Tekan CTRL + Click foto yg di inginkan untuk memilih foto lebih dari 1. Anda dapat upload maximal: 5 foto</p>
 								</div>
 							</div>
