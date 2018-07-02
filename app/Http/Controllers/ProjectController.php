@@ -62,7 +62,7 @@ class ProjectController extends Controller
             'unregistered_company_name' => 'required_if:company_id,0',
             'image' => 'required|array|between:1,5',
             'user.name' => 'required',
-            'user.email' => 'required',
+            'user.email' => 'required|email|unique:users',
             'user.password' => 'required|confirmed',
         ], [], [
             'installed_capacity' => __('project.installed_capacity'),
