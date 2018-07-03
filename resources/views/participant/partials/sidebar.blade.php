@@ -12,11 +12,11 @@
       </div>
     </div>
     <ul class="sidebar-menu">
-      <li class="header">Main Menu</li>
+      <li class="header">Menu Utama</li>
 
       <li class="@if(@$active_page == 'dashboard') active @endif">
         <a href="{{ route('participant.dashboard') }}">
-          <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
+          <i class="fa fa-pie-chart"></i> <span>Dasbor</span>
         </a>
       </li>
       <li class="@if(@$active_page == 'company') active @endif">
@@ -31,7 +31,7 @@
       </li> --}}
       <li class="@if(@$active_page == 'quotes') active @endif">
         <a href="{{ route('participant.quote.index') }}">
-          <i class="fa fa-calculator"></i> <span>Solar Calculator</span>
+          <i class="fa fa-calculator"></i> <span>Kalkulator Surya</span>
         </a>
       </li>
     </ul>
