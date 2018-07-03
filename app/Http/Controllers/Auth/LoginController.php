@@ -45,7 +45,7 @@ class LoginController extends Controller
             } elseif ($user->type == 'V') {
                 $redirect = route('participant.dashboard');
             } else {
-                $redirect = 'profile';
+                $redirect = route('user.profile');
             }
 
             if ($company_id = request('ref_company')) {
