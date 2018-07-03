@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="text-center">
-                                {!! $quotes->links() !!}
+                                {!! $quotes->links('vendor.pagination.bootstrap-4') !!}
                             </div>
                         @endif
                     </div>

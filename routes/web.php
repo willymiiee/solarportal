@@ -88,13 +88,17 @@ Route::prefix('projects')->group(function () {
     Route::get('/{id}', 'ProjectController@show')->name('project.show');
 });
 
+Route::prefix('user')->as('user.')->group(function() {
+    Route::get('verify/{code}', 'UserController@getVerify')->name('verify');
+    Route::get('profile', 'UserController@getProfile')->name('profile');
+    Route::post('profile', 'UserController@postProfile')->name('update-profile');
+    Route::get('change-password', 'UserController@getChangePassword')->name('change-password');
+    Route::post('change-password', 'UserController@postChangePassword')->name('update-password');
+    Route::get('quotes', 'UserController@getQuotes')->name('quote.index');
+});
+
 Route::post('alternate-login', 'UserController@postAlternateLogin')->name('alternate-login');
 Route::get('/', 'HomeController@index');
-Route::get('user/verify/{code}', 'UserController@getVerify');
-Route::get('profile', 'UserController@getProfile');
-Route::post('profile', 'UserController@postProfile');
-Route::get('change-password', 'UserController@getChangePassword');
-Route::post('change-password', 'UserController@postChangePassword');
 Route::post('lost-password', 'UserController@postLostPassword')->name('lost-password');
 Route::get('reset-password/{code}', 'UserController@getResetPassword');
 Route::post('reset-password', 'UserController@postResetPassword');

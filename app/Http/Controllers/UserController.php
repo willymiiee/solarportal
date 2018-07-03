@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Quote;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -50,10 +51,12 @@ class UserController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();
 
-            return view('profile')->with(
+            return view('user.profile')->with(
                 [
+                    'title' => 'User Profile',
                     'data' => $this->data,
                     'user' => $user,
+                    'active_page' => 'profile'
                 ]
             );
         }
@@ -63,7 +66,7 @@ class UserController extends Controller
 
     public function postProfile(Request $request)
     {
-        $data = $request->except('_token');
+        $data = $request->except(['_token', '_method']);
         User::where('id', \Auth::user()->id)
             ->update($data);
 
@@ -75,10 +78,12 @@ class UserController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();
 
-            return view('change-password')->with(
+            return view('user.change-password')->with(
                 [
+                    'title' => 'Change Password',
                     'data' => $this->data,
                     'user' => $user,
+                    'active_page' => 'change-password'
                 ]
             );
         }
@@ -189,5 +194,19 @@ class UserController extends Controller
         $user = User::where('email', $request->get('email'))->first();
         \Auth::login($user);
         return response()->json($user);
+    }
+
+    public function getQuotes()
+    {
+        $items = Quote::where('user_id', \Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $data = [
+            'title' => 'Quotes',
+            'quotes' => $items,
+        ];
+
+        return view('user.quotes', $data);
     }
 }
