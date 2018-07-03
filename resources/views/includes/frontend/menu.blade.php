@@ -33,7 +33,15 @@
 
             @if (Auth::check())
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('participant') }}">Hi, {{ Auth::user()->name }}</a>
+                <a class="nav-link" href="{{
+                    Auth::user()->type == 'A' ?
+                    route('admin.home') :
+                    (Auth::user()->type == 'V' ?
+                        route('participant.dashboard') :
+                        route('user.profile')
+                    ) }}">
+                    Hi, {{ Auth::user()->name }}
+                </a>
             </li>
             @else
             <li class="nav-item">
