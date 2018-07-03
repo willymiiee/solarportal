@@ -17,17 +17,23 @@ class QuoteController extends Controller
     public function postQuote(Request $request)
     {
         $data = $request->all();
+        $condition = false;
 
-        $recaptchaData = [
-            "secret" => env('RECAPTCHA_SECRET_KEY'),
-            "response" => $data['g-recaptcha-response'],
-            "remoteip" => $data['ip']
-        ];
-        $client = new \GuzzleHttp\Client;
-        $response = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
-        $recaptchaResult = json_decode($response->getBody());
+        if (!$data['user_id']) {
+            $recaptchaData = [
+                "secret" => env('RECAPTCHA_SECRET_KEY'),
+                "response" => $data['g-recaptcha-response'],
+                "remoteip" => $data['ip']
+            ];
+            $client = new \GuzzleHttp\Client;
+            $response = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
+            $recaptchaResult = json_decode($response->getBody());
+            $condition = $recaptchaResult->success;
+        } else {
+            $condition = true;
+        }
 
-        if ($recaptchaResult->success) {
+        if ($condition) {
             $data['bill'] = intval(preg_replace('/[^\d.]/', '', $data['bill']));
             $usePerDay = number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30), 1);
             $pvRequired = $usePerDay / Config::get('constants.sun_hour');

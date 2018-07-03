@@ -265,7 +265,9 @@
                             </select>
                         </div>
 
+                        @if (!Auth::check())
                         <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                        @endif
 
                         <div class="text-center next">
                             <button type="submit" class="btn btn-primary">Hitung Sekarang</button>
