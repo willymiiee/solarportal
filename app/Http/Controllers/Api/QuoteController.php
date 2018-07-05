@@ -118,7 +118,7 @@ class QuoteController extends Controller
         $quote->status = 'quotation';
         $quote->save();
 
-        $quoteAdmin = GlobalConfig::where('key', 'quote_admin')->first();
+        $quoteAdmin = GlobalConfig::where('key', 'quote_email')->first();
         $emailData = json_encode(
             [
                 '-senderName-' => $user->name,
