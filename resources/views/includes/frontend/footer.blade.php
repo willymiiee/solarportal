@@ -4,14 +4,29 @@
             <div class="footer-col-title">Hubungi GNSSA</div>
 
             <div class="footer-col-content">
-                <i class="icon icon-location-pin"></i>
-                <span>Gedung 625 Cluster Energi Puspiptek Serpong</span><br>
-                <span class="ml-2">Tangerang Selatan</span><br>
-                <span class="ml-2">15314</span><br>
+                <div>
+                    <div class="float-left">
+                        <i class="icon icon-location-pin"></i>
+                    </div>
+
+                    <div class="ml-2">
+                        <span>Gedung 625 Cluster Energi Puspiptek Serpong</span><br>
+                        <span>Tangerang Selatan</span><br>
+                        <span>15314</span><br>
+                    </div>
+                </div>
                 {{--  <i class="icon icon-phone"></i>
                 <span>+1 212-431-2100</span><br>  --}}
-                <i class="icon icon-envelope"></i>
-                <span>info@sejutasuryaatap.com</span>
+
+                <div class="mt-1">
+                    <div class="float-left">
+                        <i class="icon icon-envelope"></i>
+                    </div>
+
+                    <div class="ml-2">
+                        <span>info@sejutasuryaatap.com</span>
+                    </div>
+                </div>
             </div>
         </div>
 

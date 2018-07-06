@@ -367,7 +367,7 @@ footer {
 .footer-col-content > i {
     margin-right: 8px;
 }
-.footer-col-content > span {
+.footer-col-content span {
     font-size: 14px;
     color: #7b4a02;
     font-family: 'OpenSans-Bold';
