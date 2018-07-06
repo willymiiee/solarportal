@@ -357,11 +357,11 @@
 
     <script>
         function addThousandsSeparator(x) {
-            //remove commas
-            retVal = x ? parseFloat(x.replace(/,/g, '')) : 0
+            //remove dots
+            retVal = x ? parseFloat(x.replace(/\./g, '')) : 0
 
             //apply formatting
-            return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
 
         $(function() {
