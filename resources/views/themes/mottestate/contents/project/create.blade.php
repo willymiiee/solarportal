@@ -146,5 +146,6 @@
 			var theDisplay = ($(this).val() == 0) ? 'block' : 'none'
 			$('#unregistered_company_field').css('display', theDisplay)
 		})
+		$('#company_id').trigger('change')
 	</script>
 @stop
