@@ -198,7 +198,7 @@
     <div class="container">
         <div class="row">
             <div class="main col-12">
-                <h1 class="text-center my-0 pb-1">Kalkulator Listrik Surya Atap</h1>
+                <h1 class="text-center my-0 pb-1">Kalkulator Surya Atap</h1>
                 <h3 class="text-center pb-3">Pemasangan On Grid (Terkoneksi ke PLN)</h3>
 
                 <div class="progress">
@@ -271,6 +271,10 @@
 
                         <div class="text-center next">
                             <button type="submit" class="btn btn-primary">Hitung Sekarang</button>
+
+                            <div class="alert alert-primary mt-2" role="alert">
+                                Mohon tidak mengaktifkan adblock saat menggunakan fitur Kalkulator Listrik Surya Atap
+                            </div>
                         </div>
                     </form>
 
