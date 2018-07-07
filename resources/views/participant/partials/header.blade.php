@@ -22,16 +22,6 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li class="@if(@$active_page == 'participant_project') active @endif">
-                    <a href="{{ route('participant.project.index') }}">
-                        <i class="fa fa-file"></i> Rooftop PV Installation
-                    </a>
-                </li>
-                <li class="@if(@$active_page == 'participant_invite') active @endif">
-                    <a href="{{ route('participant.company.invite') }}">
-                        <i class="fa fa-user-plus"></i> Invite Teams
-                    </a>
-                </li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ auth()->user()->avatar_url }}" class="user-image">

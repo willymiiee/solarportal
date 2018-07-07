@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('active_page', 'participant_project');
+    }
+
     public function index()
     {
         $projects = $this->_startQuery()

@@ -24,6 +24,16 @@
           <i class="fa fa-briefcase"></i> <span>Perusahaan/Institusi</span>
         </a>
       </li>
+      <li class="@if(@$active_page == 'participant_project') active @endif">
+        <a href="{{ route('participant.project.index') }}">
+          <i class="fa fa-file"></i> Rooftop PV Installation
+        </a>
+      </li>
+      <li class="@if(@$active_page == 'participant_invite') active @endif">
+        <a href="{{ route('participant.company.invite') }}">
+          <i class="fa fa-user-plus"></i> Invite Teams
+        </a>
+      </li>
       {{-- <li class="@if(@$active_page == 'verify') active @endif">
         <a href="{{ route('participant.verify.index') }}">
           <i class="fa fa-check"></i> <span>Verifikasi</span>
