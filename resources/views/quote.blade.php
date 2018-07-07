@@ -428,11 +428,12 @@
                     kapasitas: "Silahkan pilih batas daya"
                 },
                 submitHandler: function (form) {
-                    $.getJSON('http://ip-api.com/json?callback=?', function(ipData) {
+                    $.getJSON('https://ipapi.co/json/', function(ipData) {
+                        const ip = JSON.stringify(ipData, null, 2)
                         let data = $('#quote-form').serializeArray()
                         data = data.concat({
                             name: "ip",
-                            value: ipData.query
+                            value: ip.ip
                         })
 
                         $('#block2A').removeClass('block2').addClass('activeblock2')
