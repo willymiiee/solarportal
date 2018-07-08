@@ -194,7 +194,7 @@
             margin: 50px 0;
         }
     </style>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    {{-- <script src='https://www.google.com/recaptcha/api.js'></script> --}}
 @stop
 
 @section('content')
@@ -270,7 +270,7 @@
                         </div>
 
                         @if (!Auth::check())
-                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                        {{-- <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div> --}}
                         @endif
 
                         <div class="text-center next">

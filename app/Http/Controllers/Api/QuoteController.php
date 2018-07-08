@@ -20,15 +20,20 @@ class QuoteController extends Controller
         $condition = false;
 
         if (!$data['user_id']) {
-            $recaptchaData = [
-                "secret" => env('RECAPTCHA_SECRET_KEY'),
-                "response" => $data['g-recaptcha-response'],
-                "remoteip" => $data['ip']
-            ];
-            $client = new \GuzzleHttp\Client;
-            $response = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
-            $recaptchaResult = json_decode($response->getBody());
-            $condition = $recaptchaResult->success;
+            // *update 8 July : disable recaptcha
+
+            // $recaptchaData = [
+            //     "secret" => env('RECAPTCHA_SECRET_KEY'),
+            //     "response" => $data['g-recaptcha-response'],
+            //     "remoteip" => $data['ip']
+            // ];
+            // $client = new \GuzzleHttp\Client;
+            // $response = $client->post("https://www.google.com/recaptcha/api/siteverify", ['form_params' => $recaptchaData]);
+            // $recaptchaResult = json_decode($response->getBody());
+            // $condition = $recaptchaResult->success;
+
+            // remove this part if recaptcha enabled again
+            $condition = true;
         } else {
             $condition = true;
         }
