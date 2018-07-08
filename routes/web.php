@@ -77,6 +77,7 @@ Route::prefix('participant')->namespace('Participant')->middleware('participant'
 
 Route::prefix('companies')->group(function () {
     Route::get('/', 'CompanyController@index')->name('company.index');
+    Route::get('category/{slug}', 'CompanyController@getByCategory')->name('company.category');
     Route::get('/{slug}', 'CompanyController@show')->name('company.show');
     Route::post('/{slug}/send-message', 'CompanyController@sendMessage')->name('company.sendMessage');
 });

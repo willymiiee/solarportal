@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Company;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
@@ -62,5 +63,21 @@ class CompanyController extends Controller
         $this->repo->sendMessage($slug, $request->all());
 
         return redirect()->back()->withMessage(['type' => 'success', 'message' => 'Pesan berhasil terkirim!']);
+    }
+
+    public function getByCategory($slug = null)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        if (!$category) {
+            abort(404);
+        }
+
+        $data = [
+            'title' => $category->name,
+            'companies' => $category->companies()->paginate(2),
+        ];
+
+        return view('public_entity::contents.company.index', $data);
     }
 }
