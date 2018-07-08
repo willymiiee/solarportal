@@ -263,6 +263,7 @@
                                 <option value=1300>1300</option>
                                 <option value=2200>2200</option>
                                 <option value=3500>3500</option>
+                                <option value=4400>4400</option>
                                 <option value=5500>5500</option>
                                 <option value="Lebih dari 5500">Lebih dari 5500</option>
                             </select>
