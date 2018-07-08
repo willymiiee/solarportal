@@ -8,6 +8,10 @@
       </div>
 
       <div class="box-body">
+        <div class="form-group">
+          <a href="{{ route('calculator') }}" class="btn btn-primary">Hitung Kembali</a>
+        </div>
+
         @if ($quotes->isEmpty())
           <p class="text-center text-muted lead">Saat ini tidak ada hasil kalkulator.</p>
         @else
