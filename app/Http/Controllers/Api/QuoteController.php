@@ -40,7 +40,7 @@ class QuoteController extends Controller
 
         if ($condition) {
             $data['bill'] = intval(preg_replace('/\./', '', $data['bill']));
-            $usePerDay = number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30), 1);
+            $usePerDay = max(0, number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30) - (40 * ($data['capacity']/1000)/30), 1));
             $pvRequired = $usePerDay / Config::get('constants.sun_hour');
             $pvAllowed = round(min($pvRequired, $data['capacity'] > 0 ? $data['capacity']/1000 : 1000) * 1000, -2) / 1000;
             $cost = $pvAllowed * Config::get('constants.cost_kw');
