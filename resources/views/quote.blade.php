@@ -293,44 +293,53 @@
                             <div id="resultLabel">
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="tagihan-result"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Batas Daya (VA atau Watt)</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="kapasitas-result"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Kapasitas Listrik Surya Atap</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="capacity"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Luas atap yang dibutuhkan</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="large"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Estimasi biaya pemasangan</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="cost"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Potensi Penghematan per Bulan</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="saving"></label>
                                     </div>
+                                </div>
+
+                                <div class="form-group row small mt-2">
+                                    <ul>
+                                        <li>Perhitungan Kalkulator Listrik Surya atap adalah simulasi perhitungan dalam kondisi umum.</li>
+                                        <li>Perhitungan bisa berubah tergantung posisi rumah, luas atap yang tersedia, jenis atap, rumah bertingkat, jenis panel surya dan inverter yang digunakan, tenaga ahli, dan lain-lain.</li>
+                                        <li>Untuk perhitungan lebih akurat, silakan menggunakan fasilitas permintaan penawaran. Portal GNSSA akan menghubungkan anda dengan perusahaan yang terverifikasi untuk memberikan penawaran sesuai kondisi khusus anda.</li>
+                                        <li>Perhitungan keuangan merupakan perhitungan perkiraan dan tidak bisa dipergunakan untuk mengambil keputusan keuangan tanpa berkonsultasi dengan tenaga ahli listrik surya atap.</li>
+                                    </ul>
                                 </div>
                             </div>
 
