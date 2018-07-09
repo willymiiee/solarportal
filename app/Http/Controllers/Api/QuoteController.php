@@ -45,7 +45,7 @@ class QuoteController extends Controller
             $pvAllowed = round(min($pvRequired, $data['capacity'] > 0 ? $data['capacity']/1000 : 1000) * 1000, -2) / 1000;
             $cost = $pvAllowed * Config::get('constants.cost_kw');
             $roofArea = $pvAllowed * Config::get('constants.panel_area') * 1000;
-            $saving = $pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30;
+            $saving = max(0, ($pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30) - ($data['capacity']/1000 * 40 * Config::get('constants.pln_tld')));
 
             $data = array_merge($data, [
                 'use_per_day' => $usePerDay,
