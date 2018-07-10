@@ -22,6 +22,10 @@ class Quote extends Model
         'pv_required',
         'pv_allowed',
         'cost',
+        'consumption',
+        'new_usage',
+        'exported',
+        'new_bill',
         'saving',
         'status'
     ];
