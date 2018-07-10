@@ -288,8 +288,8 @@
                         <h3 class="mt-2">Silahkan tunggu proses perhitungan...</h3>
                     </div>
 
-                    <div class="px-4" id="result">
-                        <form action="" class="form-horizontal">
+                    <div id="result">
+                        <form action="" class="form-horizontal px-4">
                             <div id="resultLabel">
                                 <div class="form-group row">
                                     <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
@@ -342,23 +342,23 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            <div class="form-group row text-center mt-3">
-                                @if (!Auth::check())
-                                <div class="col">
-                                    <button class="btn btn-primary" type="button" id="{{ Auth::check() ? 'printBtn' : 'showDialog' }}">Simpan</button>
-                                </div>
-                                @endif
-
-                                <div class="col">
-                                    <button class="btn btn-primary" type="button" id="requestQuote">Minta Penawaran</button>
-                                </div>
-
-                                <div class="col">
-                                    <a href="{{ route('calculator') }}" class="btn btn-primary">Kembali</a>
-                                </div>
-                            </div>
                         </form>
+
+                        <div class="row text-center mt-3">
+                            @if (!Auth::check())
+                            <div class="col mt-1">
+                                <button class="btn btn-primary btn-block" type="button" id="{{ Auth::check() ? 'printBtn' : 'showDialog' }}">Simpan</button>
+                            </div>
+                            @endif
+
+                            <div class="col mt-1">
+                                <button class="btn btn-primary btn-block" type="button" id="requestQuote">Minta Penawaran</button>
+                            </div>
+
+                            <div class="col mt-1">
+                                <a href="{{ route('calculator') }}" class="btn btn-primary btn-block">Kembali</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
