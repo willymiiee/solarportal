@@ -40,18 +40,27 @@ class QuoteController extends Controller
 
         if ($condition) {
             $data['bill'] = intval(preg_replace('/\./', '', $data['bill']));
-            $usePerDay = max(0, number_format(0.9 * $data['bill'] / (Config::get('constants.pln_tld') * 30) - (40 * ($data['capacity']/1000)/30), 1));
+            $usePerDay = max(0, number_format($data['bill'] / (Config::get('constants.pln_tld') * 30 * Config::get('constants.nett_tdl')) - (40 * ($data['capacity']/1000)/30), 1));
             $pvRequired = $usePerDay / Config::get('constants.sun_hour');
             $pvAllowed = round(min($pvRequired, $data['capacity'] > 0 ? $data['capacity']/1000 : 1000) * 1000, -2) / 1000;
             $cost = $pvAllowed * Config::get('constants.cost_kw');
             $roofArea = $pvAllowed * Config::get('constants.panel_area') * 1000;
-            $saving = max(0, ($pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30) - ($data['capacity']/1000 * 40 * Config::get('constants.pln_tld')));
+            $consumption = number_format($data['bill'] / (Config::get('constants.pln_tld') * 30 * Config::get('constants.nett_tdl')), 2);
+            $newUsage = round((1 - Config::get('constants.day_share')) * $consumption * 30 * Config::get('constants.pln_tld') * Config::get('constants.nett_tdl'), -3);
+            $exported = ($pvAllowed * Config::get('constants.sun_hour') - Config::get('constants.day_share') * $consumption) * 30 * Config::get('constants.pln_tld');
+            $newBill = $newUsage - $exported;
+            $saving = $data['bill'] - $newBill;
+            // $saving = max(0, ($pvAllowed * Config::get('constants.sun_hour') * Config::get('constants.pln_tld') * 30) - ($data['capacity']/1000 * 40 * Config::get('constants.pln_tld')));
 
             $data = array_merge($data, [
                 'use_per_day' => $usePerDay,
                 'pv_required' => $pvRequired * 1000,
                 'pv_allowed' => $pvAllowed * 1000,
                 'cost' => $cost,
+                'consumption' => $consumption,
+                'new_usage' => $newUsage,
+                'exported' => $exported,
+                'new_bill' => $newBill,
                 'saving' => $saving,
                 'status' => 'calculator'
             ]);
@@ -66,6 +75,10 @@ class QuoteController extends Controller
                 'pv_allowed' => $pvAllowed * 1000,
                 'cost' => ceil($cost),
                 'roof_area' => $roofArea,
+                'consumption' => $consumption,
+                'new_usage' => $newUsage,
+                'exported' => $exported,
+                'new_bill' => $newBill,
                 'saving' => ceil($saving)
             ]);
         } else {
