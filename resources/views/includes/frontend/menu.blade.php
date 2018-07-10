@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('calculator') }}">Kalkulator Listrik</a>
+                <a class="nav-link" href="{{ route('calculator') }}">Kalkulator</a>
             </li>
 
             @if (Auth::check())
@@ -45,7 +45,7 @@
             </li>
             @else
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('login') }}">Login Partisipan</a>
+                <a class="nav-link" href="{{ url('login') }}">Masuk</a>
             </li>
             @endif
         </ul>

@@ -46,6 +46,88 @@
         </div>
     </div>  --}}
 
+    <div class="container text-center" id="buttons">
+        <div class="row">
+            <div class="col px-4">
+                <a href="{{ route('calculator') }}" class="btn btn-primary btn-block btn-lg">Kalkulator Listrik Surya Atap</a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col mt-1">
+                <a href="{{ route('company.category', ['slug' => 'epckontraktor-pemasang-listrik-surya-atap']) }}" class="btn btn-secondary btn-block btn-lg">Daftar EPC</a>
+            </div>
+
+            <div class="col mt-1">
+                <a href="{{ route('company.category', ['slug' => 'pabrikandistributorretailer-produk-listrik-surya-atap']) }}" class="btn btn-secondary btn-block btn-lg">Daftar Pabrikan</a>
+            </div>
+
+            <div class="col mt-1">
+                <a href="{{ route('company.index') }}" class="btn btn-secondary btn-block btn-lg">Daftar Lengkap</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="about">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 no-gutters" id="about-img">
+                <div class="about-img"></div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 no-gutters" id="about-content">
+                <div id="about-title">{{ $data['about']->title }}</div>
+
+                <div id="about-description">
+                    {!! $data['about']->content[0] !!}
+                    <a href="{{ route('article.detail', ['slug' => $data['about']->slug]) }}" class="readmore">Lihat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="blog">
+        <div class="section-title" id="blog-title">Informasi</div>
+        <hr class="section-line">
+
+        <div class="row">
+            @foreach ($data['blog'] as $b)
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 blog-item">
+                <img src="{{ $b->image ? asset($b->image->url) : 'http://via.placeholder.com/300x250' }}" alt="" class="blog-cover">
+                <div class="blog-item-title">{{ str_limit($b->title, 25) }}</div>
+                <div class="blog-item-content">
+                    {!! str_limit($b->content, 150) !!}
+                </div>
+                <a href="{{ route('article.detail', ['slug' => $b->slug]) }}" class="blog-item-readmore">Lihat</a>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="row align-items-center justify-content-center more-btn-container">
+            <a href="{{ route('article.list') }}" class="btn-more">Daftar Artikel</a>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="benefit">
+        <div id="benefit-title">Mengapa Listrik Surya Atap</div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
+                <i class="icon icon-chart"></i>
+                <span>Hemat</span>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
+                <i class="icon icon-energy"></i>
+                <span>Mandiri</span>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
+                <i class="icon icon-globe"></i>
+                <span>Hijau</span>
+            </div>
+        </div>
+    </div>
+
     <div class="container" id="signed">
         <div class="section-title" id="signed-title">Deklarator</div>
         <hr class="section-line">
@@ -96,67 +178,7 @@
         </div>
     </div>
 
-    <div class="container-fluid" id="about">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 no-gutters" id="about-img">
-                <div class="about-img"></div>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 no-gutters" id="about-content">
-                <div id="about-title">{{ $data['about']->title }}</div>
-
-                <div id="about-description">
-                    {!! $data['about']->content[0] !!}
-                    <a href="{{ route('article.detail', ['slug' => $data['about']->slug]) }}" class="readmore">Lihat</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="blog">
-        <div class="section-title" id="blog-title">Informasi Terkini</div>
-        <hr class="section-line">
-
-        <div class="row">
-            @foreach ($data['blog'] as $b)
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 blog-item">
-                <img src="{{ $b->image ? asset($b->image->url) : 'http://via.placeholder.com/300x250' }}" alt="" class="blog-cover">
-                <div class="blog-item-title">{{ str_limit($b->title, 25) }}</div>
-                <div class="blog-item-content">
-                    {!! str_limit($b->content, 150) !!}
-                </div>
-                <a href="{{ route('article.detail', ['slug' => $b->slug]) }}" class="blog-item-readmore">Lihat</a>
-            </div>
-            @endforeach
-        </div>
-
-        <div class="row align-items-center justify-content-center more-btn-container">
-            <a href="{{ route('article.list') }}" class="btn-more">Daftar Artikel</a>
-        </div>
-    </div>
-
-    <div class="container-fluid" id="benefit">
-        <div id="benefit-title">Mengapa Listrik Surya Atap</div>
-
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
-                <i class="icon icon-chart"></i>
-                <span>Hemat</span>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
-                <i class="icon icon-energy"></i>
-                <span>Mandiri</span>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 benefit-item">
-                <i class="icon icon-globe"></i>
-                <span>Hijau</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="participant">
+    {{-- <div class="container" id="participant">
         <div class="section-title" id="participant-title">Partisipan</div>
         <hr class="section-line">
 
@@ -177,7 +199,7 @@
                 <a href="{{ route('register') }}" class="btn btn-more">Mendaftar menjadi Partisipan</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('script')
