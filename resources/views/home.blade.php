@@ -49,7 +49,7 @@
     <div class="container text-center" id="buttons">
         <div class="row">
             <div class="col px-4">
-                <a href="{{ route('calculator') }}" class="btn-more">Kalkulator Listrik Surya Atap</a>
+                <a href="{{ route('calculator') }}" class="btn-more">Kalkulator</a>
             </div>
         </div>
 
