@@ -4,7 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta property="og:title" content="Kalkulator Listrik Surya Atap" />
     <meta property="og:description" content="Kalkulator listrik surya atap untuk pemasangan on-grid" />
-    <meta property="og:image" content="{{ asset('img/logo.svg') }}" />
+    <meta property="og:image" content="{{ asset('img/logo.png') }}" />
 @stop
 
 @section('style')
