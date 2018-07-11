@@ -75,7 +75,7 @@ class CompanyController extends Controller
 
         $data = [
             'title' => $category->name,
-            'companies' => $category->companies()->paginate(2),
+            'companies' => $category->companies()->paginate(10),
         ];
 
         return view('public_entity::contents.company.index', $data);
