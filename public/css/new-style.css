@@ -194,7 +194,7 @@ a, a:hover { text-decoration: none; color: #000; }
 #buttons {
     height: 100%;
     background: #fff;
-    padding: 120px 0 140px;
+    padding-bottom: 80px;
 }
 
 /*============================================*/

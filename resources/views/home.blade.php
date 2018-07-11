@@ -48,21 +48,19 @@
 
     <div class="container text-center" id="buttons">
         <div class="row">
-            <div class="col px-4">
+            <div class="col-12 col-lg-3 mt-3">
                 <a href="{{ route('calculator') }}" class="btn-more">Kalkulator</a>
             </div>
-        </div>
 
-        <div class="row mt-3">
-            <div class="col-12 col-lg-4 mt-2">
+            <div class="col-12 col-lg-3 mt-3">
                 <a href="{{ route('company.category', ['slug' => 'epckontraktor-pemasang-listrik-surya-atap']) }}" class="btn-more">Daftar EPC</a>
             </div>
 
-            <div class="col-12 col-lg-4 mt-2">
+            <div class="col-12 col-lg-3 mt-3">
                 <a href="{{ route('company.category', ['slug' => 'pabrikandistributorretailer-produk-listrik-surya-atap']) }}" class="btn-more">Daftar Pabrikan</a>
             </div>
 
-            <div class="col-12 col-lg-4 mt-2">
+            <div class="col-12 col-lg-3 mt-3">
                 <a href="{{ route('company.index') }}" class="btn-more">Daftar Lengkap</a>
             </div>
         </div>
