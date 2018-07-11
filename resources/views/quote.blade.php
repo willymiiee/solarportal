@@ -289,46 +289,46 @@
                     </div>
 
                     <div id="result">
-                        <form action="" class="form-horizontal px-4">
+                        <form action="" class="form-horizontal px-1">
                             <div id="resultLabel">
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Tagihan PLN per bulan (Rupiah)</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="tagihan-result"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Batas Daya (VA atau Watt)</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Batas Daya (VA atau Watt)</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="kapasitas-result"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Kapasitas Listrik Surya Atap</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Kapasitas Listrik Surya Atap</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="capacity"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Luas atap yang dibutuhkan</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Luas atap yang dibutuhkan</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="large"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Estimasi biaya pemasangan</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Estimasi biaya pemasangan</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="cost"></label>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-6 col-form-label">Potensi Penghematan per Bulan</label>
-                                    <div class="col-sm-6 text-center">
+                                    <label for="" class="col-6 col-form-label">Potensi Penghematan per Bulan</label>
+                                    <div class="col-6 text-center">
                                         <label for="" class="col-form-label font-weight-bold" id="saving"></label>
                                     </div>
                                 </div>
