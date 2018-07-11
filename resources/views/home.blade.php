@@ -49,21 +49,21 @@
     <div class="container text-center" id="buttons">
         <div class="row">
             <div class="col px-4">
-                <a href="{{ route('calculator') }}" class="btn btn-primary btn-block btn-lg">Kalkulator Listrik Surya Atap</a>
+                <a href="{{ route('calculator') }}" class="btn-more">Kalkulator Listrik Surya Atap</a>
             </div>
         </div>
 
         <div class="row mt-3">
-            <div class="col mt-1">
-                <a href="{{ route('company.category', ['slug' => 'epckontraktor-pemasang-listrik-surya-atap']) }}" class="btn btn-secondary btn-block btn-lg">Daftar EPC</a>
+            <div class="col-12 col-lg-4 mt-2">
+                <a href="{{ route('company.category', ['slug' => 'epckontraktor-pemasang-listrik-surya-atap']) }}" class="btn-more">Daftar EPC</a>
             </div>
 
-            <div class="col mt-1">
-                <a href="{{ route('company.category', ['slug' => 'pabrikandistributorretailer-produk-listrik-surya-atap']) }}" class="btn btn-secondary btn-block btn-lg">Daftar Pabrikan</a>
+            <div class="col-12 col-lg-4 mt-2">
+                <a href="{{ route('company.category', ['slug' => 'pabrikandistributorretailer-produk-listrik-surya-atap']) }}" class="btn-more">Daftar Pabrikan</a>
             </div>
 
-            <div class="col mt-1">
-                <a href="{{ route('company.index') }}" class="btn btn-secondary btn-block btn-lg">Daftar Lengkap</a>
+            <div class="col-12 col-lg-4 mt-2">
+                <a href="{{ route('company.index') }}" class="btn-more">Daftar Lengkap</a>
             </div>
         </div>
     </div>
