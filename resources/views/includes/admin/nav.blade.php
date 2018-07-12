@@ -23,7 +23,7 @@
         <i class="fa fa-users"></i> <span>Users</span>
     </a>
 </li>
-<li class="{{ Request::segment(2) == 'project' ? 'active' : '' }}">
+<li class="{{ Request::segment(2) == 'projects' ? 'active' : '' }}">
     <a href="{{ url('admin/projects') }}">
         <i class="fa fa-file"></i> <span>Projects</span>
     </a>

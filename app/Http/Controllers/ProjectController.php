@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-    	$projects = Project::with('companies')->filterableQuery()->paginate(10);
+    	$projects = Project::with('companies')->filterableQuery()->where('is_shown', 1)->paginate(10);
     	$data = [
             'title' => 'Projects',
             'projects' => $projects,
@@ -22,7 +22,14 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-    	$project = Project::with(['companies', 'customers'])->filterableQuery()->findOrFail($id);
+    	$project = Project::with(['companies', 'customers'])->filterableQuery();
+
+        if (auth()->user()->type != 'A') {
+            $project = $project->where('is_shown', 1);
+        }
+
+        $project = $project->findOrFail($id);
+
         $data = [
             'title' => 'Project',
             'project' => $project,
