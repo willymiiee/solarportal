@@ -17,20 +17,20 @@
         <div class="row">
             <div class="col-12 mt-2">
                 <small>
-                    <i class="far fa-calendar mr-1"></i> <span id="date">{{ \Carbon\Carbon::parse($data['item']->created_at)->format('l j F Y, h:i:s') }}</span>
+                    <i class="fa fa-calendar mr-1"></i> <span id="date">{{ \Carbon\Carbon::parse($data['item']->created_at)->format('l j F Y, h:i:s') }}</span>
                 </small>
 
                 <h2 class="mt-1 mb-2 font-weight-bold">{{ $data['item']->title }}</h2>
 
                 <div class="share mb-1">
                     <a id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ url($data['item']->slug) }}" target="_blank">
-                        <i class="fab fa-facebook-square fa-3x"></i>
+                        <i class="fa fa-facebook-square fa-3x"></i>
                     </a>
                     <a id="share-tw" href="https://twitter.com/intent/tweet?text={{ $data['item']->title }}&url={{ url($data['item']->slug) }}" target="_blank">
-                        <i class="fab fa-twitter-square fa-3x"></i>
+                        <i class="fa fa-twitter-square fa-3x"></i>
                     </a>
                     <a id="share-gp" href="https://plus.google.com/share?url={{ url($data['item']->slug) }}" target="_blank">
-                        <i class="fab fa-google-plus-square fa-3x"></i>
+                        <i class="fa fa-google-plus-square fa-3x"></i>
                     </a>
                 </div>
 
