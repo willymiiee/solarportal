@@ -23,6 +23,11 @@
         <i class="fa fa-users"></i> <span>Users</span>
     </a>
 </li>
+<li class="{{ Request::segment(2) == 'project' ? 'active' : '' }}">
+    <a href="{{ url('admin/projects') }}">
+        <i class="fa fa-file"></i> <span>Projects</span>
+    </a>
+</li>
 <li class="{{ Request::segment(2) == 'verify' ? 'menu-open' : '' }} treeview">
     <a href="#">
         <i class="fa fa-check"></i> <span>Verify</span>

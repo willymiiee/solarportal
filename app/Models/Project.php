@@ -8,10 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'installed_capacity', 'type_installation', 'type_connection', 'location', 'is_location_allow_public', 'is_involved_installation', 'image', 'brand', 'capacity_panel', 'amount', 'province'
+        'installed_capacity', 'type_installation', 'type_connection', 'location', 'is_location_allow_public', 'is_involved_installation', 'image', 'status', 'is_shown', 'brand', 'capacity_panel', 'amount', 'province'
     ];
 
     protected $appends = ['transform_installed_capacity'];
+
+    /**
+     * Statuses of Projects
+     */
+    const STATUS_PENDING = 0;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REJECTED = 1;
+
+    const STATUS = [
+
+    ];
 
     const DROPDOWN_TYPE_INSTALLATION = [
         'Surya Atap (Rooftop)' => 'Surya Atap (Rooftop)',

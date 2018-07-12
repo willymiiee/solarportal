@@ -20,7 +20,9 @@
 @section('content')
 <!-- Main row -->
 <div class="row">
-    You are logged in!
+	<div class="col-xs-12">
+    	You are logged in!
+	</div>
 </div>
 <!-- /.row (main row) -->
 @endsection

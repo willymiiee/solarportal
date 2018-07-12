@@ -9,7 +9,7 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">Edit Profile</h3>
 					</div>
-					{!! Form::model($user, ['method' => 'PUT', 'url' => route('profile.update'), 'class' => 'form-horizontal', 'files' => true]) !!}
+					{!! Form::model($user, ['method' => 'PUT', 'url' => route('participant.profile.update'), 'class' => 'form-horizontal', 'files' => true]) !!}
 						<div class="box-body">
 							<div class="form-group">
 								{!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
@@ -67,7 +67,7 @@
 						</div>
 						<div class="box-footer">
 							<div class="pull-left">
-								<a href="{{ route('profile.password') }}">Change Password</a>
+								<a href="{{ route('participant.profile.password') }}">Change Password</a>
 							</div>
 							<button type="submit" class="btn btn-warning pull-right">
 								<i class="fa fa-save"></i> Update Profile

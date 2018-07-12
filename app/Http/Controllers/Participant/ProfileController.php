@@ -46,7 +46,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile.edit')->withMessage([
+        return redirect()->route('participant.profile.edit')->withMessage([
             'type' => 'success',
             'message' => 'Profile updated successfully!',
         ]);
@@ -77,7 +77,7 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('profile.password')->withMessage([
+        return redirect()->route('participant.profile.password')->withMessage([
             'type' => 'success',
             'message' => 'Password updated successfully!',
         ]);

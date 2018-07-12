@@ -10,7 +10,7 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">Change Password</h3>
 					</div>
-					{!! Form::open(['method' => 'PUT', 'url' => route('profile.updatePassword'), 'class' => 'form-horizontal']) !!}
+					{!! Form::open(['method' => 'PUT', 'url' => route('participant.profile.updatePassword'), 'class' => 'form-horizontal']) !!}
 						<div class="box-body">
 							<div class="form-group">
 								{!! Form::label('current_password', 'Current Password', ['class' => 'col-sm-4 control-label']) !!}
@@ -34,7 +34,7 @@
 							</div>
 						</div>
 						<div class="box-footer">
-							<a href="{{ route('profile.edit') }}" class="pull-left">
+							<a href="{{ route('participant.profile.edit') }}" class="pull-left">
 								Edit Profile
 							</a>
 							<button type="submit" class="btn btn-info pull-right">
