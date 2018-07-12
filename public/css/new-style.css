@@ -256,6 +256,7 @@ a, a:hover { text-decoration: none; color: #000; }
     background-color: #dfddf0;
     text-align: center;
     margin-top: 50px;
+    min-height: 500px;
 }
 .blog-cover {
     width: 100%;
