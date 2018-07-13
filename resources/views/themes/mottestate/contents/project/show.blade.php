@@ -30,7 +30,7 @@
 @stop
 
 @section('breadcrumb')
-	@if (auth()->user()->type == 'A')
+	@if (optional(auth()->user())->type == 'A')
     	<section class="tl-inner-banner" style="padding: 0px; background-color: transparent;">
 	    	<div class="alert alert-info text-center" style="margin: 0px;">
 	    		You are view this page as ADMIN Mode

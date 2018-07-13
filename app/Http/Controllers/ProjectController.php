@@ -24,7 +24,7 @@ class ProjectController extends Controller
     {
     	$project = Project::with(['companies', 'customers'])->filterableQuery();
 
-        if (auth()->user()->type != 'A') {
+        if (optional(auth()->user())->type != 'A') {
             $project = $project->where('is_shown', 1);
         }
 
