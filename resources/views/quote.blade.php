@@ -568,18 +568,18 @@
                                     $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
                                         .then((res) => {
                                             swal(
-                                                'Sukses meminta penawaran!',
-                                                'Silahkan tunggu konfirmasi dari pihak kami',
+                                                'Kami sudah menyimpan data anda!',
+                                                'Mohon perika e-mail anda untuk konfirmasi kata kunci',
                                                 'success'
                                             ).then((res) => {
-                                                let dt = {
-                                                    email: input
-                                                }
+                                                // let dt = {
+                                                //     email: input
+                                                // }
 
-                                                $.post("{{ route('alternate-login') }}", dt)
-                                                    .then((res) => {
-                                                        location.reload()
-                                                    })
+                                                // $.post("{{ route('alternate-login') }}", dt)
+                                                //     .then((res) => {
+                                                //         location.reload()
+                                                //     })
                                             })
                                         })
                                     resolve()
