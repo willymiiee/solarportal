@@ -134,6 +134,12 @@ class QuoteController extends Controller
         }
 
         $quote->status = 'quotation';
+        $quote->is_related = $request->get('is_related');
+        $quote->plan_to_install = $request->get('plan_to_install');
+        $quote->phone = $request->get('phone');
+        $quote->address = $request->get('address');
+        $quote->tnc = $request->get('tnc');
+
         $quote->save();
 
         $quoteAdmin = GlobalConfig::where('key', 'quote_email')->first();
