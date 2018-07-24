@@ -27,7 +27,12 @@ class Quote extends Model
         'exported',
         'new_bill',
         'saving',
-        'status'
+        'status',
+        'is_related',
+        'plan_to_install',
+        'phone',
+        'address',
+        'tnc'
     ];
 
     /**
