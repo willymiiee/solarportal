@@ -9,7 +9,8 @@ Route::resources([
 	'pages' => 'PageController',
 	'posts' => 'PostController',
 	'users' => 'UserController',
-	'companies' => 'CompanyController'
+	'companies' => 'CompanyController',
+	'quotes' => 'QuoteController',
 ]);
 
 Route::get('projects', 'ProjectController@index')->name('projects');
