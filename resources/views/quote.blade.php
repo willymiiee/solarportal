@@ -534,7 +534,7 @@
               '<button class="btn btn-primary loginBtn">Masuk</button>'
         })
       } else {
-        let quotes = JSON.parse('{!! Auth::user()->quotes()->get() !!}')
+        let quotes = JSON.parse('{!! Auth::check() ? Auth::user()->quotes()->get() : '' !!}')
         let cond = false
 
         if (quotes.length > 0) {
