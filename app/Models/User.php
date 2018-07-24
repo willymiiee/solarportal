@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Company;
 use App\Models\CompanyMessage;
+use App\Models\Quote;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -81,5 +82,10 @@ class User extends Authenticatable
 
         $this->companies()->attach($company->id);
         return true;
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
     }
 }
