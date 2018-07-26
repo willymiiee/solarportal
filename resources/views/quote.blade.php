@@ -513,8 +513,8 @@
         showCloseButton: true,
         showConfirmButton: false,
         html: '<p>Untuk dapat menggunakan fitur ini, anda harus memiliki akun.</p>' +
-          '<button class="btn btn-primary mr-3 registerBtn">Daftar</button>' +
-          '<button class="btn btn-primary loginBtn">Masuk</button>'
+          '<button class="btn btn-primary mr-3 registerSaveBtn">Daftar</button>' +
+          '<button class="btn btn-primary loginSaveBtn">Masuk</button>'
       })
     })
 
@@ -535,7 +535,6 @@
         })
       } else {
         let quotes = JSON.parse('{!! Auth::check() ? Auth::user()->quotes()->get() : '' !!}')
-        let cond = false
 
         if (quotes.length > 0) {
           swal({
@@ -753,6 +752,50 @@
     })
   })
 
+  $(document).on('click', '.registerSaveBtn', function() {
+    swal({
+      title: 'Daftar Partisipan',
+      text: 'Masukkan email anda',
+      input: 'email',
+      showCloseButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Submit',
+      allowOutsideClick: false,
+      preConfirm: (input) => {
+        let data = [{
+          name: "email",
+          value: input
+        }]
+
+        return new Promise((resolve) => {
+          $.post("{{ route('api.check-user') }}", data)
+            .then((result) => {
+              if (result.status == 0) {
+                data = data.concat({
+                  name: "_method",
+                  value: "PUT"
+                })
+
+                $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                  .then((res) => {
+                    swal(
+                      'Sukses menyimpan hasil kalkulator!',
+                      'Mohon perika e-mail anda untuk konfirmasi kata kunci',
+                      'success'
+                    )
+                  })
+                resolve()
+              } else {
+                swal.showValidationError('Email sudah terdaftar!')
+                swal.hideLoading()
+                return false
+              }
+            })
+          })
+      }
+    })
+  })
+
   $(document).on('click', '.registerBtn', function() {
     swal({
       title: 'Daftar Partisipan',
@@ -888,6 +931,67 @@
     })
   })
 
+  $(document).on('click', '.loginSaveBtn', function() {
+    swal({
+      title: 'Login Partisipan',
+      html: '<input id="loginEmail" class="swal2-input" type="email" placeholder="Masukkan alamat email">' +
+          '<input id="loginPassword" class="swal2-input" type="password" placeholder="Masukkan kata sandi">' +
+          '<small><a href="javascript:void(0)" id="forgetPass" class="text-primary">Lupa Password?</a></small>',
+      focusConfirm: false,
+      showCloseButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Submit',
+      allowOutsideClick: false,
+      preConfirm: () => {
+        let email = $('#loginEmail').val()
+        let pass = $('#loginPassword').val()
+
+        if (email && pass) {
+          let data = [{
+            name: "email",
+            value: email
+          }, {
+            name: "password",
+            value: pass
+          }]
+
+          $.post("{{ route('api.check-user') }}", data)
+            .then((res) => {
+              data = data.concat({
+                name: "_method",
+                value: "PUT"
+              })
+
+              $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                .then((res) => {
+                  swal(
+                    'Sukses menyimpan hasil kalkulator!',
+                    'Hasil kalkulator telah disimpan di dalam akun anda!',
+                    'success'
+                  ).then((res) => {
+                    data.splice(2, 1)
+
+                    $.post("{{ route('alternate-login') }}", data)
+                      .then((res) => {
+                        location.reload()
+                      })
+                  })
+                })
+            })
+            .fail(function(xhr, status, error) {
+              swal({
+                title: 'Error!',
+                type: 'error',
+                text: 'Email atau password yang anda masukkan salah!'
+              })
+            })
+        } else {
+          swal.showValidationError('Silahkan masukkan alamat email dan password yang valid!')
+        }
+      }
+    })
+  })
+
   $(document).on('click', '.loginBtn', function() {
     swal({
       title: 'Login Partisipan',
@@ -914,108 +1018,231 @@
 
           $.post("{{ route('api.check-user') }}", data)
             .then((res) => {
-              swal.mixin({
-                showCloseButton: true,
-                showLoaderOnConfirm: true,
-                confirmButtonText: 'Lanjut &rarr;',
-                progressSteps: ['1', '2', '3', '4', '5'],
-                preConfirm: (input) => {
-                }
-              }).queue([
-                  {
-                    title: 'Apakah permintaan ini terkait dengan perhitungan kalkulator surya?',
-                    input: 'checkbox',
-                    inputValue: 1,
-                    inputPlaceholder: 'Ya',
-                    inputValidator: (value) => {
-                      return !value && 'Anda harus mengklik kotak centang di atas!'
-                    }
-                  },
-                  {
-                    title: 'Rencana memasang listrik surya',
-                    input: 'radio',
-                    inputOptions: {
-                      '3': 'dalam 3 bulan',
-                      '12': 'dalam 1 tahun',
-                      '0': 'belum tahu'
-                    },
-                    inputValidator: (value) => {
-                      return !value && 'Anda harus memilih salah satu jawaban!'
-                    }
-                  },
-                  {
-                    title: 'Nomor HP',
-                    input: 'text',
-                    inputValue: res.phone,
-                    inputValidator: (value) => {
-                      return !value && 'Anda harus mengisi nomor HP!'
-                    }
-                  },
-                  {
-                    title: 'Alamat pemasangan',
-                    input: 'text',
-                    inputValue: res.address,
-                    inputValidator: (value) => {
-                      return !value && 'Anda harus mengisi alamat pemasangan!'
-                    }
-                  },
-                  {
-                    title: 'Kebijakan pribadi',
-                    input: 'checkbox',
-                    confirmButtonText: 'Minta Tawaran',
-                    showCancelButton: true,
-                    cancelButtonText: 'Kembali',
-                    html: '<ul><li>Saya mengijinkan Portal GNSSA untuk memberikan email dan no telepon saya kepada perusahaan pihak penyedia untuk keperluan mendapatkan data yang akurat dalam memberikan penawaran.</li>' +
-                    '<li>Saya bersedia untuk dihubungi melalui email, mobile, atau whatsapp oleh tim admin portal GNSSA atau perusahaan pihak penyedia.</li>' +
-                    '<li>Portal GNSSA tidak akan menggunakan data pribadi anda untuk hal-hal yang tidak terkait dengan pemberian penawaran untuk pemasangan listrik surya atap.</li></ul>',
-                    inputValue: 1,
-                    inputPlaceholder: 'Ya, saya setuju.',
-                    inputValidator: (value) => {
-                      return !value && 'Anda harus menyetujui kebijakan pribadi!'
-                    }
-                  }
-                ]).then((res) => {
-                  data = data.concat(
-                    {
-                      name: "_method",
-                      value: "PUT"
-                    },
-                    {
-                      name: "is_related",
-                      value: res.value[0]
-                    },
-                    {
-                      name: "plan_to_install",
-                      value: res.value[1]
-                    },
-                    {
-                      name: "phone",
-                      value: res.value[2]
-                    },
-                    {
-                      name: "address",
-                      value: res.value[3]
-                    },
-                    {
-                      name: "tnc",
-                      value: res.value[4]
-                    }
-                  )
+              if (res.quotes.length > 0) {
+                swal({
+                  title: 'Anda sudah pernah meminta penawaran sebelumnya',
+                  type: 'warning',
+                  text: 'Apakah anda membutuhkan penawaran yang berbeda dengan sebelumnya?',
+                  allowOutsideClick: true,
+                  showCloseButton: true,
+                  showConfirmButton: true,
+                  confirmButtonText: 'Ya, saya minta penawaran baru',
+                  showCancelButton: true,
+                  cancelButtonText: 'Kembali',
+                }).then((res) => {
+                  if (res.value) {
+                    swal.mixin({
+                      showCloseButton: true,
+                      showLoaderOnConfirm: true,
+                      confirmButtonText: 'Lanjut &rarr;',
+                      progressSteps: ['1', '2', '3', '4', '5'],
+                      preConfirm: (input) => {
+                      }
+                    }).queue([
+                        {
+                          title: 'Apakah permintaan ini terkait dengan perhitungan kalkulator surya?',
+                          input: 'checkbox',
+                          inputValue: 1,
+                          inputPlaceholder: 'Ya',
+                          inputValidator: (value) => {
+                            return !value && 'Anda harus mengklik kotak centang di atas!'
+                          }
+                        },
+                        {
+                          title: 'Rencana memasang listrik surya',
+                          input: 'radio',
+                          inputOptions: {
+                            '3': 'dalam 3 bulan',
+                            '12': 'dalam 1 tahun',
+                            '0': 'belum tahu'
+                          },
+                          inputValidator: (value) => {
+                            return !value && 'Anda harus memilih salah satu jawaban!'
+                          }
+                        },
+                        {
+                          title: 'Nomor HP',
+                          input: 'text',
+                          inputValue: res.phone,
+                          inputValidator: (value) => {
+                            return !value && 'Anda harus mengisi nomor HP!'
+                          }
+                        },
+                        {
+                          title: 'Alamat pemasangan',
+                          input: 'text',
+                          inputValue: res.address,
+                          inputValidator: (value) => {
+                            return !value && 'Anda harus mengisi alamat pemasangan!'
+                          }
+                        },
+                        {
+                          title: 'Kebijakan pribadi',
+                          input: 'checkbox',
+                          confirmButtonText: 'Minta Tawaran',
+                          showCancelButton: true,
+                          cancelButtonText: 'Kembali',
+                          html: '<ul><li>Saya mengijinkan Portal GNSSA untuk memberikan email dan no telepon saya kepada perusahaan pihak penyedia untuk keperluan mendapatkan data yang akurat dalam memberikan penawaran.</li>' +
+                          '<li>Saya bersedia untuk dihubungi melalui email, mobile, atau whatsapp oleh tim admin portal GNSSA atau perusahaan pihak penyedia.</li>' +
+                          '<li>Portal GNSSA tidak akan menggunakan data pribadi anda untuk hal-hal yang tidak terkait dengan pemberian penawaran untuk pemasangan listrik surya atap.</li></ul>',
+                          inputValue: 1,
+                          inputPlaceholder: 'Ya, saya setuju.',
+                          inputValidator: (value) => {
+                            return !value && 'Anda harus menyetujui kebijakan pribadi!'
+                          }
+                        }
+                      ]).then((res) => {
+                        data = data.concat(
+                          {
+                            name: "_method",
+                            value: "PUT"
+                          },
+                          {
+                            name: "is_related",
+                            value: res.value[0]
+                          },
+                          {
+                            name: "plan_to_install",
+                            value: res.value[1]
+                          },
+                          {
+                            name: "phone",
+                            value: res.value[2]
+                          },
+                          {
+                            name: "address",
+                            value: res.value[3]
+                          },
+                          {
+                            name: "tnc",
+                            value: res.value[4]
+                          }
+                        )
 
-                  $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
-                    .then((res) => {
-                      swal(
-                        'Sukses meminta penawaran!',
-                        'Silahkan tunggu konfirmasi dari pihak kami',
-                        'success'
-                      ).then((res) => {
-                        $.post("{{ route('alternate-login') }}", data)
+                        $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
                           .then((res) => {
-                            location.reload()
+                            swal(
+                              'Kami sudah menyimpan data anda!',
+                              'Silahkan tunggu konfirmasi dari pihak kami',
+                              'success'
+                            ).then((res) => {
+                              data.splice(2, 1)
+
+                              $.post("{{ route('alternate-login') }}", data)
+                                .then((res) => {
+                                  location.reload()
+                                })
+                            })
                           })
                       })
-                    })
+                  }
                 })
+              } else {
+                swal.mixin({
+                  showCloseButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonText: 'Lanjut &rarr;',
+                  progressSteps: ['1', '2', '3', '4', '5'],
+                  preConfirm: (input) => {
+                  }
+                }).queue([
+                    {
+                      title: 'Apakah permintaan ini terkait dengan perhitungan kalkulator surya?',
+                      input: 'checkbox',
+                      inputValue: 1,
+                      inputPlaceholder: 'Ya',
+                      inputValidator: (value) => {
+                        return !value && 'Anda harus mengklik kotak centang di atas!'
+                      }
+                    },
+                    {
+                      title: 'Rencana memasang listrik surya',
+                      input: 'radio',
+                      inputOptions: {
+                        '3': 'dalam 3 bulan',
+                        '12': 'dalam 1 tahun',
+                        '0': 'belum tahu'
+                      },
+                      inputValidator: (value) => {
+                        return !value && 'Anda harus memilih salah satu jawaban!'
+                      }
+                    },
+                    {
+                      title: 'Nomor HP',
+                      input: 'text',
+                      inputValue: res.phone,
+                      inputValidator: (value) => {
+                        return !value && 'Anda harus mengisi nomor HP!'
+                      }
+                    },
+                    {
+                      title: 'Alamat pemasangan',
+                      input: 'text',
+                      inputValue: res.address,
+                      inputValidator: (value) => {
+                        return !value && 'Anda harus mengisi alamat pemasangan!'
+                      }
+                    },
+                    {
+                      title: 'Kebijakan pribadi',
+                      input: 'checkbox',
+                      confirmButtonText: 'Minta Tawaran',
+                      showCancelButton: true,
+                      cancelButtonText: 'Kembali',
+                      html: '<ul><li>Saya mengijinkan Portal GNSSA untuk memberikan email dan no telepon saya kepada perusahaan pihak penyedia untuk keperluan mendapatkan data yang akurat dalam memberikan penawaran.</li>' +
+                      '<li>Saya bersedia untuk dihubungi melalui email, mobile, atau whatsapp oleh tim admin portal GNSSA atau perusahaan pihak penyedia.</li>' +
+                      '<li>Portal GNSSA tidak akan menggunakan data pribadi anda untuk hal-hal yang tidak terkait dengan pemberian penawaran untuk pemasangan listrik surya atap.</li></ul>',
+                      inputValue: 1,
+                      inputPlaceholder: 'Ya, saya setuju.',
+                      inputValidator: (value) => {
+                        return !value && 'Anda harus menyetujui kebijakan pribadi!'
+                      }
+                    }
+                  ]).then((res) => {
+                    data = data.concat(
+                      {
+                        name: "_method",
+                        value: "PUT"
+                      },
+                      {
+                        name: "is_related",
+                        value: res.value[0]
+                      },
+                      {
+                        name: "plan_to_install",
+                        value: res.value[1]
+                      },
+                      {
+                        name: "phone",
+                        value: res.value[2]
+                      },
+                      {
+                        name: "address",
+                        value: res.value[3]
+                      },
+                      {
+                        name: "tnc",
+                        value: res.value[4]
+                      }
+                    )
+
+                    $.post("{{ url('api/v1/quote') }}/"+$('#quoteId').val(), data)
+                      .then((res) => {
+                        swal(
+                          'Kami sudah menyimpan data anda!',
+                          'Silahkan tunggu konfirmasi dari pihak kami',
+                          'success'
+                        ).then((res) => {
+                          data.splice(2, 1)
+
+                          $.post("{{ route('alternate-login') }}", data)
+                            .then((res) => {
+                              location.reload()
+                            })
+                        })
+                      })
+                  })
+              }
             })
             .fail(function(xhr, status, error) {
               swal({

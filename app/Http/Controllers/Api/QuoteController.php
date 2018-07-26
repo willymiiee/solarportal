@@ -134,11 +134,11 @@ class QuoteController extends Controller
         }
 
         $quote->status = 'quotation';
-        $quote->is_related = $request->get('is_related');
+        $quote->is_related = $request->has('is_related') ? $request->get('is_related') : 0;
         $quote->plan_to_install = $request->get('plan_to_install');
         $quote->phone = $request->get('phone');
         $quote->address = $request->get('address');
-        $quote->tnc = $request->get('tnc');
+        $quote->tnc = $request->has('tnc') ? $request->get('tnc') : 0;
 
         $quote->save();
 
