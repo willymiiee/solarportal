@@ -140,6 +140,7 @@ class UserController extends Controller
                 'confirmation_code' => null
             ])) {
                 $user = \Auth::user();
+                $user['quotes'] = \Auth::user()->quotes()->get();
             } else {
                 return response()->json([
                     'error' => 'Wrong credentials!'
